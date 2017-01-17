@@ -10,6 +10,7 @@
  */
 public class SpaceLegend {
     public static void main(String...notUsed){
+        System.out.println("Start der Mission");
         System.out.println("Ende der Legende");
     }
 }
