@@ -9,11 +9,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+
+                
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+                Gdx.graphics.setTitle("Space Legend 0.01a");
+                //Gdx.graphics.
 	}
 
 	@Override
