@@ -30,5 +30,5 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.dispose();
 		img.dispose();
 	}
-        //test
+        //test 123
 }
