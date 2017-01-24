@@ -6,13 +6,14 @@ package com.mygdx.game;
  * @version 0.01
  *
  * Einstelungen fuer den fenster und Volbildmodus Audio usw. .
- *
+ * 
+ * Folgende beispiele sind moeglich:
+ * 
  * Fenster Groesse angeben und festlegen des blidschirm Modus.
  *
- * height legt die hoehe fest und width legt die breite fest.
- *
- * fullscreen legt fest ob dass spiel im Vollbild modus oder im fenster modus
- * leauft.
+ * Festlegen ob dass spiel im Vollbild modus oder im Fenstermodus leauft.
+ * 
+ * Die Version und den Titel des Spiels ausgeben.
  *
  */
 public class GameSetings {
