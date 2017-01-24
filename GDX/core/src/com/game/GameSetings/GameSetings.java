@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.game.GameSetings;
 
 /**
  *
  * @author dreissa
- * @version 0.01
+ * @version 0.02
  *
  * Einstelungen fuer den fenster und Volbildmodus Audio usw. .
  * 

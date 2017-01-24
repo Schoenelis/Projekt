@@ -1,25 +1,30 @@
-package com.mygdx.game;
+package com.game.menu;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.SpaceLegends;
 
 /**
- * Erstellt ein Hauptmenue
+ * Erstellt ein Hauptmenu Fenster.
+ *
+ * Erstellt ein Hauptmenue Fenster wo derr spieler zwischen Spielstarten,
+ * Einstelungen oder Spielbenden waehlen kann.
+ *
  * @author Dreissa
+ * @version 0.01
  */
-
 public class MainMenu implements Screen {
-    
+
     // Groesse der schaltflaechen.
     private final int width = 200;
     private final int heigth = 70;
-    
+
     // position der schaltflaeche.
     private final int x = 300;
     private final int y = 150;
-    private  int butonWidth=0;
+    private int butonWidth = 0;
 
     final SpaceLegends game;
 
@@ -55,8 +60,7 @@ public class MainMenu implements Screen {
         game.batch.begin();
 
         butonWidth = Start_enabled.getWidth() / 2;
- 
-        
+
         game.batch.draw(Start_enabled, x, y, width, heigth);
 
         game.batch.end();

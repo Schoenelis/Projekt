@@ -1,9 +1,14 @@
 
-package com.mygdx.game;
+package com.game.Audio;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-
+/**
+ * 
+ * Verwaltet die Audio ausgabe des Spiels
+ * @author info
+ * @version 0.01
+ */
 
 public class Sounds{
     Sound sound;
