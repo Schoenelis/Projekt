@@ -5,6 +5,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * Erstellt ein Hauotmenue
+ * @author Dreissa
+ */
+
 public class MainMenu implements Screen {
     
     // Groesse der schaltflaechen.
