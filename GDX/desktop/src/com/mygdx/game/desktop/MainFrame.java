@@ -10,14 +10,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.GameSetings;
 import com.mygdx.game.MyGdxGame;
 
-/**
- *
- * @author Dreissa
- * @version 0.1
- *
- * Erstellt das Hauptfenster.
- *
- */
+
+ 
 public class MainFrame {
 
     public static void MainFrame() {

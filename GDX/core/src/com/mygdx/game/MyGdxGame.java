@@ -11,8 +11,11 @@ public class MyGdxGame extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
 
+    Sounds sound;
+            
     @Override
     public void create() {
+        sound = new Sounds();
         batch = new SpriteBatch();
         img = new Texture("badlogic.jpg");
 
@@ -29,6 +32,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
     @Override
     public void dispose() {
+        super.dispose();
         batch.dispose();
         img.dispose();
     }
