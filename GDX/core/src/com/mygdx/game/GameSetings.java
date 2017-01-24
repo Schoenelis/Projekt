@@ -25,43 +25,43 @@ public class GameSetings {
     private static final String version =" pre-Alpha.";
             
     // Spiel einstelungen Warnung nicht aendern.
-    private static final int height = 500;
-    private static final int width = 540;
-    private static final boolean fullscreen = false;
-    private static final String path = null; // pfad zum fenster icon.
-    private static final String title = "The Space Legend";
-    private static final boolean resizeble = false; 
+    private static final int Main_Frame_height = 500;
+    private static final int Main_Frame_width = 540;
+    private static final boolean Main_Frame_fullscreen = false;
+    private static final String Main_Frame_IconPath = null; // pfad zum fenster icon.
+    private static final String Main_Frame_title = "The Space Legend";
+    private static final boolean Main_Frame_resizeble = false; 
 
     
     
     
     
-    public static boolean isResizeble() {
-        return resizeble;
+    public static boolean Main_Frame_isResizeble() {
+        return Main_Frame_resizeble;
     }
 
     public static String getRelease() {
         return build + buildnummer + version;
     }
 
-    public static int getHeight() {
-        return height;
+    public static int getMain_Frame_Height() {
+        return Main_Frame_height;
     }
 
-    public static int getWidth() {
-        return width;
+    public static int getMain_Frame_Width() {
+        return Main_Frame_width;
     }
 
-    public static boolean isFullscreen() {
-        return fullscreen;
+    public static boolean Main_Frame_isFullscreen() {
+        return Main_Frame_fullscreen;
     }
 
-    public static String getPath() {
-        return path;
+    public static String getMain_Frame_IconPath() {
+        return Main_Frame_IconPath;
     }
 
-    public static String getTitle() {
-        return title;
+    public static String getMain_Frame_Title() {
+        return Main_Frame_title;
     }
     
     
