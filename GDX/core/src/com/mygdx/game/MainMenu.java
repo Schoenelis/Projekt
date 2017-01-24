@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * Erstellt ein Hauotmenue
+ * Erstellt ein Hauptmenue
  * @author Dreissa
  */
 
