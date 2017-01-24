@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.GameSetings;
-import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.SpaceLegends;
 
-
+/**
+ * Stellt das hauptfenster ein und startet das spiel.
+ * @author Dreissa
+ */
  
 public class MainFrame {
 
@@ -36,7 +35,7 @@ public class MainFrame {
             mainframe.fullscreen = GameSetings.Main_Frame_isFullscreen();
         }
 
-        LwjglApplication lwjglApplication = new LwjglApplication(new MyGdxGame(), mainframe);
+        LwjglApplication lwjglApplication = new LwjglApplication(new SpaceLegends(), mainframe);
 
     }
 }
