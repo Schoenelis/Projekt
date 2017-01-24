@@ -36,7 +36,6 @@ public class GameSetings {
     
     
     
-    
     public static boolean Main_Frame_isResizeble() {
         return Main_Frame_resizeble;
     }

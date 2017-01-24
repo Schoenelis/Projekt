@@ -4,12 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.profiling.GL20Profiler;
 
 public class MainMenu implements Screen {
     
+    // Groesse der schaltflaechen.
+    private final int width = 200;
+    private final int heigth = 70;
+    
+    // position der schaltflaeche.
+    private final int x = 300;
+    private final int y = 150;
+    private  int butonWidth=0;
 
-    private final MyGdxGame game;
+    final SpaceLegends game;
 
     Texture Start_enabled;
     Texture Ende_enabled;
@@ -19,14 +26,16 @@ public class MainMenu implements Screen {
     Texture Ende_disabled;
     Texture Einstelungen_disabled;
 
-    public MainMenu(MyGdxGame game) {
+    public MainMenu(SpaceLegends game) {
         this.game = game;
-        Start_enabled = new Texture("");
-        Start_disabled = new Texture("");
-        Ende_enabled = new Texture("");
-        Ende_disabled = new Texture("");
-        Einstelungen_enabled = new Texture("");
-        Einstelungen_disabled = new Texture("");
+        Start_enabled = new Texture("badlogic.jpg");
+//        Start_disabled = new Texture("");
+//        Ende_enabled = new Texture("");
+//        Ende_disabled = new Texture("");
+//        Einstelungen_enabled = new Texture("");
+//        Einstelungen_disabled = new Texture("");
+
+        MainMenu mainMenuScreen = this;
     }
 
     @Override
@@ -39,10 +48,12 @@ public class MainMenu implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
+
+        butonWidth = Start_enabled.getWidth() / 2;
+ 
         
-        game.batch.draw(Start_enabled, 100, 100, 50, 50);
-        
-        
+        game.batch.draw(Start_enabled, x, y, width, heigth);
+
         game.batch.end();
 
     }
@@ -69,8 +80,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
-
+        game.dispose();
     }
-
 
 }
