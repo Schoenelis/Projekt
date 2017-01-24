@@ -3,7 +3,7 @@ package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.GameSetings;
+import com.game.GameSetings.GameSetings;
 import com.mygdx.game.SpaceLegends;
 
 /**
@@ -17,7 +17,7 @@ public class MainFrame {
         LwjglApplicationConfiguration mainframe = new LwjglApplicationConfiguration();
 
         // Titel und icon wird festgelegt.
-        mainframe.title = GameSetings.getMain_Frame_Title() + GameSetings.getRelease() + "  " + mainframe.foregroundFPS + "  FPS";
+        mainframe.title = GameSetings.getMain_Frame_Title() + GameSetings.getRelease();
         //config.addIcon(path, Files.FileType.Internal);
 
         // Fenster Groesse anpassen.
