@@ -24,7 +24,7 @@ public class GameSetings {
     
     // Versions Verwaltung des Spiels. 
     private static final String build = "      Internal Build Version:";
-    private static final String buildnummer = " 00.002";
+    private static final String buildnummer = " 00.003";
     private static final String version =" pre-Alpha."; 
     
     // Spiel einstelungen Warnung nicht aendern.
