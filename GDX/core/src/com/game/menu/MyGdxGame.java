@@ -1,13 +1,14 @@
 package com.game.menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Bewegung;
+import com.game.obj.Player;
+import com.game.obj.SchwarzesLoch;
 import com.mygdx.game.SpaceLegends;
-import com.mygdx.game.obj.Player;
 
 /**
  *
@@ -19,28 +20,38 @@ public class MyGdxGame implements Screen {
     SpriteBatch batch;
     Texture imgPlayer;
     Texture imgSchwarzesLoch;
-    Bewegung bewegung;
+    SchwarzesLoch schwarzesLoch;
     Player player;
 
     public MyGdxGame(SpaceLegends game) {
         this.game = game;
         batch = new SpriteBatch();
         imgPlayer = new Texture("badlogic.jpg");
-        // imgSchwarzesLoch = new Texture("schwarzesLoch.jpg")
+        imgSchwarzesLoch = new Texture("badlogic.jpg");
+
     }
 
     @Override
     public void render(float delta) {
-        bewegung = new Bewegung();
+        if (Gdx.graphics.isFullscreen()) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                Gdx.app.exit();
+            }
+        }
         player = new Player();
-
-        bewegung.steuerung();
+        schwarzesLoch = new SchwarzesLoch();
+        
+        player.movePlayerAll();
+        player.koolisionFenster();
+        
+        schwarzesLoch.pullPlayer();
+        
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 
-        // game.batch.draw(imgSchwarzesLoch, 100, 100);
-        game.batch.draw(imgPlayer, Bewegung.playerX, Bewegung.playerY, player.getPlayerwidth(), player.getPlayerheight());
+        game.batch.draw(imgPlayer, Player.x, Player.y, Player.width, Player.height);
+        game.batch.draw(imgSchwarzesLoch, SchwarzesLoch.x, SchwarzesLoch.y, SchwarzesLoch.width, SchwarzesLoch.height);
 
         game.batch.end();
     }
@@ -49,31 +60,26 @@ public class MyGdxGame implements Screen {
     public void dispose() {
         game.dispose();
         imgPlayer.dispose();
-        //imgSchwarzesLoch.dispose();
+        imgSchwarzesLoch.dispose();
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
     }
-
 }

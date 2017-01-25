@@ -1,15 +1,12 @@
 package com.game.menu;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.SpaceLegends;
-import static com.game.GameSetings.GameSetings.getRelease;
-import static com.game.GameSetings.GameSetings.getMain_Frame_Title;
 
 /**
  * Erstellt ein Hauptmenu Fenster.
@@ -54,6 +51,8 @@ public class MainMenu implements Screen {
     private int screen_width = 0;
     private int screen_heigth = 0;
 
+    private int select = 0;
+
     final SpaceLegends game;
 
     Texture Low_Resoulution;
@@ -73,7 +72,7 @@ public class MainMenu implements Screen {
         // platzhalter bilder werden geladen.
         Low_Resoulution = new Texture("low_resoulution.png");
         Background = new Texture("background.png");
-        Start_enabled = new Texture("start_disabled.png");
+        Start_enabled = new Texture("aktiv.png");
         Start_disabled = new Texture("inaktiv.png");
         Exit_enabled = new Texture("aktiv.png");
         Exit_disabled = new Texture("inaktiv.png");
@@ -91,57 +90,61 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
-
-        // halbe biltschirm goesse ermiteln.
-        screen_heigth = (Gdx.graphics.getHeight()) / 2;
-        screen_width = (Gdx.graphics.getWidth() / 2);
-
-        //Titel banner position anpassen.
-        Banner_Width = Title_Banner_size_width / 2;
-        Banner_x = screen_width - Banner_Width + 5;
-
-        Banner_heigth = Title_banner_size_heigth / 2;
-
-        // berechnen das die butons immer in der mitte sind.
-        buton_Width = buton_size_width / 2;
-        buton_x = screen_width - buton_Width + 5;
-
-        buton_heigth = buton_size_heigth / 2;
-
-        // halbe biltschirm goesse ermiteln.
-        screen_heigth = (Gdx.graphics.getHeight()) / 2;
-        screen_width = (Gdx.graphics.getWidth() / 2);
-
-        //Titel banner position anpassen.
-        Banner_Width = Title_Banner_size_width / 2;
-        Banner_x = screen_width - Banner_Width + 5;
-
-        Banner_heigth = Title_banner_size_heigth / 2;
-
-        // berechnen das die butons immer in der mitte sind.
-        buton_Width = buton_size_width / 2;
-        buton_x = screen_width - buton_Width + 5;
-
-        buton_heigth = buton_size_heigth / 2;
-
         if (Gdx.graphics.isFullscreen()) {
             if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
                 System.exit(0);
             }
         }
-
-        
-
-        //Gdx.graphics.setTitle(getMain_Frame_Title() + "Main Menu" + getRelease());
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
+
+        getScreenResoulution();
         
-        if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
-            
-                 game.setScreen(new MyGdxGame(game));
+        if (Gdx.input.isKeyJustPressed((Keys.DPAD_DOWN)) && select < 2) {
+            select++;
+        }
+        if (Gdx.input.isKeyJustPressed((Keys.DPAD_UP)) && select > 0) {
+            select--;
         }
 
+        game.batch.end();
+
+    }
+
+    public void getScreenResoulution() {
+         // halbe biltschirm goesse ermiteln.
+        screen_heigth = (Gdx.graphics.getHeight()) / 2;
+        screen_width = (Gdx.graphics.getWidth() / 2);
+
+        //Titel banner position anpassen.
+        Banner_Width = Title_Banner_size_width / 2;
+        Banner_x = screen_width - Banner_Width + 5;
+
+        Banner_heigth = Title_banner_size_heigth / 2;
+
+        // berechnen das die butons immer in der mitte sind.
+        buton_Width = buton_size_width / 2;
+        buton_x = screen_width - buton_Width + 5;
+
+        buton_heigth = buton_size_heigth / 2;
+
+        // halbe biltschirm goesse ermiteln.
+        screen_heigth = (Gdx.graphics.getHeight()) / 2;
+        screen_width = (Gdx.graphics.getWidth() / 2);
+
+        //Titel banner position anpassen.
+        Banner_Width = Title_Banner_size_width / 2;
+        Banner_x = screen_width - Banner_Width + 5;
+
+        Banner_heigth = Title_banner_size_heigth / 2;
+
+        // berechnen das die butons immer in der mitte sind.
+        buton_Width = buton_size_width / 2;
+        buton_x = screen_width - buton_Width + 5;
+
+        buton_heigth = buton_size_heigth / 2;
+        
         //Monitor aufloesung festlegen und zu kleine aufloesung verhindern
         if (Gdx.graphics.getHeight() < 768 && Gdx.graphics.getWidth() < 1024) {
             game.batch.draw(Low_Resoulution, Background_size_x, Background_size_y);
@@ -154,20 +157,53 @@ public class MainMenu implements Screen {
             Option_buton_y = 40;
             Exit_buton_y = -60;
 
+            selectMenu();
+
         } else {
             Banner_y = screen_heigth + Banner_heigth + 350;
             buton_y = screen_heigth - buton_heigth + 5;
 
-            // platz halter werden aus gegeben.
+            selectMenu();
+
+        }
+    }
+
+    
+    /**
+     * Erzeugt die Butons für das haupt menue und das pause menue
+     */
+    public void selectMenu() {
+        
+        if (select == 0) {
+            game.batch.draw(Background, Background_size_x, Background_size_y);
+            game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
+            game.batch.draw(Start_enabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+            if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
+                game.setScreen(new MyGdxGame(game));
+            }
+
+        } else if (select == 1) {
+            game.batch.draw(Background, Background_size_x, Background_size_y);
+            game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
+            game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Option_enabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+//                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
+//                    game.setScreen(new MyGdxGame(game));
+//                }
+
+        } else if (select == 2) {
             game.batch.draw(Background, Background_size_x, Background_size_y);
             game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
             game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
             game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-            game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+            if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
+                Gdx.app.exit();
+            }
         }
-
-        game.batch.end();
-
     }
 
     @Override

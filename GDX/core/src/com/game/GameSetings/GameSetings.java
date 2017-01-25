@@ -38,6 +38,11 @@ public class GameSetings {
     
     
     
+    public static boolean setMain_Frame_fullscreen(boolean Main_Frame_fullscreen) {
+        return GameSetings.Main_Frame_fullscreen = Main_Frame_fullscreen;
+    }
+
+    
     public static boolean Main_Frame_isResizeble() {
         return Main_Frame_resizeble;
     }
