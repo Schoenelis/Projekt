@@ -17,7 +17,7 @@ public class MainFrame {
         LwjglApplicationConfiguration mainframe = new LwjglApplicationConfiguration();
 
         // Titel und icon wird festgelegt.
-        mainframe.title = GameSetings.getMain_Frame_Title() + GameSetings.getRelease();
+        //mainframe.title = GameSetings.getMain_Frame_Title() + GameSetings.getRelease();
         //config.addIcon(path, Files.FileType.Internal);
 
         // Fenster Groesse anpassen.
@@ -27,9 +27,11 @@ public class MainFrame {
 
         // vollbild ein oder aus schalten.
         if (GameSetings.Main_Frame_isFullscreen()) {
+            
             mainframe.fullscreen = GameSetings.Main_Frame_isFullscreen();
             mainframe.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
             mainframe.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+    
 
         } else {
             mainframe.fullscreen = GameSetings.Main_Frame_isFullscreen();

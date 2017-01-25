@@ -1,5 +1,7 @@
 package com.game.GameSetings;
 
+import com.badlogic.gdx.Gdx;
+
 /**
  *
  * @author dreissa
@@ -23,12 +25,12 @@ public class GameSetings {
     // Versions Verwaltung des Spiels. 
     private static final String build = "      Internal Build Version:";
     private static final String buildnummer = " 00.002";
-    private static final String version =" pre-Alpha.";
-            
+    private static final String version =" pre-Alpha."; 
+    
     // Spiel einstelungen Warnung nicht aendern.
-    private static final int Main_Frame_height = 500;
-    private static final int Main_Frame_width = 540;
-    private static final boolean Main_Frame_fullscreen = false;
+    private static final int Main_Frame_height = 900;
+    private static final int Main_Frame_width = 772;
+    public static  boolean Main_Frame_fullscreen = true;
     private static final String Main_Frame_IconPath = null; // pfad zum fenster icon.
     private static final String Main_Frame_title = "The Space Legend";
     private static final boolean Main_Frame_resizeble = false; 

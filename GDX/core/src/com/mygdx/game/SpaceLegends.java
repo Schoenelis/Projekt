@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mygdx.game;
 
 import com.game.Audio.Sounds;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.game.menu.MyGdxGame;
+import com.game.menu.MainMenu;
 
 /**
  * Hauptklasse des spiels.
  *
  * @author dreissa
+ * @version 0.01
  */
 public class SpaceLegends extends Game {
 
@@ -25,7 +21,7 @@ public class SpaceLegends extends Game {
         sound = new Sounds();
         batch = new SpriteBatch();
 
-        this.setScreen(new MyGdxGame(this));
+        this.setScreen(new MainMenu(this));
 
     }
 
