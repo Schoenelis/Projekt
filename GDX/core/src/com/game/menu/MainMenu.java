@@ -56,6 +56,7 @@ public class MainMenu implements Screen {
 
     final SpaceLegends game;
 
+    Texture Low_Resoulution;
     Texture Background;
     Texture Title_Banner;
     Texture Start_enabled;
@@ -70,6 +71,7 @@ public class MainMenu implements Screen {
         this.game = game;
 
         // platzhalter bilder werden geladen.
+        Low_Resoulution = new Texture("low_resoulution.png");
         Background = new Texture("background.png");
         Start_enabled = new Texture("start_disabled.png");
         Start_disabled = new Texture("inaktiv.png");
@@ -90,21 +92,21 @@ public class MainMenu implements Screen {
     @Override
     public void render(float delta) {
 
-        if (Gdx.graphics.isFullscreen()) {
-            if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-                System.exit(0);
-            }
-        }
+        // halbe biltschirm goesse ermiteln.
+        screen_heigth = (Gdx.graphics.getHeight()) / 2;
+        screen_width = (Gdx.graphics.getWidth() / 2);
 
-        if (Gdx.input.isKeyJustPressed((Keys.DPAD_UP))) {
+        //Titel banner position anpassen.
+        Banner_Width = Title_Banner_size_width / 2;
+        Banner_x = screen_width - Banner_Width + 5;
 
-        }
+        Banner_heigth = Title_banner_size_heigth / 2;
 
-        //Gdx.graphics.setTitle(getMain_Frame_Title() + "Main Menu" + getRelease());
-        //123456
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
+        // berechnen das die butons immer in der mitte sind.
+        buton_Width = buton_size_width / 2;
+        buton_x = screen_width - buton_Width + 5;
+
+        buton_heigth = buton_size_heigth / 2;
 
         // halbe biltschirm goesse ermiteln.
         screen_heigth = (Gdx.graphics.getHeight()) / 2;
@@ -122,11 +124,29 @@ public class MainMenu implements Screen {
 
         buton_heigth = buton_size_heigth / 2;
 
-        if(Gdx.graphics.getHeight() < 768){
-           game.batch.draw(Background, Background_size_x, Background_size_y); 
-           game.batch.end();
+        if (Gdx.graphics.isFullscreen()) {
+            if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+                System.exit(0);
+            }
         }
-        else if (Gdx.graphics.getHeight() < 800) {
+
+        
+
+        //Gdx.graphics.setTitle(getMain_Frame_Title() + "Main Menu" + getRelease());
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.batch.begin();
+        
+        if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
+            
+                 game.setScreen(new MyGdxGame(game));
+        }
+
+        //Monitor aufloesung festlegen und zu kleine aufloesung verhindern
+        if (Gdx.graphics.getHeight() < 768 && Gdx.graphics.getWidth() < 1024) {
+            game.batch.draw(Low_Resoulution, Background_size_x, Background_size_y);
+
+        } else if (Gdx.graphics.getHeight() < 800) {
             Banner_y = screen_heigth + Banner_heigth + 200;
             buton_y = screen_heigth - buton_heigth;
             Title_Banner_y = 450;
@@ -137,14 +157,14 @@ public class MainMenu implements Screen {
         } else {
             Banner_y = screen_heigth + Banner_heigth + 350;
             buton_y = screen_heigth - buton_heigth + 5;
-        }
 
-        // platz halter werden aus gegeben.
-        game.batch.draw(Background, Background_size_x, Background_size_y);
-        game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-        game.batch.draw(Start_enabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-        game.batch.draw(Option_enabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-        game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+            // platz halter werden aus gegeben.
+            game.batch.draw(Background, Background_size_x, Background_size_y);
+            game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
+            game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
+            game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+        }
 
         game.batch.end();
 
