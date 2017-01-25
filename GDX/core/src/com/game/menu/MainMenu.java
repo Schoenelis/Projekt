@@ -101,6 +101,7 @@ public class MainMenu implements Screen {
         }
 
         //Gdx.graphics.setTitle(getMain_Frame_Title() + "Main Menu" + getRelease());
+        //123456
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
