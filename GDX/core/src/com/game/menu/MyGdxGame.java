@@ -33,11 +33,12 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.graphics.isFullscreen()) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+        
+        
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 Gdx.app.exit();
             }
-        }
+        
         player = new Player();
         schwarzesLoch = new SchwarzesLoch();
         

@@ -31,8 +31,7 @@ public class MainFrame {
             mainframe.fullscreen = GameSetings.Main_Frame_isFullscreen();
             mainframe.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
             mainframe.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-    
-
+                    
         } else {
             mainframe.fullscreen = GameSetings.Main_Frame_isFullscreen();
         }

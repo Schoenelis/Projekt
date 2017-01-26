@@ -4,6 +4,7 @@ import com.game.Audio.Sounds;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.game.menu.MainMenu;
+import com.game.menu.OptionMenu;
 
 /**
  * Hauptklasse des spiels.
