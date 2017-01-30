@@ -25,12 +25,12 @@ public class OptionMenu implements Screen {
     final SpaceLegends game;
 
     private int select = 0;
-    private int menuButonId = 0;
-    private int gameButonId = 1;
+    private final int menuButtonId = 0;
+    private final int gameButtonId = 1;
 
     // Groesse der schaltflaechen.
-    private final int buton_size_heigth = 80;
-    private final int buton_size_width = 230;
+    private final int button_size_heigth = 80;
+    private final int button_size_width = 230;
 
     private final int Title_banner_size_heigth = 400;
     private final int Title_Banner_size_width = 1200;
@@ -41,37 +41,40 @@ public class OptionMenu implements Screen {
 
     // y positionen der bilder.
     private int Title_Banner_y = 200;
-    private int Menu_Volume_buton_y = 250;
-    private int Game_Volume_buton_y = 150;
-    private int About_game_buton_y = 50;
-    private int Exit_With_Out_Save_buton_y = -50;
-    private int Exit_And_Save_buton_y = -150;
+    private int Menu_Volume_button_y = 250;
+    private int Game_Volume_button_y = 150;
+    private int About_game_button_y = 50;
+    private int Exit_With_Out_Save_button_y = -50;
+    private int Exit_And_Save_button_y = -150;
 
     //
-    private int buton_Width = 0;
-    private int buton_heigth = 0;
+    private int button_Width = 0;
+    private int button_heigth = 0;
 
     private int Banner_Width = 0;
     private int Banner_heigth = 0;
 
     private int Banner_x = 0;
     private int Banner_y = 0;
-    private int buton_x = 0;
-    private int buton_y = 0;
+    private int button_x = 0;
+    private int button_y = 0;
 
     private int screen_width = 0;
     private int screen_heigth = 0;
 
-    int Menu_Volume_Value = (int) (GameSettings.getMenu_Volume() * 100);;
-    float Menu_Volume =  GameSettings.getMenu_Volume();
-    int Game_Volume_Value = 80;
+    int Menu_Volume_Value = (int) (GameSettings.getMenu_Volume() * 100);
+    float Menu_Volume = GameSettings.getMenu_Volume();
+    int Game_Volume_Value = (int) (GameSettings.getGame_Volume() * 100);
+    float Game_Volume = GameSettings.getGame_Volume();
+    int Game_FX_Value = (int) (GameSettings.getGame_FX_Volume() * 100);
+    float Game_FX_Volume = GameSettings.getGame_FX_Volume();
 
     Texture Title_Banner;
     Texture Background;
     Texture Menu_Background;
-    Texture Volume_Buton_Not_Selcted;
-    Texture Menu_Volume_Buton;
-    Texture Game_Volume_Buton;
+    Texture Volume_Button_Not_Selcted;
+    Texture Menu_Volume_Button;
+    Texture Game_Volume_Button;
     Texture About_Game;
     Texture Exit_With_Out_Save;
     Texture Exit_And_Save;
@@ -90,11 +93,12 @@ public class OptionMenu implements Screen {
         Background = new Texture("background.png");
 
 //        //Menu_Background = new Texture("Menu_background.png");
-        Menu_Volume_Buton = new Texture("Volume_Butons/Volume_" + Menu_Volume_Value + ".png");
 
-        Game_Volume_Buton = new Texture("Volume_Butons/Volume_" + Game_Volume_Value + ".png");
+        Menu_Volume_Button = new Texture("Volume_Buttons/Volume_" + Menu_Volume_Value + ".png");
 
-        Volume_Buton_Not_Selcted = new Texture("Volume_Butons/Volume_Not_Selected.png");
+        Game_Volume_Button = new Texture("Volume_Buttons/Volume_" + Game_Volume_Value + ".png");
+
+        Volume_Button_Not_Selcted = new Texture("Volume_Buttons/Volume_Not_Selected.png");
 
         About_Game = new Texture("inaktiv.png");
 
@@ -127,18 +131,20 @@ public class OptionMenu implements Screen {
             select--;
         }
 
+        
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_RIGHT)) && select == 0 && Menu_Volume_Value < 100) {
             Menu_Volume += 0.2f;
             Sounds.setMenu_Volume(1f);
-            for (int i = 0; i < 10; i++);
             GameSettings.setMenu_Volume(Menu_Volume);
             Menu_Volume_Value = (int) (100 * Menu_Volume);
-            setVolume(menuButonId);
+            setVolume(menuButtonId);
 
-            System.out.println("Menue_Volume_Value: " + Menu_Volume_Value  + " Menue_Volume: " + Menu_Volume);
+            System.out.println("\nMenue_Volume_Value: " + Menu_Volume_Value + " Menue_Volume: " + Menu_Volume);
 
         }
 
+        
+        
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_LEFT)) && select == 0 && Menu_Volume_Value > 0) {
             Menu_Volume_Value -= 20;
 
@@ -149,20 +155,46 @@ public class OptionMenu implements Screen {
             }
 
             Sounds.setMenu_Volume(Menu_Volume);
-            setVolume(menuButonId);
+            GameSettings.setMenu_Volume(Menu_Volume);
+            setVolume(gameButtonId);
 
-            System.out.println("Menu_Volume_Value: " + Menu_Volume_Value + " Menu_Volume: " + Menu_Volume);
+            System.out.println("\nMenu_Volume_Value: " + Menu_Volume_Value + " Menu_Volume: " + Menu_Volume);
         }
 
+        
+        
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_RIGHT)) && select == 1 && Game_Volume_Value < 100) {
             Game_Volume_Value += 20;
-            setVolume(gameButonId);
+            Sounds.setGame_Volume(1f);
+            GameSettings.setGame_Volume(Game_Volume);
+            Game_Volume_Value = (int) (100 * Game_Volume);
+            setVolume(gameButtonId);
+
+            System.out.println("\nGame_Volume_Value: " + Game_Volume_Value + " Game_Volume: " + Game_Volume);
+
+            setVolume(gameButtonId);
         }
+        
+        
+        
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_LEFT)) && select == 1 && Game_Volume_Value > 0) {
             Game_Volume_Value -= 20;
-            setVolume(gameButonId);
+
+            if (Game_Volume_Value == 0) {
+                Game_Volume = 0f;
+            } else {
+                Game_Volume -= 0.2f;
+            }
+            Sounds.setGame_Volume(Game_Volume);
+            GameSettings.setGame_Volume(Game_Volume);
+            
+            System.out.println("\nGame_Volume_Value: " + Game_Volume_Value + " Game_Volume: " + Game_Volume);
+            
+            setVolume(gameButtonId);
         }
 
+        
+        
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
@@ -183,12 +215,12 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 //  game.batch.draw(Menu_Background, Background_size_y, Background_size_x);
-                game.batch.draw(Menu_Volume_Buton, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Game_Volume_Buton, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(About_Game, buton_x, buton_y + About_game_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, buton_x, buton_y + Exit_With_Out_Save_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_And_Save, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     Gdx.app.exit();
@@ -198,12 +230,12 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 //game.batch.draw(Menu_Background, Background_size_y, Background_size_x);
-                game.batch.draw(Menu_Volume_Buton, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Game_Volume_Buton, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(About_Game, buton_x, buton_y + About_game_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, buton_x, buton_y + Exit_With_Out_Save_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_And_Save, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     //Gdx.app.exit();
@@ -213,13 +245,13 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 //game.batch.draw(Menu_Background, Background_size_y, Background_size_x);
-                game.batch.draw(Menu_Volume_Buton, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Game_Volume_Buton, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(About_Game2, buton_x, buton_y + About_game_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, buton_x, buton_y + Exit_With_Out_Save_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_And_Save, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(About_Game2, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     //Gdx.app.exit();
@@ -230,13 +262,13 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 //game.batch.draw(Menu_Background, Background_size_y, Background_size_x);
-                game.batch.draw(Menu_Volume_Buton, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Game_Volume_Buton, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(About_Game, buton_x, buton_y + About_game_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_With_Out_Save2, buton_x, buton_y + Exit_With_Out_Save_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_And_Save, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_With_Out_Save2, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     //Gdx.app.exit();
@@ -247,13 +279,13 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 //game.batch.draw(Menu_Background, Background_size_y, Background_size_x);
-                game.batch.draw(Menu_Volume_Buton, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Menu_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Game_Volume_Buton, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Volume_Buton_Not_Selcted, buton_x, buton_y + Game_Volume_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(About_Game, buton_x, buton_y + About_game_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, buton_x, buton_y + Exit_With_Out_Save_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_And_Save2, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(Exit_And_Save2, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     Gdx.app.exit();
@@ -266,24 +298,24 @@ public class OptionMenu implements Screen {
     }
 
     /**
-     * Zeichnet die Butons fuer die Lautstaerke neu.
+     * Zeichnet die Buttons fuer die Lautstaerke neu.
      *
-     * Die zu zeichneden butons werden mittels der butonId aus gewaehlt und dann
-     * gezeichnet.
+     * Die zu zeichneden buttons werden mittels der buttonId aus gewaehlt und
+     * dann gezeichnet.
      *
-     * @param butonId
+     * @param buttonId
      */
-    public void setVolume(int butonId) {
-        switch (butonId) {
+    public void setVolume(int buttonId) {
+        switch (buttonId) {
             case 0:
-                butonId = 0;
-                Menu_Volume_Buton = new Texture("Volume_Butons/Volume_" + Menu_Volume_Value + ".png");
+                buttonId = 0;
+                Menu_Volume_Button = new Texture("Volume_Buttons/Volume_" + Menu_Volume_Value + ".png");
 
                 break;
 
             case 1:
-                butonId = 2;
-                Game_Volume_Buton = new Texture("Volume_Butons/Volume_" + Game_Volume_Value + ".png");
+                buttonId = 1;
+                Game_Volume_Button = new Texture("Volume_Buttons/Volume_" + Game_Volume_Value + ".png");
                 break;
             default:
                 break;
@@ -327,34 +359,34 @@ public class OptionMenu implements Screen {
             Banner_heigth = Title_banner_size_heigth / 2;
 
             // berechnen das die butons immer in der mitte sind.
-            buton_Width = buton_size_width / 2;
-            buton_x = screen_width - buton_Width + 5;
+            button_Width = button_size_width / 2;
+            button_x = screen_width - button_Width + 5;
 
-            buton_heigth = buton_size_heigth / 2;
+            button_heigth = button_size_heigth / 2;
 
         }
 
         if (Gdx.graphics.getHeight() <= 768) {
             Banner_y = screen_heigth + Banner_heigth - 90;
-            buton_y = screen_heigth - buton_heigth + 2;
+            button_y = screen_heigth - button_heigth + 2;
             Title_Banner_y = 250;
-            Menu_Volume_buton_y = 100;
-            Game_Volume_buton_y = -30;
-            About_game_buton_y = -160;
-            Exit_With_Out_Save_buton_y = -200;
-            Exit_And_Save_buton_y = -250;
+            Menu_Volume_button_y = 100;
+            Game_Volume_button_y = -30;
+            About_game_button_y = -160;
+            Exit_With_Out_Save_button_y = -200;
+            Exit_And_Save_button_y = -250;
 
             selectMenu();
 
         } else if (Main_Frame_fullscreen) {
             Banner_y = screen_heigth + Banner_heigth;
-            buton_y = screen_heigth - buton_heigth;
+            button_y = screen_heigth - button_heigth;
 
             selectMenu();
 
         } else {
             Banner_y = screen_heigth + Banner_heigth + 330;
-            buton_y = screen_heigth - buton_heigth + 180;
+            button_y = screen_heigth - button_heigth + 180;
 
             selectMenu();
         }

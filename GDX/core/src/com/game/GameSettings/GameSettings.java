@@ -24,15 +24,15 @@ public class GameSettings {
     //Spiel Einstelungen eigestelt durch den Spieler.
     //Anlegen der Lautstearke der Audiodatein.
     private static float Menu_Volume = 0.0f;
-    private static float Buton_Volume = 0.0f;
+    private static float Button_Volume = 0.0f;
     private static float Game_Volume = 0.0f;
     private static float Game_FX_Volume = 0.0f;
 
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
-    private static String build = "Internal Build Version";
-    private static String buildnummer = "00.04";
-    private static String version = "pre-Alpha.";
+    private static final String build  = "Internal Build Version";;
+    private static final String buildnummer = "00.04";
+    private static final String version = "pre-Alpha.";
 
     // Spiel einstelungen Warnung nicht aendern.
     private static final String Game_Settings_File = "Settings.dat";
@@ -43,6 +43,11 @@ public class GameSettings {
     private static final String Main_Frame_title = "The Space Legend";
     private static final boolean Main_Frame_resizeble = false;
 
+    
+    /**
+     * Set the Game to Fullscreen in the final game this has no effects.
+     * @param Set_fullscreen 
+     */
     public static void setMain_Frame_fullscreen(boolean Set_fullscreen) {
         Main_Frame_fullscreen = Set_fullscreen;
 
@@ -56,6 +61,42 @@ public class GameSettings {
     public static void setMenu_Volume(float Menu_Volume) {
         GameSettings.Menu_Volume = Menu_Volume;
     }
+    
+    /**
+     * Set the Volume of the Game Music
+     * @param Game_Volume 
+     */
+    public static void setGame_Volume(float Game_Volume) {
+        GameSettings.Game_Volume = Game_Volume;
+    }
+/**
+ * Returns the Volume of the game Buttons.
+ * @return 
+ */
+    public static float getButton_Volume() {
+        return Button_Volume;
+    }
+/**
+ * Returns the Volume of the Game.
+ * @return 
+ */
+    public static float getGame_Volume() {
+        return Game_Volume;
+    }
+/**
+ * Returns the Volume of the special effects in the Game.
+ * @return 
+ */
+    public static float getGame_FX_Volume() {
+        return Game_FX_Volume;
+    }
+/**
+ * Returns the name of the Game_Settings_File.
+ * @return 
+ */
+    public static String getGame_Settings_File() {
+        return Game_Settings_File;
+    }
 
     /**
      * Returns the Volume of the Menu Music.
@@ -65,31 +106,54 @@ public class GameSettings {
     public static float getMenu_Volume() {
         return Menu_Volume;
     }
-
+/**
+ * Returns if the game Fullscreen or not in the final game you 
+ * can only use Fullscreen.
+ * @return 
+ */
     public static boolean Main_Frame_isFullscreen() {
         return Main_Frame_fullscreen;
     }
-
+/**
+ * Returns if the Game is Resizeble
+ * @return 
+ */
     public static boolean Main_Frame_isResizeble() {
         return Main_Frame_resizeble;
     }
-
+/**
+ * Returns the Release of the Game.
+ * @return 
+ */
     public static String getRelease() {
         return "      " + build + "  " + buildnummer + "  " + version;
     }
-
+/**
+ * Returns the Heigth of the Game.
+ * @return 
+ */
     public static int getMain_Frame_Height() {
         return Main_Frame_height;
     }
-
+/**
+ * Returns the Width of the Game.
+ * @return 
+ */
     public static int getMain_Frame_Width() {
         return Main_Frame_width;
     }
-
+/**
+ * Returns the ichon of the Game.
+ * @return 
+ */
     public static String getMain_Frame_IconPath() {
         return Main_Frame_IconPath;
     }
 
+    /**
+     * Returns the title of the Game
+     * @return 
+     */
     public static String getMain_Frame_Title() {
         return Main_Frame_title;
     }
@@ -98,12 +162,9 @@ public class GameSettings {
 
         String data = "#Game Settings file do not change this file, it can have side effects for the gameplay and the stability of the game.\n"
                 + "You can change the settings in the Option menu from the Game.\n\n"
-                + "#Build: " + build + ",\n"
-                + "#Build_Nr: " + buildnummer + ",\n"
-                + "#Build_Version: " + version + ",\n\n"
                 + "#Audio Settings \n"
                 + "#Menu Volume: " + Menu_Volume + ",\n"
-                + "#Buton_Volume: " + Buton_Volume + ",\n"
+                + "#Buton_Volume: " + Button_Volume + ",\n"
                 + "#Game_Volume: " + Game_Volume + ",\n"
                 + "#Game_FX_Volume: " + Game_FX_Volume + ",\n"
                 + "#End";
@@ -111,7 +172,9 @@ public class GameSettings {
         Gdx.files.local(Game_Settings_File).writeString(data, false);
 
     }
-
+/**
+ * Die spiel einstelungen werden geladen.
+ */
     public static void LoadGameSettings() {
 
         //Set the Char for the String Cuting
@@ -127,7 +190,7 @@ public class GameSettings {
         int String_Size = 0;
 
         // String Array for the output settings.
-        String[] SETTINGS_DATA = new String[8];
+        String[] SETTINGS_DATA = new String[arrayLength];
 
         //Loading the curent Game Setings from the Setings File.
         try {
@@ -173,17 +236,10 @@ public class GameSettings {
             
             
             // Set the Values.  
-            build = SETTINGS_DATA[0];
-            buildnummer = SETTINGS_DATA[1];
-            version = SETTINGS_DATA[2];
-            
-            System.out.println("1 " + Menu_Volume);
-         //  Menu_Volume = Float.parseFloat(SETTINGS_DATA[3]);
-            System.out.println("2 " + Menu_Volume);
-            
-            Buton_Volume = Float.parseFloat(SETTINGS_DATA[4]);
-            Game_Volume = Float.parseFloat(SETTINGS_DATA[5]);
-            Game_FX_Volume = Float.parseFloat(SETTINGS_DATA[6]);
+            Menu_Volume = Float.parseFloat(SETTINGS_DATA[1]);
+            Button_Volume = Float.parseFloat(SETTINGS_DATA[2]);
+            Game_Volume = Float.parseFloat(SETTINGS_DATA[3]);
+            Game_FX_Volume = Float.parseFloat(SETTINGS_DATA[4]);
 
             //Print the Value to the Terminal for Testing.
             for (int i = 0; i < SETTINGS_DATA.length; i++) {
@@ -191,4 +247,6 @@ public class GameSettings {
             }
         }
     }
+
+    
 }

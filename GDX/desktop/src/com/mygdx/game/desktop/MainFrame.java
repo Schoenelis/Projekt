@@ -1,4 +1,3 @@
-
 package com.mygdx.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -8,16 +7,17 @@ import com.mygdx.game.SpaceLegends;
 
 /**
  * Stellt das hauptfenster ein und startet das spiel.
+ *
  * @author Dreissa
  */
- 
 public class MainFrame {
 
     public static void MainFrame() {
         LwjglApplicationConfiguration mainframe = new LwjglApplicationConfiguration();
 
+        
         // Titel und icon wird festgelegt.
-       mainframe.title = GameSettings.getMain_Frame_Title() + GameSettings.getRelease();
+        mainframe.title = GameSettings.getMain_Frame_Title() + GameSettings.getRelease();
         //config.addIcon(path, Files.FileType.Internal);
 
         // Fenster Groesse anpassen.
@@ -27,11 +27,11 @@ public class MainFrame {
 
         // vollbild ein oder aus schalten.
         if (GameSettings.Main_Frame_isFullscreen()) {
-            
+
             mainframe.fullscreen = GameSettings.Main_Frame_isFullscreen();
             mainframe.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
             mainframe.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-                    
+
         } else {
             mainframe.fullscreen = GameSettings.Main_Frame_isFullscreen();
         }
