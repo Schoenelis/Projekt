@@ -124,22 +124,22 @@ public class GameSettings {
 
         while (index <= laenge) {
 
-            // Nach dem Trennzeichen cut suchen.
-            if (readData.charAt(index) == cut) {
-                index++;
-                ab = index;
-
-                // alles zahlen bis cut2 auftaucht.
-                while (readData.charAt(index) != cut2) {
-                    index++;
-                    bis = index;
-                }
-
-            }else{
-                index++;
-            }
-
-        }
+//            // Nach dem Trennzeichen cut suchen.
+//            if (readData.charAt(index) == cut) {
+//                index++;
+//                ab = index;
+//
+//                // alles zahlen bis cut2 auftaucht.
+//                while (readData.charAt(index) != cut2) {
+//                    index++;
+//                    bis = index;
+//                }
+//
+//            }else{
+//                index++;
+//            }
+//
+    }
 
         //als letztel redData zerschneiden.
         temp = readData.substring(ab, bis);
