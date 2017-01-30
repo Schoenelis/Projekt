@@ -1,8 +1,13 @@
-#Game_Name: The Space Legend
-#Bulid_Version: Internal Build Version:  00.04  pre-Alpha.
-#Fullscreen: false
-#Game_Heigth: 768
-#Game_Width: 1024
+#Game Settings file do not change this file, it can have side effects for the gameplay and the stability of the game.
+You can change the settings in the Option menu from the Game.
+
+#Build: Internal Build Version,
+#Build_Nr: 00.04,
+#Build_Version: pre-Alpha.,
+
 #Audio Settings 
-#Menu Volume: 0.2
-#End:
+#Menu Volume: 0.0,
+#Buton_Volume: 0.0,
+#Game_Volume: 0.0,
+#Game_FX_Volume: 0.0,
+#End

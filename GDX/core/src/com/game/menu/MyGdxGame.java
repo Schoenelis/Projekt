@@ -22,6 +22,9 @@ public class MyGdxGame implements Screen {
     Texture imgSchwarzesLoch;
     SchwarzesLoch schwarzesLoch;
     Player player;
+    Texture Background;
+    private final float Background_size_x = (float) (Gdx.graphics.getWidth() * 0.0);
+    private final float Background_size_y = (float) (Gdx.graphics.getHeight() * 0.0);
 
     public MyGdxGame(SpaceLegends game) {
         this.game = game;
@@ -33,24 +36,23 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void render(float delta) {
-        
-        
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-                Gdx.app.exit();
-            }
-        
+            Gdx.app.exit();
+        }
+        Background = new Texture("background.png");
         player = new Player();
         schwarzesLoch = new SchwarzesLoch();
-        
+
         player.movePlayerAll();
         player.koolisionFenster();
-        
+
         schwarzesLoch.pullPlayer();
-        
+
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-
+        game.batch.draw(Background, Background_size_x, Background_size_y);
         game.batch.draw(imgPlayer, Player.x, Player.y, Player.width, Player.height);
         game.batch.draw(imgSchwarzesLoch, SchwarzesLoch.x, SchwarzesLoch.y, SchwarzesLoch.width, SchwarzesLoch.height);
 

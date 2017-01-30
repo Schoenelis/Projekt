@@ -23,6 +23,7 @@ public class SpaceLegends extends Game {
 
         sound = new Sounds();      
         batch = new SpriteBatch();
+        com.game.GameSettings.GameSettings.LoadGameSettings();
 
        this.setScreen(new MainMenu(this));
         //this.setScreen(new OptionMenu(this));

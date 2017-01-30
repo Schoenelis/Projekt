@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.game.Audio.Sounds;
 import com.game.GameSettings.GameSettings;
 import static com.game.GameSettings.GameSettings.Main_Frame_fullscreen;
-import static com.game.GameSettings.GameSettings.saveGameSetings;
+import static com.game.GameSettings.GameSettings.*;
 import com.mygdx.game.SpaceLegends;
 
 /**
@@ -206,7 +206,7 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Exit_And_Save, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
-                    Gdx.app.exit();
+                    //Gdx.app.exit();
                 }
                 break;
             case 2:
@@ -223,7 +223,7 @@ public class OptionMenu implements Screen {
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     //Gdx.app.exit();
-                    saveGameSetings();
+                    saveGameSettings();
                 }
                 break;
             case 3:
@@ -239,7 +239,8 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Exit_And_Save, buton_x, buton_y + Exit_And_Save_buton_y, buton_size_width, buton_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
-                    Gdx.app.exit();
+                    //Gdx.app.exit();
+                    LoadGameSettings();
                 }
                 break;
             case 4:
