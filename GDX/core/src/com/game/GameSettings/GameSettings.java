@@ -30,7 +30,8 @@ public class GameSettings {
 
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
-    private static final String build  = "Internal Build Version";;
+    private static final String build = "Internal Build Version";
+    ;
     private static final String buildnummer = "00.04";
     private static final String version = "pre-Alpha.";
 
@@ -43,10 +44,10 @@ public class GameSettings {
     private static final String Main_Frame_title = "The Space Legend";
     private static final boolean Main_Frame_resizeble = false;
 
-    
     /**
      * Set the Game to Fullscreen in the final game this has no effects.
-     * @param Set_fullscreen 
+     *
+     * @param Set_fullscreen
      */
     public static void setMain_Frame_fullscreen(boolean Set_fullscreen) {
         Main_Frame_fullscreen = Set_fullscreen;
@@ -61,39 +62,48 @@ public class GameSettings {
     public static void setMenu_Volume(float Menu_Volume) {
         GameSettings.Menu_Volume = Menu_Volume;
     }
-    
+
     /**
      * Set the Volume of the Game Music
-     * @param Game_Volume 
+     *
+     * @param Game_Volume
      */
     public static void setGame_Volume(float Game_Volume) {
         GameSettings.Game_Volume = Game_Volume;
     }
-/**
- * Returns the Volume of the game Buttons.
- * @return 
- */
+
+    /**
+     * Returns the Volume of the game Buttons.
+     *
+     * @return
+     */
     public static float getButton_Volume() {
         return Button_Volume;
     }
-/**
- * Returns the Volume of the Game.
- * @return 
- */
+
+    /**
+     * Returns the Volume of the Game.
+     *
+     * @return
+     */
     public static float getGame_Volume() {
         return Game_Volume;
     }
-/**
- * Returns the Volume of the special effects in the Game.
- * @return 
- */
+
+    /**
+     * Returns the Volume of the special effects in the Game.
+     *
+     * @return
+     */
     public static float getGame_FX_Volume() {
         return Game_FX_Volume;
     }
-/**
- * Returns the name of the Game_Settings_File.
- * @return 
- */
+
+    /**
+     * Returns the name of the Game_Settings_File.
+     *
+     * @return
+     */
     public static String getGame_Settings_File() {
         return Game_Settings_File;
     }
@@ -106,53 +116,66 @@ public class GameSettings {
     public static float getMenu_Volume() {
         return Menu_Volume;
     }
-/**
- * Returns if the game Fullscreen or not in the final game you 
- * can only use Fullscreen.
- * @return 
- */
+
+    /**
+     * Returns if the game Fullscreen or not in the final game you can only use
+     * Fullscreen.
+     *
+     * @return
+     */
     public static boolean Main_Frame_isFullscreen() {
         return Main_Frame_fullscreen;
     }
-/**
- * Returns if the Game is Resizeble
- * @return 
- */
+
+    /**
+     * Returns if the Game is Resizeble
+     *
+     * @return
+     */
     public static boolean Main_Frame_isResizeble() {
         return Main_Frame_resizeble;
     }
-/**
- * Returns the Release of the Game.
- * @return 
- */
+
+    /**
+     * Returns the Release of the Game.
+     *
+     * @return
+     */
     public static String getRelease() {
         return "      " + build + "  " + buildnummer + "  " + version;
     }
-/**
- * Returns the Heigth of the Game.
- * @return 
- */
+
+    /**
+     * Returns the Heigth of the Game.
+     *
+     * @return
+     */
     public static int getMain_Frame_Height() {
         return Main_Frame_height;
     }
-/**
- * Returns the Width of the Game.
- * @return 
- */
+
+    /**
+     * Returns the Width of the Game.
+     *
+     * @return
+     */
     public static int getMain_Frame_Width() {
         return Main_Frame_width;
     }
-/**
- * Returns the ichon of the Game.
- * @return 
- */
+
+    /**
+     * Returns the ichon of the Game.
+     *
+     * @return
+     */
     public static String getMain_Frame_IconPath() {
         return Main_Frame_IconPath;
     }
 
     /**
      * Returns the title of the Game
-     * @return 
+     *
+     * @return
      */
     public static String getMain_Frame_Title() {
         return Main_Frame_title;
@@ -172,9 +195,10 @@ public class GameSettings {
         Gdx.files.local(Game_Settings_File).writeString(data, false);
 
     }
-/**
- * Die spiel einstelungen werden geladen.
- */
+
+    /**
+     * Die spiel einstelungen werden geladen.
+     */
     public static void LoadGameSettings() {
 
         //Set the Char for the String Cuting
@@ -199,7 +223,7 @@ public class GameSettings {
             System.err.println("\n Fehler datei wurde nicht Gefunden" + e);
             System.out.println("Loading default setings");
             saveGameSettings();
-            
+
         }
 
         if (DATA_READ == null || DATA_READ.isEmpty()) {
@@ -233,8 +257,7 @@ public class GameSettings {
                 SETTINGS_DATA[SetingsCount] = DATA_READ.substring(beginIndex, endIndex);
 
             }
-            
-            
+
             // Set the Values.  
             Menu_Volume = Float.parseFloat(SETTINGS_DATA[1]);
             Button_Volume = Float.parseFloat(SETTINGS_DATA[2]);
@@ -248,5 +271,4 @@ public class GameSettings {
         }
     }
 
-    
 }
