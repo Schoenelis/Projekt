@@ -20,12 +20,12 @@ public class SpaceLegends extends Game {
 
     @Override
     public void create() {
-    
-        sound = new Sounds();
+
+        sound = new Sounds();      
         batch = new SpriteBatch();
-        
-     this.setScreen(new MainMenu(this));
-    
+
+       this.setScreen(new MainMenu(this));
+        //this.setScreen(new OptionMenu(this));
 
     }
 

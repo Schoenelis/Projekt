@@ -2,7 +2,7 @@ package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.game.GameSetings.GameSetings;
+import com.game.GameSettings.GameSettings;
 
 public class Player {
 
@@ -75,18 +75,18 @@ public class Player {
             vy = 0;
         }
         // Fenster Koolision Oben
-        if (y >= GameSetings.getMain_Frame_Height() - Player.height) {
-            y = GameSetings.getMain_Frame_Height() - Player.height;
+        if (y >= GameSettings.getMain_Frame_Height() - Player.height) {
+            y = GameSettings.getMain_Frame_Height() - Player.height;
             vy = 0;
             // Level geschafft
         }
         // Fenster Rechts durchgang nach Links
-        if (x >= GameSetings.getMain_Frame_Width() + Player.width / 2) {
+        if (x >= GameSettings.getMain_Frame_Width() + Player.width / 2) {
             x = -Player.width;
         }
         // Fenster Links durchgang nach Rechts
         if (x < -Player.width) {
-            x = GameSetings.getMain_Frame_Width();
+            x = GameSettings.getMain_Frame_Width();
         }
     }
 

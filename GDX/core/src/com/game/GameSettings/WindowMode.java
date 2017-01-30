@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.game.GameSetings;
+package com.game.GameSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
-import static com.game.GameSetings.GameSetings.getMain_Frame_Height;
-import static com.game.GameSetings.GameSetings.getMain_Frame_Width;
-import static com.game.GameSetings.GameSetings.setMain_Frame_fullscreen;
+import static com.game.GameSettings.GameSettings.getMain_Frame_Height;
+import static com.game.GameSettings.GameSettings.getMain_Frame_Width;
+import static com.game.GameSettings.GameSettings.setMain_Frame_fullscreen;
 
 /**
  *
@@ -39,7 +39,7 @@ public class WindowMode {
             if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 Gdx.app.exit();
             }
-            if (Gdx.input.isKeyJustPressed(Input.Keys.G)) {               
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {               
                 Gdx.graphics.setWindowedMode(getMain_Frame_Width(), getMain_Frame_Height());
                 setMain_Frame_fullscreen(false);
             }
