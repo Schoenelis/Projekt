@@ -140,7 +140,7 @@ public class GameSettings {
 //            }
 //
     }
-
+//
         //als letztel redData zerschneiden.
         temp = readData.substring(ab, bis);
 
