@@ -10,7 +10,7 @@ public class Sounds {
 
     //Creating of the Volume of the Audiofiles.
     private static float Menu_Volume = GameSettings.getMenu_Volume();
-    private static float Button_Volume = GameSettings.getButton_Volume();
+    private static final float Button_Volume = GameSettings.getButton_Volume();
     private static float Game_Volume = GameSettings.getGame_Volume();
     private static float Game_SFX_Volume = GameSettings.getGame_SFX_Volume();
 
