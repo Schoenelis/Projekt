@@ -15,7 +15,7 @@ public class DesktopLauncher {
 
         MainFrame.MainFrame();
 
-      loadsettings();
+        loadsettings();
 
     }
 
@@ -23,12 +23,11 @@ public class DesktopLauncher {
 
         Component MainFrame = null;
 
-     
-
         if (!GameSettings.LoadGameSettings()) {
             JOptionPane.showMessageDialog(MainFrame, "An error occurred while loading the Game settings. \n"
                     + "Click on Ok to load the default Settings.", "Settings Error", JOptionPane.ERROR_MESSAGE);
             GameSettings.LoadDefaultSettings();
+            GameSettings.saveGameSettings();
         }
 
     }

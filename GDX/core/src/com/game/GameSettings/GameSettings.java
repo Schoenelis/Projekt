@@ -27,12 +27,12 @@ public class GameSettings {
     private static float Menu_Volume = 0.0f;
     private static float Button_Volume = 0.0f;
     private static float Game_Volume = 0.0f;
-    private static float Game_SFX_Volume = 0.0f; 
-   
+    private static float Game_SFX_Volume = 0.0f;
+
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
     private static final String build = "Internal Build Version";
-    private static final String buildnummer = "00.04";
+    private static final String buildnummer = "00.05";
     private static final String version = "pre-Alpha.";
 
     // Spiel einstelungen Warnung nicht aendern.
@@ -224,14 +224,13 @@ public class GameSettings {
         String[] SETTINGS_DATA = new String[arrayLength];
 
         //Loading the curent Game Setings from the Setings File.
-        
         try {
             DATA_READ = Gdx.files.local(Game_Settings_File).readString();
         } catch (Exception e) {
             System.err.println("\n Fehler datei wurde nicht Gefunden" + e);
             System.out.println("Loading default setings");
-            return DATA_LOAD_OK;            
-       }
+            return DATA_LOAD_OK;
+        }
 
         if (DATA_READ == null || DATA_READ.isEmpty()) {
 
@@ -287,7 +286,7 @@ public class GameSettings {
     public static void LoadDefaultSettings() {
         Menu_Volume = 1f;
         Button_Volume = 0.6f;
-        Game_Volume =1f;
+        Game_Volume = 1f;
         Game_SFX_Volume = 0.6f;
     }
 

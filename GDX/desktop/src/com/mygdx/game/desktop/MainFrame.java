@@ -1,23 +1,18 @@
 package com.mygdx.game.desktop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.game.GameSettings.GameSettings;
 import com.mygdx.game.SpaceLegends;
-import java.awt.Component;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * Stellt das hauptfenster ein und startet das spiel.
  *
  * @author Dreissa
  */
-public class MainFrame extends JFrame {
+public class MainFrame {
 
     public static void MainFrame() {
-        
 
         LwjglApplicationConfiguration mainframe = new LwjglApplicationConfiguration();
 

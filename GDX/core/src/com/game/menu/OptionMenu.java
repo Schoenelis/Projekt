@@ -46,7 +46,7 @@ public class OptionMenu implements Screen {
     private int Game_Volume_button_y = 150;
     private int Game_SFX_Volume_button_y = 50;
     private int About_game_button_y = -50;
-    private int Exit_With_Out_Save_button_y = -150;
+    private int New_Game_y = -150;
     private int Exit_And_Save_button_y = -250;
 
     //
@@ -81,11 +81,11 @@ public class OptionMenu implements Screen {
     Texture Game_Volume_Button;
     Texture Game_SFX_Volume_Button;
     Texture About_Game;
-    Texture Exit_With_Out_Save;
+    Texture New_Game;
     Texture Exit_And_Save;
 
     Texture About_Game2;
-    Texture Exit_With_Out_Save2;
+    Texture New_Game2;
     Texture Exit_And_Save2;
 
     //xture Option_disabled;
@@ -108,13 +108,13 @@ public class OptionMenu implements Screen {
 
         About_Game = new Texture("inaktiv.png");
 
-        Exit_With_Out_Save = new Texture("inaktiv.png");
+        New_Game = new Texture("inaktiv.png");
 
         Exit_And_Save = new Texture("inaktiv.png");
 
         About_Game2 = new Texture("aktiv.png");
 
-        Exit_With_Out_Save2 = new Texture("aktiv.png");
+        New_Game2 = new Texture("aktiv.png");
 
         Exit_And_Save2 = new Texture("aktiv.png");
 
@@ -252,7 +252,7 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(New_Game, button_x, button_y + New_Game_y, button_size_width, button_size_heigth);
                 game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
@@ -269,7 +269,7 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(New_Game, button_x, button_y + New_Game_y, button_size_width, button_size_heigth);
                 game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
@@ -286,7 +286,7 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(New_Game, button_x, button_y + New_Game_y, button_size_width, button_size_heigth);
                 game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
@@ -305,11 +305,12 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(About_Game2, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(New_Game, button_x, button_y + New_Game_y, button_size_width, button_size_heigth);
                 game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
-                    //Gdx.app.exit();
+                    System.out.println("The Save Game has been Deleted!");
+                    Gdx.app.exit();
                 }
                 break;
             case 4:
@@ -323,10 +324,11 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
-                game.batch.draw(Exit_With_Out_Save2, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(New_Game2, button_x, button_y + New_Game_y, button_size_width, button_size_heigth);
                 game.batch.draw(Exit_And_Save, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
+                    System.out.println("Über das game");
                     //Gdx.app.exit();                    
                 }
                 break;
@@ -341,11 +343,12 @@ public class OptionMenu implements Screen {
                 game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(Volume_Button_Not_Selcted, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
                 game.batch.draw(About_Game, button_x, button_y + About_game_button_y, button_size_width, button_size_heigth);
-                game.batch.draw(Exit_With_Out_Save, button_x, button_y + Exit_With_Out_Save_button_y, button_size_width, button_size_heigth);
+                game.batch.draw(New_Game, button_x, button_y + New_Game_y, button_size_width, button_size_heigth);
                 game.batch.draw(Exit_And_Save2, button_x, button_y + Exit_And_Save_button_y, button_size_width, button_size_heigth);
 
                 if (Gdx.input.isKeyJustPressed((Input.Keys.ENTER))) {
                     saveGameSettings();
+                    System.out.println("Einstelllungen gespeichert.");
                 // LoadGameSettings(); // Print the setings to the Terminal
                   game.setScreen(new MainMenu(game));
                    
@@ -438,7 +441,7 @@ public class OptionMenu implements Screen {
             Menu_Volume_button_y = 100;
             Game_Volume_button_y = -30;
             About_game_button_y = -160;
-            Exit_With_Out_Save_button_y = -200;
+            New_Game_y = -200;
             Exit_And_Save_button_y = -250;
 
             selectMenu();

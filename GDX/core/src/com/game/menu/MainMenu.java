@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import static com.game.GameSettings.GameSettings.*;
 import com.mygdx.game.SpaceLegends;
-import com.game.Audio.Sounds;
-import javax.swing.JOptionPane;
 
 public class MainMenu implements Screen {
 
@@ -61,8 +59,6 @@ public class MainMenu implements Screen {
 
     public MainMenu(SpaceLegends game) {
         this.game = game;
-        
-      
 
         // platzhalter bilder werden geladen.
         Low_Resoulution = new Texture("low_resoulution.png");
@@ -81,13 +77,12 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
-        
+
     }
 
     @Override
     public void render(float delta) {
-        
-    
+
         if (Gdx.input.isKeyJustPressed((Keys.DPAD_DOWN)) && select < 3) {
             select++;
         } else if (select == 3) {
@@ -196,7 +191,7 @@ public class MainMenu implements Screen {
                 game.batch.draw(Option_enabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
-                    game.setScreen(new OptionMenu(game));       
+                    game.setScreen(new OptionMenu(game));
                 }
                 break;
             case 2:
