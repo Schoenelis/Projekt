@@ -25,12 +25,14 @@ public class MyGdxGame implements Screen {
     Texture Background;
     private final float Background_size_x = (float) (Gdx.graphics.getWidth() * 0.0);
     private final float Background_size_y = (float) (Gdx.graphics.getHeight() * 0.0);
+    boolean paused = false;
 
     public MyGdxGame(SpaceLegends game) {
         this.game = game;
         batch = new SpriteBatch();
         imgPlayer = new Texture("badlogic.jpg");
         imgSchwarzesLoch = new Texture("badlogic.jpg");
+        Background = new Texture("Game_Grafiken/background.png");
 
     }
 
@@ -40,7 +42,12 @@ public class MyGdxGame implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
-        Background = new Texture("background.png");
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+            game.setScreen(new MainMenu(game));
+        } 
+
+
         player = new Player();
         schwarzesLoch = new SchwarzesLoch();
 
@@ -76,6 +83,7 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void pause() {
+        
     }
 
     @Override

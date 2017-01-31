@@ -62,7 +62,7 @@ public class Sounds {
  */
     public static void playMenuSound() {
 
-        sound = Gdx.audio.newSound(Gdx.files.internal("Sound.mp3"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
 
         sound.setLooping(0, true);
 
@@ -78,7 +78,7 @@ public class Sounds {
  * Plays the Game Music when you are playing the Game.
  */
     public static void playGameSound() {
-        sound = Gdx.audio.newSound(Gdx.files.internal("Sound.mp3"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
 
         sound.setLooping(0, true);
 
@@ -96,13 +96,9 @@ public class Sounds {
      */
     public static void playButtonSound() {
 
-        sound = Gdx.audio.newSound(Gdx.files.internal(""));
-
-        sound.setLooping(0, true);
+        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/ding.wav"));
 
         Button_Sound = sound.play(0f);
-
-        sound.setLooping(Button_Sound, true);
 
         sound.setVolume(Button_Sound, Button_Volume);
 

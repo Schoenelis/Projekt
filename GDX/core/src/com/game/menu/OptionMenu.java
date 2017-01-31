@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.game.menu;
 
 import com.badlogic.gdx.Gdx;
@@ -17,7 +12,7 @@ import static com.game.GameSettings.GameSettings.*;
 import com.mygdx.game.SpaceLegends;
 
 /**
- *
+ * Creates the Option Menu
  * @author dreissa
  */
 public class OptionMenu implements Screen {
@@ -93,30 +88,30 @@ public class OptionMenu implements Screen {
         this.game = game;
 
         // platzhalter bilder werden geladen.
-        Title_Banner = new Texture("SpaceLegend.png");
+        Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
 
-        Background = new Texture("background.png");
+        Background = new Texture("Game_Grafiken/background.png");
 
-//        //Menu_Background = new Texture("Menu_background.png");
-        Menu_Volume_Button = new Texture("Volume_Buttons/Volume_" + Menu_Volume_Value + ".png");
+//        //Menu_Background = new Texture("Game_Grafiken/Menu_background.png");
+        Menu_Volume_Button = new Texture("Game_Grafiken/Volume_Buttons/Volume_" + Menu_Volume_Value + ".png");
 
-        Game_Volume_Button = new Texture("Volume_Buttons/Volume_" + Game_Volume_Value + ".png");
+        Game_Volume_Button = new Texture("Game_Grafiken/Volume_Buttons/Volume_" + Game_Volume_Value + ".png");
 
-        Game_SFX_Volume_Button = new Texture("Volume_Buttons/Volume_" + Game_SFX_Volume_Value + ".png");
+        Game_SFX_Volume_Button = new Texture("Game_Grafiken/Volume_Buttons/Volume_" + Game_SFX_Volume_Value + ".png");
 
-        Volume_Button_Not_Selcted = new Texture("Volume_Buttons/Volume_Not_Selected.png");
+        Volume_Button_Not_Selcted = new Texture("Game_Grafiken/Volume_Buttons/Volume_Not_Selected.png");
 
-        About_Game = new Texture("inaktiv.png");
+        About_Game = new Texture("Game_Grafiken/inaktiv.png");
 
-        New_Game = new Texture("inaktiv.png");
+        New_Game = new Texture("Game_Grafiken/inaktiv.png");
 
-        Exit_And_Save = new Texture("inaktiv.png");
+        Exit_And_Save = new Texture("Game_Grafiken/inaktiv.png");
 
-        About_Game2 = new Texture("aktiv.png");
+        About_Game2 = new Texture("Game_Grafiken/aktiv.png");
 
-        New_Game2 = new Texture("aktiv.png");
+        New_Game2 = new Texture("Game_Grafiken/aktiv.png");
 
-        Exit_And_Save2 = new Texture("aktiv.png");
+        Exit_And_Save2 = new Texture("Game_Grafiken/aktiv.png");
 
         OptionMenu optionMenu = this;
 
@@ -131,9 +126,12 @@ public class OptionMenu implements Screen {
     public void render(float delta) {
 
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_DOWN)) && select < 5) {
+            Sounds.playButtonSound();
             select++;
+            
         }
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_UP)) && select > 0) {
+            Sounds.playButtonSound();
             select--;
         }
         
@@ -372,18 +370,18 @@ public class OptionMenu implements Screen {
         switch (buttonId) {
             case 0:
                 buttonId = 0;
-                Menu_Volume_Button = new Texture("Volume_Buttons/Volume_" + Menu_Volume_Value + ".png");
+                Menu_Volume_Button = new Texture("Game_Grafiken/Volume_Buttons/Volume_" + Menu_Volume_Value + ".png");
 
                 break;
 
             case 1:
                 buttonId = 1;
-                Game_Volume_Button = new Texture("Volume_Buttons/Volume_" + Game_Volume_Value + ".png");
+                Game_Volume_Button = new Texture("Game_Grafiken/Volume_Buttons/Volume_" + Game_Volume_Value + ".png");
                 break;
 
             case 2:
                 buttonId = 2;
-                Game_SFX_Volume_Button = new Texture("Volume_Buttons/Volume_" + Game_SFX_Volume_Value + ".png");
+                Game_SFX_Volume_Button = new Texture("Game_Grafiken/Volume_Buttons/Volume_" + Game_SFX_Volume_Value + ".png");
                 break;
             default:
                 break;
@@ -437,11 +435,12 @@ public class OptionMenu implements Screen {
         if (Gdx.graphics.getHeight() <= 768) {
             Banner_y = screen_heigth + Banner_heigth - 90;
             button_y = screen_heigth - button_heigth + 2;
-            Title_Banner_y = 250;
-            Menu_Volume_button_y = 100;
-            Game_Volume_button_y = -30;
-            About_game_button_y = -160;
-            New_Game_y = -200;
+            Title_Banner_y = 50;
+            Menu_Volume_button_y = 250;
+            Game_Volume_button_y = 150;
+            Game_SFX_Volume_button_y = 50;
+            About_game_button_y = -50;
+            New_Game_y = -150;
             Exit_And_Save_button_y = -250;
 
             selectMenu();

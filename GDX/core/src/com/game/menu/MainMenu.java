@@ -5,14 +5,15 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.game.Audio.Sounds;
 import static com.game.GameSettings.GameSettings.*;
 import com.mygdx.game.SpaceLegends;
 
 public class MainMenu implements Screen {
 
     // Groesse der schaltflaechen.
-    private final int buton_size_heigth = 80;
-    private final int buton_size_width = 230;
+    private int buton_size_heigth = 90;
+    private int buton_size_width = 400;
 
     private final int Title_banner_size_heigth = 400;
     private final int Title_Banner_size_width = 1200;
@@ -61,15 +62,15 @@ public class MainMenu implements Screen {
         this.game = game;
 
         // platzhalter bilder werden geladen.
-        Low_Resoulution = new Texture("low_resoulution.png");
-        Background = new Texture("background.png");
-        Start_enabled = new Texture("start_enabled.png");
-        Start_disabled = new Texture("start_disabled2.png");
-        Exit_enabled = new Texture("aktiv.png");
-        Exit_disabled = new Texture("inaktiv.png");
-        Option_enabled = new Texture("Optionen_enabled.jpg");
-        Option_disabled = new Texture("Optionen_disabled.jpg");
-        Title_Banner = new Texture("SpaceLegendd.png");
+        Low_Resoulution = new Texture("Game_Grafiken/low_resoulution.png");
+        Background = new Texture("Game_Grafiken/background.png");
+        Start_enabled = new Texture("Game_Grafiken/start_enabled.png");
+        Start_disabled = new Texture("Game_Grafiken/start_disabled.png");
+        Exit_enabled = new Texture("Game_Grafiken/aktiv.png");
+        Exit_disabled = new Texture("Game_Grafiken/inaktiv.png");
+        Option_enabled = new Texture("Game_Grafiken/Optionen_enabled.jpg");
+        Option_disabled = new Texture("Game_Grafiken/Optionen_disabled.jpg");
+        Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
 
         MainMenu mainMenuScreen = this;
 
@@ -83,13 +84,16 @@ public class MainMenu implements Screen {
     @Override
     public void render(float delta) {
 
+        //Auswahl der menue Optionen.
         if (Gdx.input.isKeyJustPressed((Keys.DPAD_DOWN)) && select < 3) {
+            Sounds.playButtonSound();   // Sound wird abgespielt wenn man die Buttons Wechselt.
             select++;
-        } else if (select == 3) {
+        } else if (select == 3) { //durchgehender Auswahldurchlauf wird ermoecklicht.
             select = 0;
         }
 
         if (Gdx.input.isKeyJustPressed((Keys.DPAD_UP)) && select > -1) {
+            Sounds.playButtonSound();
             select--;
         } else if (select == -1) {
             select = 2;
@@ -135,6 +139,10 @@ public class MainMenu implements Screen {
         } else if (Gdx.graphics.getHeight() <= 768) {
             Banner_y = screen_heigth + Banner_heigth - 90;
             buton_y = screen_heigth - buton_heigth + 2;
+
+            buton_size_heigth = 80;
+            buton_size_width = 250;
+
             Title_Banner_y = 250;
             Start_buton_y = 100;
             Option_buton_y = -30;
