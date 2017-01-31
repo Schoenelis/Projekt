@@ -2,6 +2,7 @@ package com.game.GameSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,7 @@ public class GameSettings {
     private static float Menu_Volume = 0.0f;
     private static float Button_Volume = 0.0f;
     private static float Game_Volume = 0.0f;
-    private static float Game_FX_Volume = 0.0f;
+    private static float Game_SFX_Volume = 0.0f;
 
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
@@ -95,8 +96,8 @@ public class GameSettings {
      *
      * @return
      */
-    public static float getGame_FX_Volume() {
-        return Game_FX_Volume;
+    public static float getGame_SFX_Volume() {
+        return Game_SFX_Volume;
     }
 
     /**
@@ -181,6 +182,10 @@ public class GameSettings {
         return Main_Frame_title;
     }
 
+    public static void setGame_SFX_Volume(float Game_SFX_Volume) {
+        GameSettings.Game_SFX_Volume = Game_SFX_Volume;
+    }
+
     public static void saveGameSettings() {
 
         String data = "#Game Settings file do not change this file, it can have side effects for the gameplay and the stability of the game.\n"
@@ -189,7 +194,7 @@ public class GameSettings {
                 + "#Menu Volume: " + Menu_Volume + ",\n"
                 + "#Buton_Volume: " + Button_Volume + ",\n"
                 + "#Game_Volume: " + Game_Volume + ",\n"
-                + "#Game_FX_Volume: " + Game_FX_Volume + ",\n"
+                + "#FX_Volume: " + Game_SFX_Volume + ",\n"
                 + "#End";
 
         Gdx.files.local(Game_Settings_File).writeString(data, false);
@@ -198,13 +203,16 @@ public class GameSettings {
 
     /**
      * Die spiel einstelungen werden geladen.
+     *
+     * @return
      */
-    public static void LoadGameSettings() {
+    public static Boolean LoadGameSettings() {
 
         //Set the Char for the String Cuting
         final char cut = ':';
         final char cut2 = ',';
 
+        boolean DATA_LOAD_OK = false;
         final int arrayLength = 5;
         String DATA_READ = null;
         int index = 0;
@@ -220,16 +228,20 @@ public class GameSettings {
         try {
             DATA_READ = Gdx.files.local(Game_Settings_File).readString();
         } catch (Exception e) {
+
             System.err.println("\n Fehler datei wurde nicht Gefunden" + e);
             System.out.println("Loading default setings");
             saveGameSettings();
 
+            return DATA_LOAD_OK;
         }
 
         if (DATA_READ == null || DATA_READ.isEmpty()) {
-            System.out.println("Load default setings2");
-            //Gdx.app.exit();
-            saveGameSettings();
+
+            System.out.println("Load default setings");
+            return DATA_LOAD_OK;
+
+            // saveGameSettings();
         } else {
 
             System.out.println("\nReading SetingsData: \n" + DATA_READ + "\n");
@@ -262,13 +274,24 @@ public class GameSettings {
             Menu_Volume = Float.parseFloat(SETTINGS_DATA[1]);
             Button_Volume = Float.parseFloat(SETTINGS_DATA[2]);
             Game_Volume = Float.parseFloat(SETTINGS_DATA[3]);
-            Game_FX_Volume = Float.parseFloat(SETTINGS_DATA[4]);
+            Game_SFX_Volume = Float.parseFloat(SETTINGS_DATA[4]);
+
+            DATA_LOAD_OK = true;
 
             //Print the Value to the Terminal for Testing.
             for (int i = 0; i < SETTINGS_DATA.length; i++) {
                 System.out.println(SETTINGS_DATA[i]);
             }
         }
+        return DATA_LOAD_OK;
+
+    }
+
+    public static void LoadDefaultSettings() {
+        Menu_Volume = 1f;
+        Button_Volume = 0.6f;
+        Game_Volume =1f;
+        Game_SFX_Volume = 0.6f;
     }
 
 }

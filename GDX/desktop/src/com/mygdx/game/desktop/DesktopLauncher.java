@@ -1,5 +1,7 @@
 package com.mygdx.game.desktop;
+import static com.game.GameSettings.GameSettings.LoadDefaultSettings;
 import static com.game.GameSettings.GameSettings.LoadGameSettings;
+import javax.swing.JOptionPane;
 
 public class DesktopLauncher {
 
@@ -9,7 +11,8 @@ public class DesktopLauncher {
      */
     
     public static void main(String[] arg) {
-                
+ 
+        
         MainFrame.MainFrame();
         
 

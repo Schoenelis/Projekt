@@ -5,6 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.game.GameSettings.GameSettings;
 import com.mygdx.game.SpaceLegends;
 
+
 /**
  * Stellt das hauptfenster ein und startet das spiel.
  *

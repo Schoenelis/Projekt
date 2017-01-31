@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import static com.game.GameSettings.GameSettings.*;
 import com.mygdx.game.SpaceLegends;
 import com.game.Audio.Sounds;
+import javax.swing.JOptionPane;
 
 public class MainMenu implements Screen {
 
@@ -60,6 +61,9 @@ public class MainMenu implements Screen {
 
     public MainMenu(SpaceLegends game) {
         this.game = game;
+        
+      
+
         // platzhalter bilder werden geladen.
         Low_Resoulution = new Texture("low_resoulution.png");
         Background = new Texture("background.png");
@@ -77,11 +81,13 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
-
+        
     }
 
     @Override
     public void render(float delta) {
+        
+    
         if (Gdx.input.isKeyJustPressed((Keys.DPAD_DOWN)) && select < 3) {
             select++;
         } else if (select == 3) {
@@ -90,11 +96,10 @@ public class MainMenu implements Screen {
 
         if (Gdx.input.isKeyJustPressed((Keys.DPAD_UP)) && select > -1) {
             select--;
-        }else if (select == -1) {
+        } else if (select == -1) {
             select = 2;
         }
-        
-        
+
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
@@ -191,8 +196,7 @@ public class MainMenu implements Screen {
                 game.batch.draw(Option_enabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
-                    game.setScreen(new OptionMenu(game));
-                    //saveGameSettings();
+                    game.setScreen(new OptionMenu(game));       
                 }
                 break;
             case 2:
@@ -205,7 +209,7 @@ public class MainMenu implements Screen {
                     Gdx.app.exit();
                 }
                 break;
-                // Case 3 Zeichnet den ersten buton.
+            // Case 3 Zeichnet den ersten buton.
             case 3:
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
