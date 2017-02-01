@@ -1,8 +1,7 @@
 package com.game.GameSettings;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import javax.swing.JOptionPane;
+import com.badlogic.gdx.files.FileHandle;
 
 /**
  *
@@ -201,86 +200,97 @@ public class GameSettings {
     }
 
     /**
-     * Die spiel einstelungen werden geladen.
+     * Die spiel einstelungen werden geladen. Wenn die Spiel einstellungen
+     * fehlerhaft oder die Settings.dat nicht mehr vorhanden ist werden die
+     * standart einstllungen geladen.
      *
      * @return
      */
-    public static Boolean LoadGameSettings() {
+    public static boolean DATA_LOAD_Fail = false;
+
+    public static boolean LoadGameSettings() {
 
         //Set the Char for the String Cuting
-        final char cut = ':';
-        final char cut2 = ',';
-
-        boolean DATA_LOAD_OK = false;
+        final char cut = ':', cut2 = ',';
         final int arrayLength = 5;
-        String DATA_READ = null;
         int index = 0;
         int beginIndex = 0;
         int endIndex = 0;
         int SetingsCount = 0;
         int String_Size = 0;
 
+        String DATA_READ = null;
+
         // String Array for the output settings.
         String[] SETTINGS_DATA = new String[arrayLength];
 
-        //Loading the curent Game Setings from the Setings File.
-        try {
-            DATA_READ = Gdx.files.local(Game_Settings_File).readString();
-        } catch (Exception e) {
-            System.err.println("\n Fehler datei wurde nicht Gefunden" + e);
-            System.out.println("Loading default setings");
-            return DATA_LOAD_OK;
-        }
+        System.out.println("\nStart:\n");
 
-        if (DATA_READ == null || DATA_READ.isEmpty()) {
+        // Loading the curent the Setings File.
+        FileHandle file = Gdx.files.internal(Game_Settings_File);
 
-            System.out.println("Load default setings");
-            //return DATA_LOAD_OK;
-
-            // saveGameSettings();
+        if (!file.exists()) {
+            DATA_LOAD_Fail = true;
+            System.out.println("\nDATA_LOAD_Fail is: " + DATA_LOAD_Fail + " Datei wurde nicht geladen!" + "\n");//Debug Print
+            return DATA_LOAD_Fail;
         } else {
+            //Loading the Game settings
+            DATA_READ = file.readString();
 
-            System.out.println("\nReading SetingsData: \n" + DATA_READ + "\n");
+            System.out.println("\nDATA_LOAD_Fail is: " + DATA_LOAD_Fail + " DATA_READ is :\n\n " + DATA_READ + "\n");//Debug Print
 
-            String_Size = DATA_READ.length() - 1;
+            if (DATA_READ == null || DATA_READ.isEmpty() && !DATA_READ.endsWith("#END")) {
+                DATA_LOAD_Fail = true;
+                System.out.println("2. check");
+                return DATA_LOAD_Fail;
+            } else {
+                System.out.println("\nReading of the Settings.dat is compled ! \n\n" + DATA_READ + "\n");//Debug Prin
 
-            while (index <= String_Size) {
+                String_Size = DATA_READ.length() - 1;
+                //Reading DATA_READ and cut the String in parts 
+                while (index <= String_Size && DATA_LOAD_Fail == false) {
+                    // Search for cut in the String and set the beginIndex.
+                    if (index < String_Size && DATA_READ.charAt(index) == cut) {
+                        index++;
+                        beginIndex = index + 1;
 
-                // Search for cut in the String and set the beginIndex.
-                if (index < String_Size && DATA_READ.charAt(index) == cut) {
-                    index++;
-                    beginIndex = index + 1;
-
-                    // Search for cut2 in the String and set the endIndex.
-                    while (index < String_Size && DATA_READ.charAt(index) != cut2) {
+                        // Search for cut2 in the String and set the endIndex.
+                        while (index < String_Size && DATA_READ.charAt(index) != cut2) {
+                            index++;
+                        }
+                        SetingsCount++;
+                        endIndex = index;
+                    } else {
                         index++;
                     }
-                    SetingsCount++;
-                    endIndex = index;
-                } else {
+                    //Cuting the DATA_READ String.           
+                    SETTINGS_DATA[SetingsCount] = DATA_READ.substring(beginIndex, endIndex);
 
-                    index++;
                 }
-                //Cut DATA_READ            
-                SETTINGS_DATA[SetingsCount] = DATA_READ.substring(beginIndex, endIndex);
 
+//                float[] temp = new float[arrayLength];
+//                // Check the SETTINGS_DATA for Valid value between 0 and 1f.
+//                for (int i = 0; i < SETTINGS_DATA.length; i++) {
+//                    temp[i] = Float.parseFloat(SETTINGS_DATA[i]);
+//                }
+//                for (int x = 0; x < temp.length; x++) {
+//                if (temp[x] < 0f || temp[x] > 1f) {
+//                        SETTINGS_DATA[x] = "0,5";
+//                    }
+//                }
+                    Menu_Volume = Float.parseFloat(SETTINGS_DATA[1]);
+                    Button_Volume = Float.parseFloat(SETTINGS_DATA[2]);
+                    Game_Volume = Float.parseFloat(SETTINGS_DATA[3]);
+                    Game_SFX_Volume = Float.parseFloat(SETTINGS_DATA[4]);
+                
+//            //Print the Value to the Terminal for Testing.
+//            for (int i = 0; i < SETTINGS_DATA.length; i++) {
+//                System.out.println(SETTINGS_DATA[i]);
+//            }
             }
 
-            // Set the Values.  
-            Menu_Volume = Float.parseFloat(SETTINGS_DATA[1]);
-            Button_Volume = Float.parseFloat(SETTINGS_DATA[2]);
-            Game_Volume = Float.parseFloat(SETTINGS_DATA[3]);
-            Game_SFX_Volume = Float.parseFloat(SETTINGS_DATA[4]);
-
-            DATA_LOAD_OK = true;
-
-            //Print the Value to the Terminal for Testing.
-            for (int i = 0; i < SETTINGS_DATA.length; i++) {
-                System.out.println(SETTINGS_DATA[i]);
-            }
+            return DATA_LOAD_Fail;
         }
-        return DATA_LOAD_OK;
-
     }
 
     public static void LoadDefaultSettings() {

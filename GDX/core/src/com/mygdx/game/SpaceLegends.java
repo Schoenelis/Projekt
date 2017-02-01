@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.game.Audio.Sounds;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import static com.game.GameSettings.GameSettings.LoadGameSettings;
 import com.game.menu.MainMenu;
 
 /**
@@ -16,22 +15,20 @@ public class SpaceLegends extends Game {
 
     Sounds sound;
     public SpriteBatch batch;
-    private String setScreen;
-
+   
     @Override
     public void create() {
-     
-            LoadGameSettings();
-            sound = new Sounds();
-            batch = new SpriteBatch();
+            SpaceLegends();    
+    }
 
-            this.setScreen(new MainMenu(this));
-            //this.setScreen(new OptionMenu(this));
-        }
-    
-    
-
-    public SpaceLegends() {
+    public void SpaceLegends() {
+        sound = new Sounds();
+        batch = new SpriteBatch();
+         
+        this.setScreen(new MainMenu(this));
+        //this.setScreen(new OptionMenu(this));
+        //this.setScreen(new PauseMenu(this));
+        
     }
 
     @Override

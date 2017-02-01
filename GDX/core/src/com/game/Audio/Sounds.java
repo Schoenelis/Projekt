@@ -109,7 +109,7 @@ public class Sounds {
      * Plays the special effects Sounds for the Game.
      */
     public static void playSFXSounds() {
-        sound = Gdx.audio.newSound(Gdx.files.internal("Sound.mp3"));
+        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
 
         sound.setLooping(0, true);
 
