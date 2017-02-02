@@ -4,35 +4,31 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.game.obj.Blackhole;
+import com.game.obj.Bullet;
 import com.game.obj.Player;
-import com.game.obj.SchwarzesLoch;
-import com.mygdx.game.SpaceLegends;
 
-/**
- *
- * @author info
- */
+import com.mygdx.game.SpaceLegends;
+import java.util.ArrayList;
+
 public class MyGdxGame implements Screen {
 
     final SpaceLegends game;
-    SpriteBatch batch;
-    Texture imgPlayer;
-    Texture imgSchwarzesLoch;
-    SchwarzesLoch schwarzesLoch;
     Player player;
-    Texture Background;
+    Blackhole blackhole;
+    private ArrayList<Bullet> bullets;
+    Bullet bullet;
+
     private final float Background_size_x = (float) (Gdx.graphics.getWidth() * 0.0);
     private final float Background_size_y = (float) (Gdx.graphics.getHeight() * 0.0);
     boolean paused = false;
 
     public MyGdxGame(SpaceLegends game) {
         this.game = game;
-        batch = new SpriteBatch();
-        imgPlayer = new Texture("badlogic.jpg");
-        imgSchwarzesLoch = new Texture("badlogic.jpg");
-        Background = new Texture("Game_Grafiken/background.png");
+        player = new Player(bullets);
+        blackhole = new Blackhole();
+        bullets = new ArrayList<Bullet>();
+        bullet = new Bullet();
 
     }
 
@@ -45,32 +41,37 @@ public class MyGdxGame implements Screen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
             game.setScreen(new MainMenu(game));
-        } 
-
-
-        player = new Player();
-        schwarzesLoch = new SchwarzesLoch();
-
-        player.movePlayerAll();
-        player.koolisionFenster();
-
-        schwarzesLoch.pullPlayer();
-
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        }
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.begin();
-        game.batch.draw(Background, Background_size_x, Background_size_y);
-        game.batch.draw(imgPlayer, Player.x, Player.y, Player.width, Player.height);
-        game.batch.draw(imgSchwarzesLoch, SchwarzesLoch.x, SchwarzesLoch.y, SchwarzesLoch.width, SchwarzesLoch.height);
 
-        game.batch.end();
+        player.update();
+        player.draw();
+
+        blackhole.update();
+        blackhole.draw();
+
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).update();
+            if (bullets.get(i).isRemove()) {
+                bullets.remove(i);
+                i--;
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            if (bullets.size() == Player.MAX_BULLETS) {
+                return;
+            }
+            bullet.draw();
+            bullets.add(new Bullet());
+        }
+
     }
 
     @Override
     public void dispose() {
         game.dispose();
-        imgPlayer.dispose();
-        imgSchwarzesLoch.dispose();
+
     }
 
     @Override
@@ -83,7 +84,7 @@ public class MyGdxGame implements Screen {
 
     @Override
     public void pause() {
-        
+
     }
 
     @Override

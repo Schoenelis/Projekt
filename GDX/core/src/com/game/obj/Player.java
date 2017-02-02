@@ -1,95 +1,86 @@
 package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.game.GameSettings.GameSettings;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.ArrayList;
 
-public class Player {
+public class Player extends GameObj {
 
-    public static float playerA = 100f;
-    public static float playerMaxSpeed1 = 200f;
-    public static float playerMaxSpeed2 = -200f;
-    public static float x;
-    public static float y;
-    public static float vx = 0;
-    public static float vy = 0;
-    public static float width = 100;
-    public static float height = 100;
+    private ArrayList<Bullet> bullets;
+    public static final int MAX_BULLETS = 4;
 
-    public static float leben = 1;
+    private float accleration;
+    private float maxSpeed;
+    private int lifepoints;
+    private int energy;
+    private int maxEnergy;
+    private float lifeTime;
+    private float lifeTimer;
 
-    float dt = Gdx.graphics.getDeltaTime();
+    private Texture imgPlayer1;
 
-    public void movePlayerAll() {
+    public Player(ArrayList<Bullet> bullets) {
+        this.bullets = bullets;
+        spriteBatch = new SpriteBatch();
+        imgPlayer1 = new Texture("Game_Grafiken/player1.png");
+        x = 100;
+        y = 100;
+        width = height = 100;
+        lifepoints = 3;
+        accleration = 200f;
+        maxSpeed = 500f;
+        energy = 100;
+        lifeTime = 1000;
+        lifeTimer = 0;
+        vx = vy = 0;
+    }
 
-        movePlayerDown();
-        movePlayerLeft();
-        movePlayerRight();
-        movePlayerUp();
+    private void accelration() {
+        if (Gdx.input.isKeyPressed(Keys.DPAD_UP)) {
+            vy += dt * accleration;
+          
+        }
+        if (Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) {
+            vy -= dt * accleration;
+            
+        }
+        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) {
+            vx -= dt * accleration;
+          
+        }
+        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) {
+            vx += dt * accleration;
+            
+        }
 
-        // Position des Spielers aus alter Position und Geschwindigkeit
+    }
+
+    private void maxSpeed() {
+        float vec = (float) Math.sqrt(vx * vx + vy * vy);
+        if (vec > 0) {
+            vx -= (vx / vec) * dt;
+            vy -= (vy / vec) * dt;
+        }
+        if (vec > maxSpeed) {
+            vx = (vx / vec) * maxSpeed;
+            vy = (vy / vec) * maxSpeed;
+        }
+    }
+
+    public void update() {
+        windowCollision();
+        accelration();
+        maxSpeed();
+
         x += vx * dt;
         y += vy * dt;
     }
 
-    public void movePlayerUp() {
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-            vy += dt * playerA;
-            if (vy >= playerMaxSpeed1) {
-                vy = playerMaxSpeed1;
-            }
-        }
+    public void draw() {
+        spriteBatch.begin();
+        spriteBatch.draw(imgPlayer1, x, y, width, height);
+        spriteBatch.end();
     }
-
-    public void movePlayerDown() {
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-            vy -= dt * playerA;
-            if (vy < playerMaxSpeed2) {
-                vy = playerMaxSpeed2;
-            }
-        }
-    }
-
-    public void movePlayerLeft() {
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
-            vx -= dt * playerA;
-            if (vx <= playerMaxSpeed2) {
-                vx = playerMaxSpeed2;
-            }
-        }
-    }
-
-    public void movePlayerRight() {
-        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-            vx += dt * playerA;
-            if (vx >= playerMaxSpeed1) {
-                vx = playerMaxSpeed1;
-            }
-        }
-    }
-
-    public void koolisionFenster() {
-        // Fenster Koolision Unten
-        if (y < 0) {
-            y = 0;
-            vy = 0;
-        }
-        // Fenster Koolision Oben
-        if (y >= GameSettings.getMain_Frame_Height() - Player.height) {
-            y = GameSettings.getMain_Frame_Height() - Player.height;
-            vy = 0;
-            // Level geschafft
-        }
-        // Fenster Rechts durchgang nach Links
-        if (x >= GameSettings.getMain_Frame_Width() + Player.width / 2) {
-            x = -Player.width;
-        }
-        // Fenster Links durchgang nach Rechts
-        if (x < -Player.width) {
-            x = GameSettings.getMain_Frame_Width();
-        }
-    }
-
-
-
 }
