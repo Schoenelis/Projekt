@@ -2,8 +2,8 @@
 You can change the settings in the Option menu from the Game.
 
 #Audio Settings 
-#Menu Volume: 0.0,
-#Buton_Volume: 0.6,
-#Game_Volume: 0.40000004,
-#FX_Volume: 0.0,
+#Menu Volume: 1.0,
+#Buton_Volume: 0.2,
+#Game_Volume: 1.0,
+#FX_Volume: 0.6,
 #End

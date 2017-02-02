@@ -10,7 +10,7 @@ public class Sounds {
 
     //Creating of the Volume of the Audiofiles.
     private static float Menu_Volume = GameSettings.getMenu_Volume();
-    private static final float Button_Volume = GameSettings.getButton_Volume();
+    private static float Button_Volume = GameSettings.getButton_Volume();
     private static float Game_Volume = GameSettings.getGame_Volume();
     private static float Game_SFX_Volume = GameSettings.getGame_SFX_Volume();
 
@@ -78,6 +78,8 @@ public class Sounds {
  * Plays the Game Music when you are playing the Game.
  */
     public static void playGameSound() {
+        
+        
         sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
 
         sound.setLooping(0, true);
@@ -95,6 +97,8 @@ public class Sounds {
      * Plays the Button Sound when you Enter a Buton in the Game.
      */
     public static void playButtonSound() {
+        
+        Button_Volume = GameSettings.getButton_Volume();
 
         sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/ding.wav"));
 
