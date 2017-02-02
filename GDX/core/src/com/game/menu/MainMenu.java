@@ -5,9 +5,12 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
 import com.game.Audio.Sounds;
 import static com.game.GameSettings.GameSettings.*;
 import com.mygdx.game.SpaceLegends;
+import java.io.IOException;
 
 public class MainMenu implements Screen {
 
@@ -47,64 +50,60 @@ public class MainMenu implements Screen {
 
     final SpaceLegends game;
 
-    Texture Low_Resoulution;
     Texture Background;
+    Texture Low_Resoulution;
     Texture Title_Banner;
     Texture Start_enabled;
     Texture Exit_enabled;
     Texture Option_enabled;
-
     Texture Start_disabled;
     Texture Exit_disabled;
     Texture Option_disabled;
-
     Texture Load_Default_Settings;
 
-//    boolean LoadGameSettings = LoadGameSettings();
+//    boolean LoadGameSettings = LoadGameSettings(); ("Game_Grafiken/background.png");
     public MainMenu(SpaceLegends game) {
         this.game = game;
-
-        if (LoadGameSettings()) {
-            Background = new Texture("Game_Grafiken/background.png");
-            Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
-            Load_Default_Settings = new Texture("badlogic.jpg");
-
-        } else {
-
-            LoadGameSettings();
-            
-            // Loading the IMGs for the main menu.
-            Low_Resoulution = new Texture("Game_Grafiken/low_resoulution.png");
-            Background = new Texture("Game_Grafiken/background.png");
-            Start_enabled = new Texture("Game_Grafiken/start_enabled.png");
-            Start_disabled = new Texture("Game_Grafiken/start_disabled.png");
-            Exit_enabled = new Texture("Game_Grafiken/aktiv.png");
-            Exit_disabled = new Texture("Game_Grafiken/inaktiv.png");
-            Option_enabled = new Texture("Game_Grafiken/Optionen_enabled.jpg");
-            Option_disabled = new Texture("Game_Grafiken/Optionen_disabled.jpg");
-            Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
-
-        }
+        LoadGameSettings();
         MainMenu mainMenuScreen = this;
     }
 
     @Override
     public void show() {
+        try {
+            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
+            Background = new Texture(root.getChildByName("background").getAttribute("texture"));
+            Load_Default_Settings = new Texture(root.getChildByName("loaddefaultsettings").getAttribute("texture"));
+            Low_Resoulution = new Texture(root.getChildByName("lowresoulution").getAttribute("texture"));
+            Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
+            // Loading the Menu Elements from the xml file.
+            Element menu = root.getChildByName("mainmenue");
+
+            Start_enabled = new Texture(menu.getChildByName("playbutton").getAttribute("texture_enabled"));
+            Option_enabled = new Texture(menu.getChildByName("optionbutton").getAttribute("texture_enabled"));
+            Exit_enabled = new Texture(menu.getChildByName("exitbutton").getAttribute("texture_enabled"));
+
+            Start_disabled = new Texture(menu.getChildByName("playbutton").getAttribute("texture_disabled"));
+            Option_disabled = new Texture(menu.getChildByName("optionbutton").getAttribute("texture_disabled"));
+            Exit_disabled = new Texture(menu.getChildByName("exitbutton").getAttribute("texture_disabled"));
+        } catch (IOException ex) {
+            System.err.print(ex);
+        }
 
     }
 
     @Override
     public void render(float delta) {
 
+        // Check if Game Settings ok.
         if (DATA_LOAD_Fail) {
             select = -99;
         } else {
-
-            //Auswahl der menue Optionen.
+            //Listen to the keybord and wait for a user input 
             if (Gdx.input.isKeyJustPressed((Keys.DPAD_DOWN)) && select < 3) {
-                Sounds.playButtonSound();   // Sound wird abgespielt wenn man die Buttons Wechselt.
+                Sounds.playButtonSound();   // Playing sound when a button is Selected.
                 select++;
-            } else if (select == 3) { //durchgehender Auswahldurchlauf wird ermoecklicht.
+            } else if (select == 3) { //make a Selecting loop .
                 select = 0;
             }
 
@@ -118,12 +117,12 @@ public class MainMenu implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
+        game.batch.draw(Background, Background_size_x, Background_size_y);
+        game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
+        game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
         getScreenResoulution();
-
         game.batch.end();
-
         com.game.GameSettings.WindowMode.setWindowMode();
-
     }
 
     /**
@@ -138,38 +137,21 @@ public class MainMenu implements Screen {
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Load_Default_Settings, buton_x, buton_y + Option_buton_y, 100, 100);
-
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     LoadDefaultSettings();
                     saveGameSettings();
                     DATA_LOAD_Fail = false;// set  DATA_LOAD_Fail to false and returns to the main menu.
-                    game.setScreen(new MainMenu(game));;
-                }
-                break;
-            // Case -1 Draws the last button of the menu.
-            case -1:
-                game.batch.draw(Background, Background_size_x, Background_size_y);
-                game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-                game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
-                if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
-                    Gdx.app.exit();
+                    game.setScreen(new MainMenu(game));
                 }
                 break;
             case 0:
-                game.batch.draw(Background, Background_size_x, Background_size_y);
-                game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Start_enabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     game.setScreen(new MyGdxGame(game));
                 }
                 break;
             case 1:
-                game.batch.draw(Background, Background_size_x, Background_size_y);
-                game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Option_enabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
@@ -178,21 +160,7 @@ public class MainMenu implements Screen {
                 }
                 break;
             case 2:
-                game.batch.draw(Background, Background_size_x, Background_size_y);
-                game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
                 game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
-                if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
-                    Gdx.app.exit();
-                }
-                break;
-            // Case 3 draws the first button of the menu.
-            case 3:
-                game.batch.draw(Background, Background_size_x, Background_size_y);
-                game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-                game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     Gdx.app.exit();
@@ -216,7 +184,6 @@ public class MainMenu implements Screen {
             //Titel banner position anpassen.
             Banner_Width = Title_Banner_size_width / 2;
             Banner_x = screen_width - Banner_Width + 5;
-
             Banner_heigth = Title_banner_size_heigth / 2;
 
             // berechnen das die butons immer in der mitte sind.

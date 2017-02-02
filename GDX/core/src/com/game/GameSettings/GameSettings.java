@@ -31,8 +31,8 @@ public class GameSettings {
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
     private static final String build = "Internal Build Version";
-    private static final String buildnummer = "00.07";
-    private static final String version = "Alpha.";
+    private static final String buildnummer = "00.08";
+    private static final String version = "b.";
 
     // Spiel einstelungen Warnung nicht aendern.
     public static final String Game_Settings_File = "Settings.dat";

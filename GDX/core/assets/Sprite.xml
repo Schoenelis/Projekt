@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Sprite xml 
+-->
+
+
+<sprite>
+    <lowresoulution texture="Game_Grafiken/low_resoulution.png"></lowresoulution>
+    <loaddefaultsettings texture="badlogic.jpg"></loaddefaultsettings>
+    <title texture="Game_Grafiken/SpaceLegend.png" heigth = "400" width= "1200" y ="450" ></title>
+    <background texture="Game_Grafiken/background.png"></background>
+    
+    <mainmenue heigth = "90" width = "400" >
+        <playbutton texture_enabled="Game_Grafiken/start_enabled.png" texture_disabled="Game_Grafiken/start_disabled.png" y ="200" ></playbutton>
+        <optionbutton texture_enabled="Game_Grafiken/optionen_enabled.jpg" texture_disabled="Game_Grafiken/optionen_disabled.jpg" y ="70"></optionbutton>
+        <exitbutton texture_enabled="Game_Grafiken/exit_enabled.png" texture_disabled="Game_Grafiken/exit_disabled.png" y ="-70"></exitbutton>
+    </mainmenue>
+  
+    <optionmenu>
+         <volumebuttons texture="Game_Grafiken/Volume_Buttons/Volume_"></volumebuttons>
+         <!--
+        <menuvolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></menuvolumebutton>
+        <gamevolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></gamevolumebutton>
+        <gamesfxvolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></gamesfxvolumebutton> 
+        -->
+        <volumebuttonnotselcted texture="Game_Grafiken/Volume_Buttons/Volume_Not_Selected.png"></volumebuttonnotselcted>
+        <aboutgame texture_enabled="Game_Grafiken/aktiv.png" texture_disabled= "Game_Grafiken/inaktiv.png"> </aboutgame>
+        <newgame texture_enabled ="Game_Grafiken/aktiv.png" texture_disabled="Game_Grafiken/inaktiv.png"></newgame>
+        <exitandsave texture_enabled="Game_Grafiken/aktiv.png" texture_disabled="Game_Grafiken/inaktiv.png"></exitandsave>
+            
+        
+    </optionmenu>
+    
+</sprite>
+
