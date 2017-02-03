@@ -32,7 +32,7 @@ public class GameSettings {
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
     private static final String build = "Internal Build Version";
-    private static final String buildnummer = "00.08";
+    private static final String buildnummer = "00.10";
     private static final String version = "b.";
 
     // Spiel einstelungen Warnung nicht aendern.
@@ -243,7 +243,7 @@ public class GameSettings {
                 System.out.println("2. check");
                 return DATA_LOAD_Fail;
             } else {
-                System.out.println("\nReading of the Settings.dat is compled ! \n\n");//Debug Prin
+                //System.out.println("\nReading of the Settings.dat is compled ! \n\n");//Debug Prin
 
                 String_Size = DATA_READ.length() - 1;
                 //Reading DATA_READ and cut the String in parts 
@@ -271,7 +271,7 @@ public class GameSettings {
 //                // Check the SETTINGS_DATA for Valid value between 0 and 1f.
                 for (int i = 1; i < SETTINGS_DATA.length; i++) {
                     temp[i - 1] = Float.parseFloat(SETTINGS_DATA[i]);
-                    System.out.println(temp[i - 1]);
+                  //  System.out.println(temp[i - 1]);
                 }
 
                 for (int x = 0; x < temp.length; x++) {

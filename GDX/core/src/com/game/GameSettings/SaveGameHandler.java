@@ -30,15 +30,20 @@ public class SaveGameHandler extends Game{
     }
 
     private static String readXml() {
-        try {
-            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
-            String Background = root.getChildByName("background").getAttribute("texture");
-            System.out.println(Background);
+      String temp = "";
+         String e ="";
+      try {
+            Element root = new XmlReader().parse(Gdx.files.internal("Savegame.xml"));
+             temp = "savecount "+ root.getAttribute("savecount");
+            temp += "\ngameversion " + root.getAttribute("gameversion");
+             temp += "\ngameid " + root.getAttribute("gameid");
+           // System.out.println(temp);
         } catch (IOException ex) {
             System.err.print(ex);
         }
-        String temp = "test ";
-
+             
+     
+       
         return temp;
     }
 

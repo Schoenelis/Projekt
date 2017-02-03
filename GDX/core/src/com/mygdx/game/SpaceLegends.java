@@ -16,7 +16,7 @@ import com.game.menu.OptionMenu;
  */
 public class SpaceLegends extends Game {
 
-//    SaveGameHandler save;
+    SaveGameHandler save;
     Sounds sound;
     public SpriteBatch batch;
 
@@ -29,7 +29,7 @@ public class SpaceLegends extends Game {
         LoadGameSettings();
         sound = new Sounds();
         batch = new SpriteBatch();
-//        save = new SaveGameHandler();
+        save = new SaveGameHandler();
 
         this.setScreen(new MainMenu(this));
         //this.setScreen(new OptionMenu(this));

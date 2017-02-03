@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<savegame test="123456">   
+<savegame savecount = '0' gameversion="0.1" gameid="1t3hr88v8vdf89dfdfa898">   
     
     
-    <player level="1" lifeponts=""  savecount = '0' gameversion="" gameid="">   
+    <player level="1" lifeponts=""  >   
     
     
     </player>   
