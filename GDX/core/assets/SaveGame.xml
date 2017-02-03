@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<savegame savecount = '0'>   
-    <player>   
+<savegame savecount = '0' gameversion="" gameid="">   
+    <player level="" lifeponts="" >   
     </player>   
 </savegame>

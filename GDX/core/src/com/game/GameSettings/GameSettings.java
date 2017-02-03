@@ -2,6 +2,7 @@ package com.game.GameSettings;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import java.util.Arrays;
 
 /**
  *
@@ -224,8 +225,7 @@ public class GameSettings {
         // String Array for the output settings.
         String[] SETTINGS_DATA = new String[arrayLength];
 
-       // System.out.println("\nStart:\n");
-
+        // System.out.println("\nStart:\n");
         // Loading the curent the Setings File.
         FileHandle file = Gdx.files.internal(Game_Settings_File);
 
@@ -237,14 +237,13 @@ public class GameSettings {
             //Loading the Game settings
             DATA_READ = file.readString();
 
-           // System.out.println("\nDATA_LOAD_Fail is: " + DATA_LOAD_Fail + " DATA_READ is :\n\n " + DATA_READ + "\n");//Debug Print
-
+            // System.out.println("\nDATA_LOAD_Fail is: " + DATA_LOAD_Fail + " DATA_READ is :\n\n " + DATA_READ + "\n");//Debug Print
             if (DATA_READ == null || DATA_READ.isEmpty() && !DATA_READ.endsWith("#END")) {
                 DATA_LOAD_Fail = true;
                 System.out.println("2. check");
                 return DATA_LOAD_Fail;
             } else {
-               System.out.println("\nReading of the Settings.dat is compled ! \n\n");//Debug Prin
+                System.out.println("\nReading of the Settings.dat is compled ! \n\n");//Debug Prin
 
                 String_Size = DATA_READ.length() - 1;
                 //Reading DATA_READ and cut the String in parts 
@@ -268,29 +267,32 @@ public class GameSettings {
 
                 }
 
-//                float[] temp = new float[arrayLength];
+                float[] temp = new float[arrayLength];
 //                // Check the SETTINGS_DATA for Valid value between 0 and 1f.
-//                for (int i = 0; i < SETTINGS_DATA.length; i++) {
-//                    temp[i] = Float.parseFloat(SETTINGS_DATA[i]);
-//                }
-//                for (int x = 0; x < temp.length; x++) {
-//                if (temp[x] < 0f || temp[x] > 1f) {
-//                        SETTINGS_DATA[x] = "0,5";
-//                    }
-//                }
-                    Menu_Volume = Float.parseFloat(SETTINGS_DATA[1]);
-                    Button_Volume = 1;///Float.parseFloat(SETTINGS_DATA[2]);
-                    Game_Volume = Float.parseFloat(SETTINGS_DATA[3]);
-                    Game_SFX_Volume = Float.parseFloat(SETTINGS_DATA[4]);
+                for (int i = 1; i < SETTINGS_DATA.length; i++) {
+                    temp[i - 1] = Float.parseFloat(SETTINGS_DATA[i]);
+                    System.out.println(temp[i - 1]);
+                }
+
+                for (int x = 0; x < temp.length; x++) {
+                    if (temp[x] < 0f || temp[x] > 1f) {
+                        temp[x] = 0.6f;
+                    }
+                } 
+                        Menu_Volume = temp[0];
+                        Button_Volume = temp[1];
+                        Game_Volume = temp[2];
+                        Game_SFX_Volume = temp[3];
+                        saveGameSettings();
                 
 //            //Print the Value to the Terminal for Testing.
 //            for (int i = 0; i < SETTINGS_DATA.length; i++) {
 //                System.out.println(SETTINGS_DATA[i]);
 //            }
-return DATA_LOAD_Fail;
+                return DATA_LOAD_Fail;
             }
 
-          //  return DATA_LOAD_Fail;
+            //  return DATA_LOAD_Fail;
         }
     }
 

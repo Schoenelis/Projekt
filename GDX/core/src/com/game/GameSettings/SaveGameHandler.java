@@ -7,9 +7,13 @@ package com.game.GameSettings;
 
 /**
  *
- * @author info
+ * @author Dreissa
+ * @version 0.1
+ * 
+ * Write the Save Game to the xml file
  */
 public class SaveGameHandler {
+    
     
     
     
