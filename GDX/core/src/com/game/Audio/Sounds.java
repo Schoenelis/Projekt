@@ -79,6 +79,7 @@ public class Sounds {
  */
     public static void playGameSound() {
         
+        sound.stop(Menu_Music);
         
         sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
 

@@ -4,6 +4,7 @@ import com.game.Audio.Sounds;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.game.GameSettings.GameSettings.LoadGameSettings;
+import com.game.GameSettings.SaveGameHandler;
 import com.game.menu.MainMenu;
 import com.game.menu.OptionMenu;
 
@@ -15,6 +16,7 @@ import com.game.menu.OptionMenu;
  */
 public class SpaceLegends extends Game {
 
+//    SaveGameHandler save;
     Sounds sound;
     public SpriteBatch batch;
 
@@ -27,9 +29,10 @@ public class SpaceLegends extends Game {
         LoadGameSettings();
         sound = new Sounds();
         batch = new SpriteBatch();
+//        save = new SaveGameHandler();
 
-       // this.setScreen(new MainMenu(this));
-        this.setScreen(new OptionMenu(this));
+        this.setScreen(new MainMenu(this));
+        //this.setScreen(new OptionMenu(this));
         //this.setScreen(new PauseMenu(this));
 
     }

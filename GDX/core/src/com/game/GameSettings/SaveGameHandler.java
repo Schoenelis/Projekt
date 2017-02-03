@@ -1,14 +1,10 @@
 package com.game.GameSettings;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.XmlReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.badlogic.gdx.utils.XmlReader.Element;
 import java.io.IOException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 /**
  *
@@ -18,7 +14,7 @@ import org.xml.sax.SAXException;
  * Write the Save Game to the xml file.
  *
  */
-public abstract class SaveGameHandler extends XmlReader {
+public class SaveGameHandler extends Game{
 
     static String Save_DATA_PATH = "SaveGame.xml";
     private static String RAW_SAVE_DATA;
@@ -26,6 +22,7 @@ public abstract class SaveGameHandler extends XmlReader {
     private static String SAVE_DATA;
 
     public SaveGameHandler() {
+        readXml();
     }
 
     private String writeXml(String SAVE) {
@@ -33,12 +30,20 @@ public abstract class SaveGameHandler extends XmlReader {
     }
 
     private static String readXml() {
-           String temp = "test ";
+        try {
+            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
+            String Background = root.getChildByName("background").getAttribute("texture");
+            System.out.println(Background);
+        } catch (IOException ex) {
+            System.err.print(ex);
+        }
+        String temp = "test ";
+
         return temp;
     }
 
     private String encryptSave(String RAW_SAVE_DATA) {
-        
+
         return "";
     }
 
@@ -46,28 +51,11 @@ public abstract class SaveGameHandler extends XmlReader {
         return "";
     }
 
-    public static void main(String[] args) {
-        DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
-        
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse("Savegame.xml");
-            
-            
-            
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(SaveGameHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(SaveGameHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(SaveGameHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
+    @Override
+    public void create() {
         
     }
 
-   
 
-    
+
 }
