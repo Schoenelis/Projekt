@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Player extends GameObj {
 
@@ -22,9 +26,20 @@ public class Player extends GameObj {
     private Texture imgPlayer1;
 
     public Player(ArrayList<Bullet> bullets) {
+
+        //loading the Player img.
+        try {
+            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
+            Element object = root.getChildByNameRecursive("gameobjects");
+            imgPlayer1 = new Texture(object.getChildByName("player").getAttribute("playertexture0"));
+        } catch (IOException ex) {
+            System.out.println("Bild wurde nicht geladen.");
+            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
+        }
+
         this.bullets = bullets;
         spriteBatch = new SpriteBatch();
-        imgPlayer1 = new Texture("Game_Grafiken/player1.png");
+      //  imgPlayer1 = new Texture("Game_Grafiken/Player/playergrafik0.png");
         x = 100;
         y = 100;
         width = height = 100;
@@ -40,19 +55,19 @@ public class Player extends GameObj {
     private void accelration() {
         if (Gdx.input.isKeyPressed(Keys.DPAD_UP)) {
             vy += dt * accleration;
-          
+
         }
         if (Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) {
             vy -= dt * accleration;
-            
+
         }
         if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) {
             vx -= dt * accleration;
-          
+
         }
         if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) {
             vx += dt * accleration;
-            
+
         }
 
     }

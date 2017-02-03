@@ -17,8 +17,8 @@ Sprite xml
     </mainmenue>
   
     <optionmenu>
-         <volumebuttons texture="Game_Grafiken/Volume_Buttons/Volume_"></volumebuttons>
-         <!--
+        <volumebuttons texture="Game_Grafiken/Volume_Buttons/Volume_"></volumebuttons>
+        <!--
         <menuvolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></menuvolumebutton>
         <gamevolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></gamevolumebutton>
         <gamesfxvolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></gamesfxvolumebutton> 
@@ -30,6 +30,16 @@ Sprite xml
             
         
     </optionmenu>
+    
+ 
+    
+    <gameobjects>
+        <player playertexture0="Game_Grafiken/Player/playergrafik0.png" playertexture1="Game_Grafiken/Player/playergrafik1.png"  playertexture2="Game_Grafiken/Player/playergrafik2.png"  
+                playertexture3="Game_Grafiken/Player/playergrafik3.png" playertexture4="Game_Grafiken/Player/playergrafik4.png"   >
+        </player>
+        <blackhole blackholetexture0="Game_Grafiken/blackhole.png" blackholetexture1="Game_Grafiken/blackholeschwarz.png"></blackhole>
+        <bullet bullettexture0="badlogic.jpg" bullettexture1="" bullettexture2=""></bullet>
+    </gameobjects>
     
 </sprite>
 

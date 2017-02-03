@@ -1,7 +1,14 @@
 package com.game.obj;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Bullet extends GameObj {
 
@@ -12,8 +19,17 @@ public class Bullet extends GameObj {
     private boolean remove;
 
     public Bullet() {
+        //loading the bullet img.
+        try {
+            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
+            Element object = root.getChildByName("gameobjects");
+                  img = new Texture(object.getChildByName("bullet").getAttribute("bullettexture0"));
+        } catch (IOException ex) {
+          System.out.println("Bild wurde nicht geladen.");
+            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
+        }
         
-        img = new Texture("badlogic.jpg");
+       // img = new Texture("badlogic.jpg");
         spriteBatch = new SpriteBatch();
 
         this.x = x;

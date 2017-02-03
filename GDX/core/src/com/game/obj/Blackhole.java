@@ -1,9 +1,14 @@
 package com.game.obj;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.XmlReader.Element;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class Blackhole extends GameObj {
 
@@ -15,8 +20,19 @@ public class Blackhole extends GameObj {
     private Texture imgBlackhole;
 
     public Blackhole() {
+
+        //loading the img
+        try {
+            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));  
+              Element object = root.getChildByNameRecursive("gameobjects");
+            imgBlackhole = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
+        } catch (IOException ex) {
+            System.out.println("Bild wurde nicht geladen.");
+            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE); 
+        }
+
         player = new Player(bullets);
-        imgBlackhole = new Texture("Game_Grafiken/blackhole.png");
+//        imgBlackhole = new Texture("Game_Grafiken/blackhole.png");
         spriteBatch = new SpriteBatch();
         x = 300;
         y = 300;
