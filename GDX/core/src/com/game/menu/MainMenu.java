@@ -119,7 +119,6 @@ public class MainMenu implements Screen {
         game.batch.begin();
         game.batch.draw(Background, Background_size_x, Background_size_y);
         game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-        game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
         getScreenResoulution();
         game.batch.end();
         com.game.GameSettings.WindowMode.setWindowMode();
@@ -146,6 +145,7 @@ public class MainMenu implements Screen {
                 break;
             case 0:
                 game.batch.draw(Start_enabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     game.setScreen(new MyGdxGame(game));
@@ -161,6 +161,7 @@ public class MainMenu implements Screen {
                 break;
             case 2:
                 game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     Gdx.app.exit();

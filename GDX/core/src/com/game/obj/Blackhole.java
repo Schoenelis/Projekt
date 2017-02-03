@@ -24,7 +24,7 @@ public class Blackhole extends GameObj {
         //loading the img
         try {
             Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));  
-              Element object = root.getChildByNameRecursive("gameobjects");
+              Element object = root.getChildByName("gameobjects");
             imgBlackhole = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");

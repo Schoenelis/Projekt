@@ -7,12 +7,12 @@ Sprite xml
 <sprite>
     <lowresoulution texture="Game_Grafiken/low_resoulution.png"></lowresoulution>
     <loaddefaultsettings texture="badlogic.jpg"></loaddefaultsettings>
-    <title texture="Game_Grafiken/SpaceLegend.png" heigth = "400" width= "1200" y ="450" ></title>
+    <title texture="Game_Grafiken/TITEL.png" heigth = "400" width= "1200" y ="450" ></title>
     <background texture="Game_Grafiken/background.png"></background>
     
     <mainmenue heigth = "90" width = "400" >
         <playbutton texture_enabled="Game_Grafiken/start_enabled.png" texture_disabled="Game_Grafiken/start_disabled.png" y ="200" ></playbutton>
-        <optionbutton texture_enabled="Game_Grafiken/optionen_enabled.jpg" texture_disabled="Game_Grafiken/optionen_disabled.jpg" y ="70"></optionbutton>
+        <optionbutton texture_enabled="Game_Grafiken/optionen_enabled.png" texture_disabled="Game_Grafiken/optionen_disabled.png" y ="70"></optionbutton>
         <exitbutton texture_enabled="Game_Grafiken/exit_enabled.png" texture_disabled="Game_Grafiken/exit_disabled.png" y ="-70"></exitbutton>
     </mainmenue>
   
