@@ -28,8 +28,8 @@ public class SpaceLegends extends Game {
         sound = new Sounds();
         batch = new SpriteBatch();
 
-        this.setScreen(new MainMenu(this));
-        //this.setScreen(new OptionMenu(this));
+       // this.setScreen(new MainMenu(this));
+        this.setScreen(new OptionMenu(this));
         //this.setScreen(new PauseMenu(this));
 
     }

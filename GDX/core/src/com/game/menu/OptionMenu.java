@@ -32,6 +32,13 @@ public class OptionMenu implements Screen {
     private final int button_size_heigth = 80;
     private final int button_size_width = 230;
 
+    private final int Menu_Background_heigth = 100;
+    private final int Menu_Background_width =Gdx.graphics.getWidth();
+    
+
+    private final int Menuetext_heigth = 120;
+    private final int Menuetext_width = 550;
+
     private final int Title_banner_size_heigth = 400;
     private final int Title_Banner_size_width = 1200;
 
@@ -51,6 +58,8 @@ public class OptionMenu implements Screen {
     //
     private int button_Width = 0;
     private int button_heigth = 0;
+    private int MBackground_Width = 0;
+    private int MBackground_heigt = 0;
 
     private int Banner_Width = 0;
     private int Banner_heigth = 0;
@@ -59,6 +68,8 @@ public class OptionMenu implements Screen {
     private int Banner_y = 0;
     private int button_x = 0;
     private int button_y = 0;
+    private int Menu_Background_x = 0;
+    private int Menu_Background_y = 0;
 
     private int screen_width = 0;
     private int screen_heigth = 0;
@@ -73,6 +84,13 @@ public class OptionMenu implements Screen {
 
     int Game_SFX_Volume_Value = (int) (GameSettings.getGame_SFX_Volume() * 100);
     float Game_SFX_Volume = GameSettings.getGame_SFX_Volume();
+
+    Texture Menuetext0;
+    Texture Menuetext1;
+    Texture Menuetext2;
+    Texture Menuetext3;
+    Texture Menuetext4;
+    Texture Menuetext5;
 
     Texture Title_Banner;
     Texture Background;
@@ -94,8 +112,7 @@ public class OptionMenu implements Screen {
         this.game = game;
 
         // platzhalter bilder werden geladen.
-     //   Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
-
+        //   Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
         OptionMenu optionMenu = this;
 
     }
@@ -105,10 +122,19 @@ public class OptionMenu implements Screen {
         try {
             Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             Background = new Texture(root.getChildByName("background").getAttribute("texture"));
-           Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
+            Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
 
             // Loading the Optionmenu Buttons.
             Element optionmenu = root.getChildByName("optionmenu");
+            Menu_Background = new Texture(optionmenu.getChildByName("background").getAttribute("texture"));
+            
+            Menuetext0 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext0"));
+            Menuetext1 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext1"));
+            Menuetext2 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext2"));
+            Menuetext3 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext3"));
+            Menuetext4 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext4"));
+            Menuetext5 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext5"));
+//            
             path = optionmenu.getChildByName("volumebuttons").getAttribute("texture");
             System.out.println(path + Menu_Volume_Value + ".png");
             Menu_Volume_Button = new Texture(path + Menu_Volume_Value + ".png");
@@ -232,7 +258,15 @@ public class OptionMenu implements Screen {
         game.batch.begin();
         game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
         game.batch.draw(Background, Background_size_x, Background_size_y);
-        //  game.batch.draw(Menu_Background, Background_size_y, Background_size_x);
+
+        game.batch.draw(Menuetext5, button_x - 570, button_y - 260, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext4, button_x - 570, button_y - 160, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext3, button_x - 570, button_y - 60, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext2, button_x - 570, button_y + 40, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext1, button_x - 570, button_y + 140, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext0, button_x - 570, button_y + 240, Menuetext_width, Menuetext_heigth);
+
+        game.batch.draw(Menu_Background, 0, 0, Menu_Background_width, Menu_Background_heigth);
 
         game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
         game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
