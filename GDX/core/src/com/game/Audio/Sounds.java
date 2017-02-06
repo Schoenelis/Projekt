@@ -6,7 +6,7 @@ import com.game.GameSettings.GameSettings;
 
 public class Sounds {
 
-    static Sound sound;//
+    static Sound sound;///
 
     //Creating of the Volume of the Audiofiles.
     private static float Menu_Volume = GameSettings.getMenu_Volume();
