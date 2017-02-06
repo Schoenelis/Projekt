@@ -2,11 +2,10 @@
 
 
 <savegame savecount = '0' gameversion="0.1" gameid="1t3hr88v8vdf89dfdfa898">   
-    
-    
-    <player level="1" lifeponts=""  >   
+       
+    <player level="1" life="100" energy="100" curency="100" >   
     
     
     </player>   
-    
+     
 </savegame>

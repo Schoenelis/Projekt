@@ -4,7 +4,12 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
+import com.badlogic.gdx.utils.XmlWriter;
+
 import java.io.IOException;
+import java.io.StringWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,37 +19,61 @@ import java.io.IOException;
  * Write the Save Game to the xml file.
  *
  */
-public class SaveGameHandler extends Game{
+public class SaveGameHandler extends Game {
 
-    static String Save_DATA_PATH = "SaveGame.xml";
+    private static String Save_DATA_PATH = "Savegame.xml";
     private static String RAW_SAVE_DATA;
     private static String ENCRYPTED_DATA;
     private static String SAVE_DATA;
+    private static Element root;
+    private static Element player;
+   
 
     public SaveGameHandler() {
         readXml();
     }
 
-    private String writeXml(String SAVE) {
-        return "";
+    private static void writeXml() {
+//
+//        try {
+//            StringWriter writer = new StringWriter();
+//
+//            XmlWriter xml  = new XmlWriter(writer);
+//
+//         player.setAttribute("level","2");
+//          xml.write(SAVE_DATA);
+//
+//            
+//            System.out.println(writer);
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(SaveGameHandler.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
-    private static String readXml() {
-      String temp = "";
-         String e ="";
-      try {
-            Element root = new XmlReader().parse(Gdx.files.internal("Savegame.xml"));
-             temp = "savecount "+ root.getAttribute("savecount");
-            temp += "\ngameversion " + root.getAttribute("gameversion");
-             temp += "\ngameid " + root.getAttribute("gameid");
-           // System.out.println(temp);
+    private static void readXml() {
+        try {
+            
+            root = new XmlReader().parse(Gdx.files.internal(Save_DATA_PATH));
+
+            SAVE_DATA = "\n\nSave info\n";
+            SAVE_DATA += "\nsavecount: " + root.getAttribute("savecount");
+            SAVE_DATA += "\ngameversion: " + root.getAttribute("gameversion");
+            SAVE_DATA += "\ngameid: " + root.getAttribute("gameid");
+            SAVE_DATA += "\n\n\nPlayer info\n";
+            player = root.getChildByName("player");
+            SAVE_DATA += "\nLevel: " + player.getAttribute("level");
+            SAVE_DATA += "\nlife: " + player.getAttribute("life");
+            SAVE_DATA += "\nEnergy: " + player.getAttribute("energy");
+            SAVE_DATA += "\ncurency: " + player.getAttribute("curency");
+
+       //     System.out.println(SAVE_DATA);
+
+           // writeXml();
+
         } catch (IOException ex) {
             System.err.print(ex);
         }
-             
-     
-       
-        return temp;
     }
 
     private String encryptSave(String RAW_SAVE_DATA) {
@@ -58,9 +87,7 @@ public class SaveGameHandler extends Game{
 
     @Override
     public void create() {
-        
+
     }
-
-
 
 }
