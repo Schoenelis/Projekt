@@ -10,21 +10,32 @@ Sprite xml
     <title texture="Game_Grafiken/Menu/TITEL.png" heigth = "400" width= "1200" y ="450" ></title>
     <background texture="Game_Grafiken/background.png"></background>
     
+    <!-- heigth gibt die hoehe der buttons an und width die breite.-->
     <mainmenue heigth = "90" width = "400" >
         <playbutton texture_enabled="Game_Grafiken/Menu/start_enabled.png" texture_disabled="Game_Grafiken/Menu/start_disabled.png" y ="200" ></playbutton>
         <optionbutton texture_enabled="Game_Grafiken/Menu/optionen_enabled.png" texture_disabled="Game_Grafiken/Menu/optionen_disabled.png" y ="70"></optionbutton>
         <exitbutton texture_enabled="Game_Grafiken/Menu/exit_enabled.png" texture_disabled="Game_Grafiken/Menu/exit_disabled.png" y ="-70"></exitbutton>
     </mainmenue>
   
-    <optionmenu>
+  <!-- heigth gibt die hoehe der buttons an und width die breite.-->
+    <optionmenu heigth = "80" width = "230" >
         <background texture="badlogic.jpg" ></background>
         
-        <menutext  menuetext0="Game_Grafiken/Menu/Menuetext0.png"  menuetext1="Game_Grafiken/Menu/Menuetext1.png"  menuetext2 ="Game_Grafiken/Menu/Menuetext2.png" 
-                    menuetext3="Game_Grafiken/Menu/Menuetext3.png"  menuetext4="Game_Grafiken/Menu/Menuetext4.png"  menuetext5 ="Game_Grafiken/Menu/Menuetext5.png">
+        <menutext menuetextheigth="120"  menuetextwidth = "550"
+            menuetext0="Game_Grafiken/Menu/Menuetext0.png" 
+                   menuetext1="Game_Grafiken/Menu/Menuetext1.png" 
+                   menuetext2 ="Game_Grafiken/Menu/Menuetext2.png" 
+                   menuetext3="Game_Grafiken/Menu/Menuetext3.png"  
+                   menuetext4="Game_Grafiken/Menu/Menuetext4.png" 
+                   menuetext5 ="Game_Grafiken/Menu/Menuetext5.png">
         </menutext>
         
-        <volumebuttons volumetexture0="Game_Grafiken/Volume_Buttons/Volume_0.png" volumetexture20="Game_Grafiken/Volume_Buttons/Volume_20.png" volumetexture40="Game_Grafiken/Volume_Buttons/Volume_40.png" 
-                    volumetexture60="Game_Grafiken/Volume_Buttons/Volume_60.png" volumetexture80="Game_Grafiken/Volume_Buttons/Volume_80.png" volumetexture100="Game_Grafiken/Volume_Buttons/Volume_100.png">
+        <volumebuttons volumetexture0="Game_Grafiken/Volume_Buttons/Volume_0.png" 
+                       volumetexture20="Game_Grafiken/Volume_Buttons/Volume_20.png" 
+                       volumetexture40="Game_Grafiken/Volume_Buttons/Volume_40.png" 
+                       volumetexture60="Game_Grafiken/Volume_Buttons/Volume_60.png"
+                       volumetexture80="Game_Grafiken/Volume_Buttons/Volume_80.png" 
+                       volumetexture100="Game_Grafiken/Volume_Buttons/Volume_100.png">
         </volumebuttons>
         <!--
         <menuvolumebutton texture="Game_Grafiken/Volume_Buttons/Volume_"></menuvolumebutton>
@@ -42,8 +53,11 @@ Sprite xml
  
     
     <gameobjects>
-        <player playertexture0="Game_Grafiken/Player/playergrafik0.png" playertexture1="Game_Grafiken/Player/playergrafik1.png"  playertexture2="Game_Grafiken/Player/playergrafik2.png"  
-                playertexture3="Game_Grafiken/Player/playergrafik3.png" playertexture4="Game_Grafiken/Player/playergrafik4.png"   >
+        <player playertexture0="Game_Grafiken/Player/playergrafik0.png" 
+                playertexture1="Game_Grafiken/Player/playergrafik1.png" 
+                playertexture2="Game_Grafiken/Player/playergrafik2.png"  
+                playertexture3="Game_Grafiken/Player/playergrafik3.png" 
+                playertexture4="Game_Grafiken/Player/playergrafik4.png"   >
         </player>
         <blackhole blackholetexture0="Game_Grafiken/blackhole.png" blackholetexture1="Game_Grafiken/blackholeschwarz.png"></blackhole>
         <bullet bullettexture0="Game_Grafiken/Player/laser.png" bullettexture1="" bullettexture2=""></bullet>

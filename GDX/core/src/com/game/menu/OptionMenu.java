@@ -29,30 +29,30 @@ public class OptionMenu implements Screen {
     private final int sfxButtonId = 2;
 
     // Groesse der schaltflaechen.
-    private final int button_size_heigth = 80;
-    private final int button_size_width = 230;
+    private int button_size_heigth;// = 80;
+    private int button_size_width;// = 230;
 
     private final int Menu_Background_heigth = 100;
     private final int Menu_Background_width = Gdx.graphics.getWidth();
 
-    private final int Menuetext_heigth = 120;
-    private final int Menuetext_width = 550;
+    private int Menuetext_heigth;// = 120;
+    private int Menuetext_width;// = 550;
 
-    private final int Title_banner_size_heigth = 400;
-    private final int Title_Banner_size_width = 1200;
+    private int Title_banner_size_heigth;//= 400;
+    private int Title_Banner_size_width;//= 1200;
 
     private final float Background_size_x = (float) (Gdx.graphics.getWidth() * 0.0);
     private final float Background_size_y = (float) (Gdx.graphics.getHeight() * 0.0);
     // position der schaltflaeche und des Banners.
 
     // y positionen der bilder.
-    private int Title_Banner_y = 200;
-    private int Menu_Volume_button_y = 250;
-    private int Game_Volume_button_y = 150;
-    private int Game_SFX_Volume_button_y = 50;
-    private int About_game_button_y = -50;
-    private int New_Game_y = -150;
-    private int Exit_And_Save_button_y = -250;
+    private static int Title_Banner_y = Gdx.graphics.getHeight() - 250; // 200;
+    private int Menu_Volume_button_y = Title_Banner_y / 2 - 150;//250;
+    private int Game_Volume_button_y = Menu_Volume_button_y - 100; //150;
+    private int Game_SFX_Volume_button_y = Game_Volume_button_y - 100;// 50;
+    private int About_game_button_y = Game_SFX_Volume_button_y - 100;//-50;
+    private int New_Game_y = About_game_button_y - 100;// -150;
+    private int Exit_And_Save_button_y = New_Game_y - 100;//-250;
 
     //
     private int button_Width = 0;
@@ -102,13 +102,6 @@ public class OptionMenu implements Screen {
     Texture New_Game_enabled;
     Texture Exit_And_Save_enabled;
 
-    Texture Volume_Button;
-    Texture Volume_Button_0;
-    Texture Volume_Button_20;
-    Texture Volume_Button_40;
-    Texture Volume_Button_60;
-    Texture Volume_Button_80;
-    Texture Volume_Button_100;
 
     Texture About_Game_disabled;
     Texture New_Game_disabled;
@@ -119,11 +112,7 @@ public class OptionMenu implements Screen {
     //xture Option_disabled;
     public OptionMenu(SpaceLegends game) {
         this.game = game;
-
-        // platzhalter bilder werden geladen.
-        //   Title_Banner = new Texture("Game_Grafiken/SpaceLegend.png");
         OptionMenu optionMenu = this;
-
     }
 
     @Override
@@ -132,11 +121,26 @@ public class OptionMenu implements Screen {
             Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             Background = new Texture(root.getChildByName("background").getAttribute("texture"));
             Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
+            Element title = root.getChildByName("title");
 
+            Title_banner_size_heigth = Integer.parseInt(title.getAttribute("heigth"));
+
+            Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
+
+            //  Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
+            Title_Banner = new Texture(title.getAttribute("texture"));
+
+            // Loading the Menu Elements from the xml file.
+            Element menu = root.getChildByName("optionmenu");
+            button_size_heigth = Integer.parseInt(menu.getAttribute("heigth"));
+            button_size_width = Integer.parseInt(menu.getAttribute("width"));
             // Loading the Optionmenu Buttons.
             optionmenu = root.getChildByName("optionmenu");
             Menu_Background = new Texture(optionmenu.getChildByName("background").getAttribute("texture"));
 
+            Menuetext_heigth = Integer.parseInt(optionmenu.getChildByName("menutext").getAttribute("menuetextheigth"));
+            Menuetext_width  = Integer.parseInt(optionmenu.getChildByName("menutext").getAttribute("menuetextwidth"));
+            
             Menuetext0 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext0"));
             Menuetext1 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext1"));
             Menuetext2 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext2"));
