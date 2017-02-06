@@ -15,21 +15,22 @@ import java.io.IOException;
 public class MainMenu implements Screen {
 
     // Groesse der schaltflaechen.
-    private int buton_size_heigth = 90;
-    private int buton_size_width = 400;
+    private static int buton_size_heigth;// = 90;
+    private static int buton_size_width;// = 400;
 
-    private final int Title_banner_size_heigth = 400;
-    private final int Title_Banner_size_width = 1200;
+    
+    private static int Title_banner_size_heigth;// = 400;
+    private static int Title_Banner_size_width;// = 1200;
 
     private final float Background_size_x = (float) (Gdx.graphics.getWidth() * 0.0);
     private final float Background_size_y = (float) (Gdx.graphics.getHeight() * 0.0);
     // position der schaltflaeche und des Banners.
 
     // y positionen der bilder.
-    private int Title_Banner_y = 450;
-    private int Start_buton_y = 200;
-    private int Option_buton_y = 70;
-    private int Exit_buton_y = -70;
+    private static int Title_Banner_y;// = 450;
+    private static int Start_buton_y = 200;
+    private static int Option_buton_y = 70;
+    private static int Exit_buton_y = -70;
 
     //
     private int buton_Width = 0;
@@ -75,11 +76,22 @@ public class MainMenu implements Screen {
             Background = new Texture(root.getChildByName("background").getAttribute("texture"));
             Load_Default_Settings = new Texture(root.getChildByName("loaddefaultsettings").getAttribute("texture"));
             Low_Resoulution = new Texture(root.getChildByName("lowresoulution").getAttribute("texture"));
-            Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
+            Element title = root.getChildByName("title");
+            Title_banner_size_heigth = Integer.parseInt(title.getAttribute("heigth"));
+            Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
+            Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
+            Title_Banner = new Texture(title.getAttribute("texture"));
+            
+            
+            
             // Loading the Menu Elements from the xml file.
             Element menu = root.getChildByName("mainmenue");
-
+            buton_size_heigth = Integer.parseInt(menu.getAttribute("heigth"));
+            buton_size_width = Integer.parseInt(menu.getAttribute("width"));
+            
+            
             Start_enabled = new Texture(menu.getChildByName("playbutton").getAttribute("texture_enabled"));
+//            Start_buton_y = Integer.parseInt(menu.get.getAttribute(""));
             Option_enabled = new Texture(menu.getChildByName("optionbutton").getAttribute("texture_enabled"));
             Exit_enabled = new Texture(menu.getChildByName("exitbutton").getAttribute("texture_enabled"));
 
