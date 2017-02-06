@@ -33,8 +33,7 @@ public class OptionMenu implements Screen {
     private final int button_size_width = 230;
 
     private final int Menu_Background_heigth = 100;
-    private final int Menu_Background_width =Gdx.graphics.getWidth();
-    
+    private final int Menu_Background_width = Gdx.graphics.getWidth();
 
     private final int Menuetext_heigth = 120;
     private final int Menuetext_width = 550;
@@ -103,9 +102,19 @@ public class OptionMenu implements Screen {
     Texture New_Game_enabled;
     Texture Exit_And_Save_enabled;
 
+    Texture Volume_Button;
+    Texture Volume_Button_0;
+    Texture Volume_Button_20;
+    Texture Volume_Button_40;
+    Texture Volume_Button_60;
+    Texture Volume_Button_80;
+    Texture Volume_Button_100;
+
     Texture About_Game_disabled;
     Texture New_Game_disabled;
     Texture Exit_And_Save_disabled;
+
+    private static Element optionmenu;
 
     //xture Option_disabled;
     public OptionMenu(SpaceLegends game) {
@@ -125,9 +134,9 @@ public class OptionMenu implements Screen {
             Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
 
             // Loading the Optionmenu Buttons.
-            Element optionmenu = root.getChildByName("optionmenu");
+            optionmenu = root.getChildByName("optionmenu");
             Menu_Background = new Texture(optionmenu.getChildByName("background").getAttribute("texture"));
-            
+
             Menuetext0 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext0"));
             Menuetext1 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext1"));
             Menuetext2 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext2"));
@@ -135,11 +144,13 @@ public class OptionMenu implements Screen {
             Menuetext4 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext4"));
             Menuetext5 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext5"));
 //            
-            path = optionmenu.getChildByName("volumebuttons").getAttribute("texture");
+            //path = optionmenu.getChildByName("volumebuttons").getAttribute("texture");
             System.out.println(path + Menu_Volume_Value + ".png");
-            Menu_Volume_Button = new Texture(path + Menu_Volume_Value + ".png");
-            Game_Volume_Button = new Texture(path + Game_Volume_Value + ".png");
-            Game_SFX_Volume_Button = new Texture(path + Game_SFX_Volume_Value + ".png");
+
+            Menu_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Menu_Volume_Value));
+            Game_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Game_Volume_Value));
+            Game_SFX_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Game_SFX_Volume_Value));
+
             Volume_Button_Not_Selcted = new Texture(optionmenu.getChildByName("volumebuttonnotselcted").getAttribute("texture"));
             About_Game_enabled = new Texture(optionmenu.getChildByName("aboutgame").getAttribute("texture_enabled"));
             New_Game_enabled = new Texture(optionmenu.getChildByName("newgame").getAttribute("texture_enabled"));
@@ -158,10 +169,16 @@ public class OptionMenu implements Screen {
     public void render(float delta) {
 
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_DOWN)) && select < 5) {
+            if (select < 2) {
+                Sounds.stopSound();
+            }
             Sounds.playButtonSound();
             select++;
         }
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_UP)) && select > 0) {
+            if (select > 0) {
+                Sounds.stopSound();
+            }
             Sounds.playButtonSound();
             select--;
         }
@@ -176,6 +193,7 @@ public class OptionMenu implements Screen {
             Menu_Volume += 0.2f;
 
             Sounds.setMenu_Volume(1f);
+            Sounds.setMenu_Volume(Menu_Volume);
             GameSettings.setMenu_Volume(Menu_Volume);
             Menu_Volume_Value = (int) (100 * Menu_Volume);
             setVolume(menuButtonId);
@@ -204,6 +222,7 @@ public class OptionMenu implements Screen {
             Game_Volume += 0.2f;
 
             Sounds.setGame_Volume(1f);
+            Sounds.setGame_Volume(Game_Volume);
             GameSettings.setGame_Volume(Game_Volume);
             Game_Volume_Value = (int) (100 * Game_Volume);
             setVolume(gameButtonId);
@@ -231,6 +250,7 @@ public class OptionMenu implements Screen {
             Game_SFX_Volume += 0.2f;
 
             Sounds.setGame_SFX_Volume(1f);
+            Sounds.setGame_SFX_Volume(Game_SFX_Volume);
             GameSettings.setGame_SFX_Volume(Game_SFX_Volume);
             Game_SFX_Volume_Value = (int) (100 * Game_SFX_Volume);
             setVolume(sfxButtonId);
@@ -365,25 +385,22 @@ public class OptionMenu implements Screen {
         switch (buttonId) {
             case 0:
                 buttonId = 0;
-                Menu_Volume_Button = new Texture(path + Menu_Volume_Value + ".png");
+                Menu_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Menu_Volume_Value));
                 break;
-
             case 1:
                 buttonId = 1;
-                Game_Volume_Button = new Texture(path + Game_Volume_Value + ".png");
+                Game_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Game_Volume_Value));
                 break;
-
             case 2:
                 buttonId = 2;
-                Game_SFX_Volume_Button = new Texture(path + Game_SFX_Volume_Value + ".png");
-                break;
-            default:
+                Game_SFX_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Game_SFX_Volume_Value));
                 break;
         }
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height
+    ) {
     }
 
     @Override

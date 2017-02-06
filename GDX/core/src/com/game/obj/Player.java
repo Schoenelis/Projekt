@@ -37,7 +37,7 @@ public class Player extends SpaceObject {
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
-            imgPlayer = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
+            imgPlayer = new Texture(object.getChildByName("player").getAttribute("playertexture0"));
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
             JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);

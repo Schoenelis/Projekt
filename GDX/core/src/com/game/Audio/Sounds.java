@@ -56,6 +56,13 @@ public class Sounds {
         sound.setVolume(Menu_Music, Menu_Volume);
         playMenuSound();
     }
+    /**
+     * Stop the sound playing
+     */
+    public static void stopSound(){
+        sound.stop();
+        System.out.println("Sound Stop");
+    }
     
 /**
  * Plays the Menu Music when you are at the Main or Option Menu.

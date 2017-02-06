@@ -23,7 +23,7 @@ public class Bullet extends SpaceObject {
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
-            imgBullet = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
+            imgBullet = new Texture(object.getChildByName("bullet").getAttribute("bullettexture0"));
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
             JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
