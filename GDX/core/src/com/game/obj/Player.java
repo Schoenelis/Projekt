@@ -1,101 +1,124 @@
 package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.XmlReader;
-import com.badlogic.gdx.utils.XmlReader.Element;
-import java.io.IOException;
 import java.util.ArrayList;
+
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.XmlReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
-public class Player extends GameObj {
+public class Player extends SpaceObject {
 
+    private final int MAX_BULLETS = 4;
     private ArrayList<Bullet> bullets;
-    public static final int MAX_BULLETS = 4;
 
-    private float accleration;
+    private float[] flamex;
+    private float[] flamey;
+
+    private boolean left;
+    private boolean right;
+    private boolean up;
+
     private float maxSpeed;
-    private int lifepoints;
-    private int energy;
-    private int maxEnergy;
-    private float lifeTime;
-    private float lifeTimer;
+    private float acceleration;
+    private float deceleration;
+    private float acceleratingTimer;
 
-    private Texture imgPlayer1;
+    private Texture imgPlayer;
+    private SpriteBatch sb;
 
     public Player(ArrayList<Bullet> bullets) {
 
-        //loading the Player img.
         try {
-            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
-            Element object = root.getChildByNameRecursive("gameobjects");
-            imgPlayer1 = new Texture(object.getChildByName("player").getAttribute("playertexture0"));
+            XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
+            XmlReader.Element object = root.getChildByName("gameobjects");
+            imgPlayer = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
             JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
         }
 
         this.bullets = bullets;
-        spriteBatch = new SpriteBatch();
-      //  imgPlayer1 = new Texture("Game_Grafiken/Player/playergrafik0.png");
-        x = 100;
-        y = 100;
-        width = height = 100;
-        lifepoints = 3;
-        accleration = 200f;
-        maxSpeed = 500f;
-        energy = 100;
-        lifeTime = 1000;
-        lifeTimer = 0;
-        vx = vy = 0;
+        sb = new SpriteBatch();
+
+        x = 0;
+        y = 0;
+
+        maxSpeed = 300;
+        acceleration = 200;
+        deceleration = 10;
+
+        radians = 3.1415f / 2;
+        rotationSpeed = 3;
     }
 
-    private void accelration() {
-        if (Gdx.input.isKeyPressed(Keys.DPAD_UP)) {
-            vy += dt * accleration;
-
-        }
-        if (Gdx.input.isKeyPressed(Keys.DPAD_DOWN)) {
-            vy -= dt * accleration;
-
-        }
-        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) {
-            vx -= dt * accleration;
-
-        }
-        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) {
-            vx += dt * accleration;
-
-        }
-
+    public void setLeft(boolean b) {
+        left = b;
     }
 
-    private void maxSpeed() {
+    public void setRight(boolean b) {
+        right = b;
+    }
+
+    public void setUp(boolean b) {
+        up = b;
+    }
+
+    public void shoot() {
+        if (bullets.size() == MAX_BULLETS) {
+            return;
+        }
+        bullets.add(new Bullet(x, y, radians));
+    }
+
+    public void update(float dt) {
+
+        // turning
+        if (left) {
+            radians += rotationSpeed * dt;
+        } else if (right) {
+            radians -= rotationSpeed * dt;
+        }
+
+        // accelerating
+        if (up) {
+            vx += MathUtils.cos(radians) * acceleration * dt;
+            vy += MathUtils.sin(radians) * acceleration * dt;
+            acceleratingTimer += dt;
+            if (acceleratingTimer > 0.1f) {
+                acceleratingTimer = 0;
+            }
+        } else {
+            acceleratingTimer = 0;
+        }
+
+        // deceleration
         float vec = (float) Math.sqrt(vx * vx + vy * vy);
         if (vec > 0) {
-            vx -= (vx / vec) * dt;
-            vy -= (vy / vec) * dt;
+            vx -= (vx / vec) * deceleration * dt;
+            vy -= (vy / vec) * deceleration * dt;
         }
         if (vec > maxSpeed) {
             vx = (vx / vec) * maxSpeed;
             vy = (vy / vec) * maxSpeed;
         }
-    }
 
-    public void update() {
-        windowCollision();
-        accelration();
-        maxSpeed();
-
+        // set position
         x += vx * dt;
         y += vy * dt;
+
+        // screen wrap
     }
 
     public void draw() {
-        spriteBatch.begin();
-        spriteBatch.draw(imgPlayer1, x, y, width, height);
-        spriteBatch.end();
+        sb.begin();
+        sb.draw(imgPlayer, x, y);
+        sb.end();
     }
+
 }

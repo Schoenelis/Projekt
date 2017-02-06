@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import com.game.Audio.Sounds;
 import static com.game.GameSettings.GameSettings.*;
+import com.game.main.MyGdxGame;
 import com.mygdx.game.SpaceLegends;
 import java.io.IOException;
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-public class Blackhole extends GameObj {
+public class Blackhole extends SpaceObject {
 
     private float attraction;
     private ArrayList<Bullet> bullets;
@@ -18,22 +18,23 @@ public class Blackhole extends GameObj {
     private Random random;
     private Player player;
     private Texture imgBlackhole;
+    private SpriteBatch sb;
 
     public Blackhole() {
 
         //loading the img
         try {
-            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));  
-              Element object = root.getChildByName("gameobjects");
+            Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
+            Element object = root.getChildByName("gameobjects");
             imgBlackhole = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
-            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
         }
 
         player = new Player(bullets);
 //        imgBlackhole = new Texture("Game_Grafiken/blackhole.png");
-        spriteBatch = new SpriteBatch();
+        sb = new SpriteBatch();
         x = 300;
         y = 300;
         width = height = 200;
@@ -59,8 +60,8 @@ public class Blackhole extends GameObj {
     }
 
     public void draw() {
-        spriteBatch.begin();
-        spriteBatch.draw(imgBlackhole, x, y, width, height);
-        spriteBatch.end();
+        sb.begin();
+        sb.draw(imgBlackhole, x, y, width, height);
+        sb.end();
     }
 }
