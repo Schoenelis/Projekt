@@ -114,6 +114,7 @@ public class Sounds {
         sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/ding.wav"));
 
         //  Button_Sound = sound.play(0f);
+        
         sound.setVolume(Button_Sound, Button_Volume);
 
         sound.play(Button_Volume);
