@@ -18,7 +18,6 @@ public class MainMenu implements Screen {
     private static int buton_size_heigth;// = 90;
     private static int buton_size_width;// = 400;
 
-    
     private static int Title_banner_size_heigth;// = 400;
     private static int Title_Banner_size_width;// = 1200;
 
@@ -26,11 +25,11 @@ public class MainMenu implements Screen {
     private final float Background_size_y = (float) (Gdx.graphics.getHeight() * 0.0);
     // position der schaltflaeche und des Banners.
 
-    // y positionen der bilder.
-    private static int Title_Banner_y;// = 450;
-    private static int Start_buton_y = 200;
-    private static int Option_buton_y = 70;
-    private static int Exit_buton_y = -70;
+    // y positionen der bilder.1
+    private static int Title_Banner_y = Gdx.graphics.getHeight() -250; 
+    private static int Start_button_y = Title_Banner_y /2 -150;
+    private static int Option_button_y = Start_button_y - 150;
+    private static int Exit_button_y = Option_button_y -150;
 
     //
     private int buton_Width = 0;
@@ -79,21 +78,20 @@ public class MainMenu implements Screen {
             Element title = root.getChildByName("title");
             Title_banner_size_heigth = Integer.parseInt(title.getAttribute("heigth"));
             Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
-            Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
+            //  Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
             Title_Banner = new Texture(title.getAttribute("texture"));
-            
-            
-            
+
             // Loading the Menu Elements from the xml file.
             Element menu = root.getChildByName("mainmenue");
             buton_size_heigth = Integer.parseInt(menu.getAttribute("heigth"));
             buton_size_width = Integer.parseInt(menu.getAttribute("width"));
-            
-            
+
             Start_enabled = new Texture(menu.getChildByName("playbutton").getAttribute("texture_enabled"));
-//            Start_buton_y = Integer.parseInt(menu.get.getAttribute(""));
+//            Start_button_y = Integer.parseInt(menu.getChildByName("playbutton").getAttribute("y"));
             Option_enabled = new Texture(menu.getChildByName("optionbutton").getAttribute("texture_enabled"));
+//            Option_button_y = Integer.parseInt(menu.getChildByName("optionbutton").getAttribute("y"));
             Exit_enabled = new Texture(menu.getChildByName("exitbutton").getAttribute("texture_enabled"));
+//            Exit_button_y = Integer.parseInt(menu.getChildByName("exitbutton").getAttribute("y"));
 
             Start_disabled = new Texture(menu.getChildByName("playbutton").getAttribute("texture_disabled"));
             Option_disabled = new Texture(menu.getChildByName("optionbutton").getAttribute("texture_disabled"));
@@ -147,7 +145,7 @@ public class MainMenu implements Screen {
             case -99:
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-                game.batch.draw(Load_Default_Settings, buton_x, buton_y + Option_buton_y, 100, 100);
+                game.batch.draw(Load_Default_Settings, buton_x, buton_y + Option_button_y, 100, 100);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     LoadDefaultSettings();
                     saveGameSettings();
@@ -156,26 +154,26 @@ public class MainMenu implements Screen {
                 }
                 break;
             case 0:
-                game.batch.draw(Start_enabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Start_enabled, buton_x, buton_y + Start_button_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Option_disabled, buton_x, buton_y + Option_button_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_button_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     Sounds.playGameSound();
                     game.setScreen(new MyGdxGame(game));
                 }
                 break;
             case 1:
-                game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_enabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Start_disabled, buton_x, buton_y + Start_button_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Option_enabled, buton_x, buton_y + Option_button_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_button_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     game.setScreen(new OptionMenu(game));
                 }
                 break;
             case 2:
-                game.batch.draw(Start_disabled, buton_x, buton_y + Start_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Option_disabled, buton_x, buton_y + Option_buton_y, buton_size_width, buton_size_heigth);
-                game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_buton_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Start_disabled, buton_x, buton_y + Start_button_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Option_disabled, buton_x, buton_y + Option_button_y, buton_size_width, buton_size_heigth);
+                game.batch.draw(Exit_enabled, buton_x, buton_y + Exit_button_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     Gdx.app.exit();
                 }
@@ -216,27 +214,27 @@ public class MainMenu implements Screen {
             Banner_y = screen_heigth + Banner_heigth - 90;
             buton_y = screen_heigth - buton_heigth + 2;
 
-            buton_size_heigth = 80;
-            buton_size_width = 250;
-
-            Title_Banner_y = 250;
-            Start_buton_y = 100;
-            Option_buton_y = -30;
-            Exit_buton_y = -160;
-
-            selectMenu();
-
+//            buton_size_heigth = 80;
+//            buton_size_width = 250;
+//
+//            //      Title_Banner_y = 250;
+//          //  Start_button_y = 100;
+//          //  Option_button_y = -30;
+//          //  Exit_button_y = -160;
+//
+           selectMenu();
+//
         } else if (Main_Frame_fullscreen) {
             Banner_y = screen_heigth + Banner_heigth + 50;
             buton_y = screen_heigth - buton_heigth + 50;
 
             selectMenu();
 
-        } else {
-            Banner_y = screen_heigth + Banner_heigth + 330;
-            buton_y = screen_heigth - buton_heigth + 180;
-
-            selectMenu();
+//        } else {
+//            Banner_y = screen_heigth + Banner_heigth + 330;
+//            buton_y = screen_heigth - buton_heigth + 180;
+//
+//            selectMenu();
         }
 
     }

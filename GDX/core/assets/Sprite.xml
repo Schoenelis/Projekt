@@ -19,8 +19,8 @@ Sprite xml
     <optionmenu>
         <background texture="badlogic.jpg" ></background>
         
-        <menutext  menuetext0="Menuetext0.png"  menuetext1="Menuetext1.jpg"  menuetext2 ="Menuetext2.jpg" 
-                    menuetext3="Menuetext3.jpg"  menuetext4="Menuetext4.jpg"  menuetext5 ="Menuetext5.jpg">
+        <menutext  menuetext0="Menuetext0.png"  menuetext1="Menuetext1.png"  menuetext2 ="Menuetext2.png" 
+                    menuetext3="Menuetext3.jpg"  menuetext4="Menuetext4.png"  menuetext5 ="Menuetext5.jpg">
         </menutext>
         
         <volumebuttons texture="Game_Grafiken/Volume_Buttons/Volume_"></volumebuttons>

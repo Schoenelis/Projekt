@@ -15,10 +15,10 @@ public class Sounds {
     private static float Game_SFX_Volume = GameSettings.getGame_SFX_Volume();
 
     //Creatin of the IDs for the Audiofiles. 
-    private static long Menu_Music;
-    private static long Button_Sound;
-    private static long Game_Music;
-    private static long Game_SFX_Sound;
+    private static long Menu_Music = 0L;
+    private static long Button_Sound = 1L;
+    private static long Game_Music = 2L;
+    private static long Game_SFX_Sound =3L;
 
     /**
      * Set the Game Volume.
@@ -66,7 +66,7 @@ public class Sounds {
 
         sound.setLooping(0, true);
 
-        Menu_Music = sound.play(0f);
+      //  Menu_Music = sound.play(0f);
 
         sound.setLooping(Menu_Music, true);
 
@@ -85,7 +85,7 @@ public class Sounds {
 
         sound.setLooping(0, true);
 
-        Game_Music = sound.play(0f);
+        //Game_Music = sound.play(0f);
 
         sound.setLooping(Game_Music, true);
 
@@ -103,7 +103,7 @@ public class Sounds {
 
         sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/ding.wav"));
 
-        Button_Sound = sound.play(0f);
+      //  Button_Sound = sound.play(0f);
 
         sound.setVolume(Button_Sound, Button_Volume);
 
@@ -114,11 +114,12 @@ public class Sounds {
      * Plays the special effects Sounds for the Game.
      */
     public static void playSFXSounds() {
-        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
+        
+        //sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
 
         sound.setLooping(0, true);
 
-        Game_SFX_Sound = sound.play(0f);
+      //  Game_SFX_Sound = sound.play(0f);
 
         sound.setLooping(Game_SFX_Sound, true);
 
