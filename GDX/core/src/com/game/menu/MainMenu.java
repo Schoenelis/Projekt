@@ -80,7 +80,7 @@ public class MainMenu implements Screen {
             Title_banner_size_heigth = Integer.parseInt(title.getAttribute("heigth"));
             Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
             //  Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
-            Title_Banner = new Texture(title.getAttribute("texture"));
+            Title_Banner = new Texture(title.getAttribute("mainmenutitle"));
 
             // Loading the Menu Elements from the xml file.
             Element menu = root.getChildByName("mainmenue");

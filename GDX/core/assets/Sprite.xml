@@ -5,9 +5,9 @@ Sprite xml
 
 
 <sprite>
-    <lowresoulution texture="Game_Grafiken/low_resoulution.png"></lowresoulution>
+    <lowresoulution texture="Game_Grafiken/low_resoulution2.png"></lowresoulution>
     <loaddefaultsettings texture="badlogic.jpg"></loaddefaultsettings>
-    <title texture="Game_Grafiken/Menu/TITEL.png" heigth = "400" width= "1200" y ="450" ></title>
+    <title mainmenutitle="Game_Grafiken/Menu/title_main_menu.png" optionmenutitle="Game_Grafiken/Menu/title_optionen.png" heigth = "400" width= "1200" y ="450" ></title>
     <background texture="Game_Grafiken/background.png"></background>
     
     <!-- heigth gibt die hoehe der buttons an und width die breite.-->
@@ -22,7 +22,7 @@ Sprite xml
         <background texture="badlogic.jpg" ></background>
         
         <menutext menuetextheigth="120"  menuetextwidth = "550"
-            menuetext0="Game_Grafiken/Menu/Menuetext0.png" 
+                   menuetext0="Game_Grafiken/Menu/Menuetext0.png" 
                    menuetext1="Game_Grafiken/Menu/Menuetext1.png" 
                    menuetext2 ="Game_Grafiken/Menu/Menuetext2.png" 
                    menuetext3="Game_Grafiken/Menu/Menuetext3.png"  

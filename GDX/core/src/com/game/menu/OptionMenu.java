@@ -32,9 +32,8 @@ public class OptionMenu implements Screen {
     private int button_size_heigth;// = 80;
     private int button_size_width;// = 230;
 
-    private final int Menu_Background_heigth = 100;
-    private final int Menu_Background_width = Gdx.graphics.getWidth();
-
+//    private final int Menu_Background_heigth = 100;
+//    private final int Menu_Background_width = Gdx.graphics.getWidth();
     private int Menuetext_heigth;// = 120;
     private int Menuetext_width;// = 550;
 
@@ -57,8 +56,8 @@ public class OptionMenu implements Screen {
     //
     private int button_Width = 0;
     private int button_heigth = 0;
-    private int MBackground_Width = 0;
-    private int MBackground_heigt = 0;
+//    private int MBackground_Width = 0;
+//    private int MBackground_heigt = 0;
 
     private int Banner_Width = 0;
     private int Banner_heigth = 0;
@@ -67,8 +66,17 @@ public class OptionMenu implements Screen {
     private int Banner_y = 0;
     private int button_x = 0;
     private int button_y = 0;
-    private int Menu_Background_x = 0;
-    private int Menu_Background_y = 0;
+//    private int Menu_Background_x = 0;
+//    private int Menu_Background_y = 0;
+//
+//    private int Menuetext0_y = Menu_Volume_button_y;
+//    private int Menuetext1_y = Game_Volume_button_y;//Title_Banner_y / 2 - 150;//Menuetext0_y - 160;
+//    private int Menuetext2_y = Game_SFX_Volume_button_y;//Menu_Volume_button_y - 100;// Menuetext1_y - 60;
+//    private int Menuetext3_y = Game_SFX_Volume_button_y;//Game_Volume_button_y - 100;// Menuetext2_y + 40;
+//    private int Menuetext4_y = About_game_button_y;//Game_SFX_Volume_button_y - 100;//Menuetext3_y + 140;
+//    private int Menuetext5_y = Exit_And_Save_button_y;//About_game_button_y - 100;// Menuetext4_y + 240;
+
+    private int Menuetext_x = 0;
 
     private int screen_width = 0;
     private int screen_heigth = 0;
@@ -102,7 +110,6 @@ public class OptionMenu implements Screen {
     Texture New_Game_enabled;
     Texture Exit_And_Save_enabled;
 
-
     Texture About_Game_disabled;
     Texture New_Game_disabled;
     Texture Exit_And_Save_disabled;
@@ -120,15 +127,14 @@ public class OptionMenu implements Screen {
         try {
             Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             Background = new Texture(root.getChildByName("background").getAttribute("texture"));
-            Title_Banner = new Texture(root.getChildByName("title").getAttribute("texture"));
             Element title = root.getChildByName("title");
+            Title_Banner = new Texture(title.getAttribute("optionmenutitle"));
 
             Title_banner_size_heigth = Integer.parseInt(title.getAttribute("heigth"));
 
             Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
-
             //  Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
-            Title_Banner = new Texture(title.getAttribute("texture"));
+            ;
 
             // Loading the Menu Elements from the xml file.
             Element menu = root.getChildByName("optionmenu");
@@ -139,17 +145,14 @@ public class OptionMenu implements Screen {
             Menu_Background = new Texture(optionmenu.getChildByName("background").getAttribute("texture"));
 
             Menuetext_heigth = Integer.parseInt(optionmenu.getChildByName("menutext").getAttribute("menuetextheigth"));
-            Menuetext_width  = Integer.parseInt(optionmenu.getChildByName("menutext").getAttribute("menuetextwidth"));
-            
+            Menuetext_width = Integer.parseInt(optionmenu.getChildByName("menutext").getAttribute("menuetextwidth"));
+
             Menuetext0 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext0"));
             Menuetext1 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext1"));
             Menuetext2 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext2"));
             Menuetext3 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext3"));
             Menuetext4 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext4"));
             Menuetext5 = new Texture(optionmenu.getChildByName("menutext").getAttribute("menuetext5"));
-//            
-            //path = optionmenu.getChildByName("volumebuttons").getAttribute("texture");
-            System.out.println(path + Menu_Volume_Value + ".png");
 
             Menu_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Menu_Volume_Value));
             Game_Volume_Button = new Texture(optionmenu.getChildByName("volumebuttons").getAttribute("volumetexture" + Game_Volume_Value));
@@ -280,18 +283,17 @@ public class OptionMenu implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
+
         game.batch.draw(Background, Background_size_x, Background_size_y);
+        game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
+        game.batch.draw(Menuetext5, Menuetext_x, button_y - 260, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext4, Menuetext_x, button_y - 160, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext3, Menuetext_x, button_y - 60, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext2, Menuetext_x, button_y + 40, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext1, Menuetext_x, button_y + 140, Menuetext_width, Menuetext_heigth);
+        game.batch.draw(Menuetext0, Menuetext_x, button_y + 240, Menuetext_width, Menuetext_heigth);
 
-        game.batch.draw(Menuetext5, button_x - 570, button_y - 260, Menuetext_width, Menuetext_heigth);
-        game.batch.draw(Menuetext4, button_x - 570, button_y - 160, Menuetext_width, Menuetext_heigth);
-        game.batch.draw(Menuetext3, button_x - 570, button_y - 60, Menuetext_width, Menuetext_heigth);
-        game.batch.draw(Menuetext2, button_x - 570, button_y + 40, Menuetext_width, Menuetext_heigth);
-        game.batch.draw(Menuetext1, button_x - 570, button_y + 140, Menuetext_width, Menuetext_heigth);
-        game.batch.draw(Menuetext0, button_x - 570, button_y + 240, Menuetext_width, Menuetext_heigth);
-
-        game.batch.draw(Menu_Background, 0, 0, Menu_Background_width, Menu_Background_heigth);
-
+//        game.batch.draw(Menu_Background, 0, 0, Menu_Background_width, Menu_Background_heigth);
         game.batch.draw(Menu_Volume_Button, button_x, button_y + Menu_Volume_button_y, button_size_width, button_size_heigth);
         game.batch.draw(Game_Volume_Button, button_x, button_y + Game_Volume_button_y, button_size_width, button_size_heigth);
         game.batch.draw(Game_SFX_Volume_Button, button_x, button_y + Game_SFX_Volume_button_y, button_size_width, button_size_heigth);
@@ -442,35 +444,34 @@ public class OptionMenu implements Screen {
             // berechnen das die buttons immer in der mitte sind.
             button_Width = button_size_width / 2;
             button_x = screen_width - button_Width + 5;
-
+            Menuetext_x = button_x - 570;
             button_heigth = button_size_heigth / 2;
 
         }
 
-        if (Gdx.graphics.getHeight() <= 768) {
-            Banner_y = screen_heigth + Banner_heigth - 90;
-            button_y = screen_heigth - button_heigth + 2;
-            Title_Banner_y = 50;
-            Menu_Volume_button_y = 250;
-            Game_Volume_button_y = 150;
-            Game_SFX_Volume_button_y = 50;
-            About_game_button_y = -50;
-            New_Game_y = -150;
-            Exit_And_Save_button_y = -250;
+//        if (Gdx.graphics.getHeight() <= 768) {
+        //     Banner_y = screen_heigth + Banner_heigth - 90;
+        //      button_y = screen_heigth - button_heigth + 2;
+//            Title_Banner_y = 50;
+//            Menu_Volume_button_y = 250;
+//            Game_Volume_button_y = 150;
+//            Game_SFX_Volume_button_y = 50;
+//            About_game_button_y = -50;
+//            New_Game_y = -150;
+//            Exit_And_Save_button_y = -250;
+        //     selectMenu();
+        //      } else
+        if (Main_Frame_fullscreen) {
+            Banner_y = screen_heigth + Banner_heigth + 50;
+            button_y = screen_heigth - button_heigth + 50;
 
             selectMenu();
 
-        } else if (Main_Frame_fullscreen) {
-            Banner_y = screen_heigth + Banner_heigth;
-            button_y = screen_heigth - button_heigth;
-
-            selectMenu();
-
-        } else {
-            Banner_y = screen_heigth + Banner_heigth + 330;
-            button_y = screen_heigth - button_heigth + 180;
-
-            selectMenu();
+//        } else {
+//            Banner_y = screen_heigth + Banner_heigth + 330;
+//            button_y = screen_heigth - button_heigth + 180;
+//
+//            selectMenu();
         }
 
     }
