@@ -5,7 +5,7 @@ Sprite xml
 
 
 <sprite>
-    <lowresoulution texture="Game_Grafiken/low_resoulution2.png"></lowresoulution>
+    <lowresoulution texture="Game_Grafiken/Menu/low_resoulution2.png"></lowresoulution>
     <loaddefaultsettings texture="badlogic.jpg"></loaddefaultsettings>
     <title mainmenutitle="Game_Grafiken/Menu/title_main_menu.png" optionmenutitle="Game_Grafiken/Menu/title_optionen.png" heigth = "400" width= "1200" y ="450" ></title>
     <background texture="Game_Grafiken/background.png"></background>
@@ -17,17 +17,17 @@ Sprite xml
         <exitbutton texture_enabled="Game_Grafiken/Menu/exit_enabled.png" texture_disabled="Game_Grafiken/Menu/exit_disabled.png" y ="-70"></exitbutton>
     </mainmenue>
   
-  <!-- heigth gibt die hoehe der buttons an und width die breite.-->
+    <!-- heigth gibt die hoehe der buttons an und width die breite.-->
     <optionmenu heigth = "80" width = "230" >
         <background texture="badlogic.jpg" ></background>
         
         <menutext menuetextheigth="120"  menuetextwidth = "550"
-                   menuetext0="Game_Grafiken/Menu/Menuetext0.png" 
-                   menuetext1="Game_Grafiken/Menu/Menuetext1.png" 
-                   menuetext2 ="Game_Grafiken/Menu/Menuetext2.png" 
-                   menuetext3="Game_Grafiken/Menu/Menuetext3.png"  
-                   menuetext4="Game_Grafiken/Menu/Menuetext4.png" 
-                   menuetext5 ="Game_Grafiken/Menu/Menuetext5.png">
+                  menuetext0="Game_Grafiken/Menu/Menuetext0.png" 
+                  menuetext1="Game_Grafiken/Menu/Menuetext1.png" 
+                  menuetext2 ="Game_Grafiken/Menu/Menuetext2.png" 
+                  menuetext3="Game_Grafiken/Menu/Menuetext3.png"  
+                  menuetext4="Game_Grafiken/Menu/Menuetext4.png" 
+                  menuetext5 ="Game_Grafiken/Menu/Menuetext5.png">
         </menutext>
         
         <volumebuttons volumetexture0="Game_Grafiken/Volume_Buttons/Volume_0.png" 
@@ -53,14 +53,19 @@ Sprite xml
  
     
     <gameobjects>
-        <player playertexture0="Game_Grafiken/Player/playergrafik0.png" 
-                playertexture1="Game_Grafiken/Player/playergrafik1.png" 
-                playertexture2="Game_Grafiken/Player/playergrafik2.png"  
-                playertexture3="Game_Grafiken/Player/playergrafik3.png" 
-                playertexture4="Game_Grafiken/Player/playergrafik4.png"   >
+        <player playertexture0="Game_Grafiken/GameObjects/Player/playergrafik0.png" 
+                playertexture1="Game_Grafiken/GameObjects/Player/playergrafik1.png" 
+                playertexture2="Game_Grafiken/GameObjects/Player/playergrafik2.png"  
+                playertexture3="Game_Grafiken/GameObjects/Player/playergrafik3.png" 
+                playertexture4="Game_Grafiken/GameObjects/Player/playergrafik4.png"   >
         </player>
-        <blackhole blackholetexture0="Game_Grafiken/blackhole.png" blackholetexture1="Game_Grafiken/blackholeschwarz.png"></blackhole>
-        <bullet bullettexture0="Game_Grafiken/Player/laser.png" bullettexture1="" bullettexture2=""></bullet>
+        <blackhole blackholetexture0="Game_Grafiken/GameObjects/blackhole.png" blackholetexture1="Game_Grafiken/GameObjects/blackholeschwarz.png"></blackhole>
+        <bullet bullettexture0="Game_Grafiken/GameObjects/Player/laser.png" bullettexture1="" bullettexture2=""></bullet>
+        
+        <gegner gegnertexture0="Game_Grafiken/GameObjects/Gegner/" gegnertexture1="Game_Grafiken/GameObjects/Gegner/" 
+                gegnertexture2="Game_Grafiken/GameObjects/Gegner/">
+        </gegner>
+        
     </gameobjects>
     
 </sprite>

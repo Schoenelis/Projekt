@@ -371,6 +371,7 @@ public class OptionMenu implements Screen {
                     saveGameSettings();
                     System.out.println("Einstelllungen gespeichert.");
                     // LoadGameSettings(); // Print the setings to the Terminal
+                    Sounds.playMenuSound();
                     game.setScreen(new MainMenu(game));
 
                 }
