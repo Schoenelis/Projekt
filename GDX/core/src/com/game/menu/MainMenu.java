@@ -27,10 +27,10 @@ public class MainMenu implements Screen {
     // position der schaltflaeche und des Banners.
 
     // y positionen der bilder.1
-    private static int Title_Banner_y = Gdx.graphics.getHeight() -250; 
-    private static int Start_button_y = Title_Banner_y /2 -150;
+    private static int Title_Banner_y = Gdx.graphics.getHeight() - 250;
+    private static int Start_button_y = Title_Banner_y / 2 - 150;
     private static int Option_button_y = Start_button_y - 150;
-    private static int Exit_button_y = Option_button_y -150;
+    private static int Exit_button_y = Option_button_y - 150;
 
     //
     private int buton_Width = 0;
@@ -208,25 +208,39 @@ public class MainMenu implements Screen {
         }
 
         //Monitor aufloesung festlegen und zu kleine aufloesung verhindern
-        if (Gdx.graphics.getHeight() < 768 && Gdx.graphics.getWidth() < 1024) {
+        if (Gdx.graphics.getHeight() < 767 | Gdx.graphics.getWidth() < 1280) {
             game.batch.draw(Low_Resoulution, Background_size_x, Background_size_y);
 
         } else if (Gdx.graphics.getHeight() <= 768) {
             Banner_y = screen_heigth + Banner_heigth - 90;
             buton_y = screen_heigth - buton_heigth + 2;
 
-//            buton_size_heigth = 80;
-//            buton_size_width = 250;
-//
-//            //      Title_Banner_y = 250;
-//          //  Start_button_y = 100;
-//          //  Option_button_y = -30;
-//          //  Exit_button_y = -160;
-//
-           selectMenu();
-//
+            buton_size_heigth = 80;
+            buton_size_width = 250;
+
+            Title_Banner_y = 250;
+            Start_button_y = 100;
+            Option_button_y = -30;
+            Exit_button_y = -160;
+
+            selectMenu();
+
+        } else if (Gdx.graphics.getHeight() <= 900) {
+
+            Banner_y = screen_heigth + Banner_heigth;
+            buton_y = screen_heigth - buton_heigth + 50;
+
+            buton_size_heigth = 80;
+            buton_size_width = 250;
+
+            Title_Banner_y = 250;
+            Start_button_y = 100;
+            Option_button_y = -30;
+            Exit_button_y = -160;
+
+            selectMenu();
         } else if (Main_Frame_fullscreen) {
-            Banner_y = screen_heigth + Banner_heigth + 50;
+            Banner_y = screen_heigth + Banner_heigth + 60;
             buton_y = screen_heigth - buton_heigth + 50;
 
             selectMenu();
