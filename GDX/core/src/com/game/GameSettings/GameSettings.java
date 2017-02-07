@@ -41,6 +41,15 @@ public class GameSettings {
     public static boolean Main_Frame_fullscreen = true;
     private static final String Main_Frame_IconPath = null; // pfad zum fenster icon.
     private static final String Main_Frame_title = "The Space Legend";
+    private static final String Game_Id = "10012b001e";
+
+    public static String getGame_Id() {
+        return Game_Id;
+    }
+
+    public static String getBuildnummer() {
+        return buildnummer;
+    }
     private static final boolean Main_Frame_resizeble = false;
 
     /**

@@ -4,12 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
-import com.badlogic.gdx.utils.XmlWriter;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,68 +17,61 @@ import java.util.logging.Logger;
  */
 public class SaveGameHandler extends Game {
 
-    private static String Save_DATA_PATH = "Savegame.xml";
+    private static final String Save_DATA_PATH = "Savegame.xml";
     private static String RAW_SAVE_DATA;
     private static String ENCRYPTED_DATA;
     private static String SAVE_DATA;
     private static Element root;
     private static Element player;
-   
+    private static String level;
+    private static String life;
+    private static String curency;
+    private static String energy;
+    private static String savecount;
+    private static String gameversion;
+    private static String gameid;
 
     public SaveGameHandler() {
         readXml();
+        setAttribute();
+        writeXml();
     }
 
     private static void writeXml() {
-//
-//        try {
-//            StringWriter writer = new StringWriter();
-//
-//            XmlWriter xml  = new XmlWriter(writer);
-//
-//         player.setAttribute("level","2");
-//          xml.write(SAVE_DATA);
-//
-//            
-//            System.out.println(writer);
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(SaveGameHandler.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
+        SAVE_DATA = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "\n"
+                + "\n"
+                + "<savegame savecount = '" + savecount + "' gameversion=\"" + gameversion + "\" gameid=\"" + gameid + "\">   \n"
+                + "    \n"
+                + "    \n"
+                + "    <player level=\"" + level + "\" life=\"" + life + "\" curency=\"" + curency + "\" energy=\"" + energy + "\" >   \n"
+                + "    \n"
+                + "    \n"
+                + "    </player>   \n"
+                + "    \n"
+                + "</savegame>";
+
+        System.out.println(SAVE_DATA);
+
+        Gdx.files.local(Save_DATA_PATH).writeString(SAVE_DATA, false);
     }
 
     private static void readXml() {
         try {
-            
             root = new XmlReader().parse(Gdx.files.internal(Save_DATA_PATH));
 
-            SAVE_DATA = "\n\nSave info\n";
-            SAVE_DATA += "\nsavecount: " + root.getAttribute("savecount");
-            SAVE_DATA += "\ngameversion: " + root.getAttribute("gameversion");
-            SAVE_DATA += "\ngameid: " + root.getAttribute("gameid");
-            SAVE_DATA += "\n\n\nPlayer info\n";
+            savecount = root.getAttribute("savecount");
+            gameversion = root.getAttribute("gameversion");
+            gameid = root.getAttribute("gameid");
             player = root.getChildByName("player");
-            SAVE_DATA += "\nLevel: " + player.getAttribute("level");
-            SAVE_DATA += "\nlife: " + player.getAttribute("life");
-            SAVE_DATA += "\nEnergy: " + player.getAttribute("energy");
-            SAVE_DATA += "\ncurency: " + player.getAttribute("curency");
-
-       //     System.out.println(SAVE_DATA);
-
-           // writeXml();
-
+            level = player.getAttribute("level");
+            life = player.getAttribute("life");
+            energy = player.getAttribute("energy");
+            curency = player.getAttribute("curency");
         } catch (IOException ex) {
             System.err.print(ex);
         }
-    }
-
-    private String encryptSave(String RAW_SAVE_DATA) {
-
-        return "";
-    }
-
-    private String decryptSave(String ENCRYPTED_DATA) {
-        return "";
     }
 
     @Override
@@ -90,4 +79,15 @@ public class SaveGameHandler extends Game {
 
     }
 
+    public static void setAttribute() {
+
+        level = "1";
+        life = "10";
+        curency = "10";
+        energy = "80";
+        savecount = "3";
+        gameversion = GameSettings.getBuildnummer();
+        gameid = GameSettings.getGame_Id();
+
+    }
 }

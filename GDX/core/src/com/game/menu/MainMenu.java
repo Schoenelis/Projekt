@@ -208,7 +208,7 @@ public class MainMenu implements Screen {
         }
 
         //Monitor aufloesung festlegen und zu kleine aufloesung verhindern
-        if (Gdx.graphics.getHeight() < 767 | Gdx.graphics.getWidth() < 1280) {
+        if (Gdx.graphics.getHeight() < 768 | Gdx.graphics.getWidth() < 1024) {
             game.batch.draw(Low_Resoulution, Background_size_x, Background_size_y);
 
         } else if (Gdx.graphics.getHeight() <= 768) {
