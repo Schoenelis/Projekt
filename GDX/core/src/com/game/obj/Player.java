@@ -55,7 +55,7 @@ public class Player extends SpaceObject {
 
         width = 100;
         height = 100;
-        maxSpeed = 300;
+        maxSpeed = 200;
         maxEnergy = 100.0f;
         acceleration = 200;
         deceleration = 10;
@@ -113,17 +113,31 @@ public class Player extends SpaceObject {
             vx -= (vx / vec) * deceleration * dt;
             vy -= (vy / vec) * deceleration * dt;
         }
+
         if (vec > maxSpeed) {
             vx = (vx / vec) * maxSpeed;
             vy = (vy / vec) * maxSpeed;
         }
 
         // set position
+        if (x > Gdx.graphics.getWidth()) {
+            x = 0;
+        }
+        
+        if (x < -3) {
+            x = Gdx.graphics.getWidth();
+        }
+        
         x += vx * dt;
 
+        if (y > Gdx.graphics.getHeight()) {
+            //GOTO Next Level
+            y = 0;
+        }
+
         if (y <= 0 && up == true) {
-             y = 5;
-        }else if(y > -3){
+            y = 5;
+        } else if (y > -3) {
             y += vy * dt;
         }
 
