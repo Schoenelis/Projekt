@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.game.managers.GameKeys;
 import com.game.managers.GameStateManager;
+import com.game.obj.Blackhole;
 import com.game.obj.Bullet;
 import com.game.obj.Player;
 
@@ -16,7 +17,6 @@ public class PlayState extends GameState {
 	
 	private Player player;
 	private ArrayList<Bullet> bullets;
-	
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
 	}
@@ -28,7 +28,6 @@ public class PlayState extends GameState {
 		bullets = new ArrayList<Bullet>();
 		
 		player = new Player(bullets);
-		
 	}
 	
 	public void update(float dt) {
@@ -59,6 +58,7 @@ public class PlayState extends GameState {
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).draw();
 		}
+               
 		
 	}
 	
