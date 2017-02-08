@@ -26,7 +26,6 @@ public class Bullet extends SpaceObject {
             imgBullet = new Texture(object.getChildByName("bullet").getAttribute("bullettexture0"));
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
-            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
         }
         sb = new SpriteBatch();
 

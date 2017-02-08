@@ -2,13 +2,13 @@ package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.XmlReader;
 import com.badlogic.gdx.utils.XmlReader.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 public class Blackhole extends SpaceObject {
 
@@ -18,7 +18,8 @@ public class Blackhole extends SpaceObject {
     private Random random;
     private Player player;
     private Texture imgBlackhole;
-    private SpriteBatch sb;
+    private  SpriteBatch sb;
+    private Sprite sprite2;
 
     public Blackhole() {
 
@@ -27,9 +28,9 @@ public class Blackhole extends SpaceObject {
             Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             Element object = root.getChildByName("gameobjects");
             imgBlackhole = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
+            sprite2 = new Sprite(imgBlackhole);
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
-            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
         }
 
         player = new Player(bullets);
@@ -51,8 +52,9 @@ public class Blackhole extends SpaceObject {
         double dvx = a * dx;
         double dvy = a * dy;
 
-        player.vx += dvx;
-        player.vy += dvy;
+       player.vx += dvx;
+       player.vy += dvy;
+        System.out.println("player vx " + player.vx +"player vy " + player.vy);
     }
 
     public void update() {
@@ -60,8 +62,19 @@ public class Blackhole extends SpaceObject {
     }
 
     public void draw() {
+       
         sb.begin();
-        sb.draw(imgBlackhole, x, y, width, height);
+        
+        sprite2.setTexture(imgBlackhole);
+        //Set the rotation of the Sprite.
+        
+        sprite2.rotate(0.02f);
+        //Set the x and y positon of the Sprite.
+        
+        sprite2.setPosition(x, y);
+        
+        sprite2.draw(sb);
+        //  sb.draw(imgBlackhole, x, y, width, height);
         sb.end();
     }
 }

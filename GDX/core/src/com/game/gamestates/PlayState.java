@@ -15,6 +15,7 @@ public class PlayState extends GameState {
 	
 	private ShapeRenderer sr;
 	
+        private Blackhole blackhole;
 	private Player player;
 	private ArrayList<Bullet> bullets;
 	public PlayState(GameStateManager gsm) {
@@ -27,7 +28,10 @@ public class PlayState extends GameState {
 		
 		bullets = new ArrayList<Bullet>();
 		
-		player = new Player(bullets);
+                blackhole = new Blackhole();
+		
+                player = new Player(bullets);
+                
 	}
 	
 	public void update(float dt) {
@@ -37,7 +41,7 @@ public class PlayState extends GameState {
 		
 		// update player
 		player.update(dt);
-		
+		blackhole.update();
 		// update player bullets
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update(dt);
@@ -53,7 +57,7 @@ public class PlayState extends GameState {
 		
 		// draw player
 		player.draw();
-		
+		blackhole.draw();
 		// draw bullets
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).draw();
