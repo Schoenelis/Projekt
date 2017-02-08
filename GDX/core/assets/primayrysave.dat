@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<savegame savecount = '4' gameversion="00.12" gameid="10012b001e">   
+<savegame savecount = '1' gameversion="00.12" gameid="10012b001e">
     
     
-    <player level="1" life="10" curency="10" energy="85" >   
+    <player level="1" life="10" curency="10" energy="85" >
     
     
-    </player>   
+    </player>
     
 </savegame>
