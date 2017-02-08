@@ -102,9 +102,14 @@ public class MainMenu implements Screen {
         }
 
     }
-
+int t = 0;
     @Override
     public void render(float delta) {
+        
+        if (Gdx.input.isKeyJustPressed((Keys.SPACE))) {
+            t++;
+            System.out.println(t);
+        }
 
         // Check if Game Settings ok.
         if (DATA_LOAD_Fail) {

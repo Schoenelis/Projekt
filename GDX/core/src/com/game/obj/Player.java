@@ -2,6 +2,7 @@ package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
@@ -25,12 +26,15 @@ public class Player extends SpaceObject {
     private boolean up;
 
     private float maxSpeed;
+    private float maxEnergy;
     private float acceleration;
     private float deceleration;
     private float acceleratingTimer;
+    private float count = 0;
 
     private Texture imgPlayer;
     private SpriteBatch sb;
+    private Sprite sprite;
 
     public Player(ArrayList<Bullet> bullets) {
 
@@ -38,6 +42,7 @@ public class Player extends SpaceObject {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
             imgPlayer = new Texture(object.getChildByName("player").getAttribute("playertexture0"));
+            sprite = new Sprite(imgPlayer);
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
             JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
@@ -46,10 +51,14 @@ public class Player extends SpaceObject {
         this.bullets = bullets;
         sb = new SpriteBatch();
 
-        x = 0;
-        y = 0;
-
+        // The Player starts on the midel of the screen.
+        x = Gdx.graphics.getWidth()/2;
+        y = 50;
+        
+        width = 100;
+        height = 100;
         maxSpeed = 300;
+        maxEnergy = 100.0f;
         acceleration = 200;
         deceleration = 10;
 
@@ -80,8 +89,11 @@ public class Player extends SpaceObject {
 
         // turning
         if (left) {
+            //Set the rotationSpeed to count.
+            count += rotationSpeed;
             radians += rotationSpeed * dt;
         } else if (right) {
+            count -= rotationSpeed;
             radians -= rotationSpeed * dt;
         }
 
@@ -117,7 +129,18 @@ public class Player extends SpaceObject {
 
     public void draw() {
         sb.begin();
-        sb.draw(imgPlayer, x, y);
+        // Set the Player img to the Sprite.
+        sprite.setTexture(imgPlayer);
+        //Set the rotation of the Sprite.
+        sprite.setRotation(count);
+        //Set the x and y positon of the Sprite.
+        sprite.setPosition(x, y);
+        //Set the x position of the Sprite.
+        sprite.setX(x);
+        //Set the Sprite to the Centre.
+        sprite.setCenter(x, y);
+        //Draw the Sprite
+        sprite.draw(sb);
         sb.end();
     }
 
