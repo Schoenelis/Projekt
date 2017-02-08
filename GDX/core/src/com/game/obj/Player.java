@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
@@ -52,9 +50,9 @@ public class Player extends SpaceObject {
         sb = new SpriteBatch();
 
         // The Player starts on the midel of the screen.
-        x = Gdx.graphics.getWidth()/2;
+        x = Gdx.graphics.getWidth() / 2;
         y = 50;
-        
+
         width = 100;
         height = 100;
         maxSpeed = 300;
@@ -63,7 +61,7 @@ public class Player extends SpaceObject {
         deceleration = 10;
 
         radians = 3.1415f / 2;
-        rotationSpeed = 3;
+        rotationSpeed = 1.5f;
     }
 
     public void setLeft(boolean b) {
@@ -122,7 +120,12 @@ public class Player extends SpaceObject {
 
         // set position
         x += vx * dt;
-        y += vy * dt;
+
+        if (y <= 0 && up == true) {
+             y = 5;
+        }else if(y > -3){
+            y += vy * dt;
+        }
 
         // screen wrap
     }
