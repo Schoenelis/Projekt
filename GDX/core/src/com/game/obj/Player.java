@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
-import javax.swing.JOptionPane;
 
 public class Player extends SpaceObject {
 
@@ -28,11 +27,15 @@ public class Player extends SpaceObject {
     private float acceleration;
     private float deceleration;
     private float acceleratingTimer;
-    private float count = 0;
+    private float count = 1.5f;
 
+    public static float b;
+    public static float h;
     private Texture imgPlayer;
     private SpriteBatch sb;
-    private Sprite sprite;
+    Sprite sprite;
+
+    private Blackhole blackhole;
 
     public Player(ArrayList<Bullet> bullets) {
 
@@ -43,7 +46,6 @@ public class Player extends SpaceObject {
             sprite = new Sprite(imgPlayer);
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
-            JOptionPane.showMessageDialog(null, ex, "alert", JOptionPane.ERROR_MESSAGE);
         }
 
         this.bullets = bullets;
@@ -55,7 +57,7 @@ public class Player extends SpaceObject {
 
         width = 100;
         height = 100;
-        maxSpeed = 200;
+        maxSpeed = 300;
         maxEnergy = 100.0f;
         acceleration = 200;
         deceleration = 10;
@@ -87,12 +89,13 @@ public class Player extends SpaceObject {
 
         // turning
         if (left) {
-            //Set the rotationSpeed to count.
-            count += rotationSpeed;
+            //Set the rotationSpeed to count.          
             radians += rotationSpeed * dt;
+            count += rotationSpeed;
         } else if (right) {
-            count -= rotationSpeed;
-            radians -= rotationSpeed * dt;
+            radians -= rotationSpeed * dt; 
+
+            count -= sprite.getX();;
         }
 
         // accelerating
@@ -123,11 +126,11 @@ public class Player extends SpaceObject {
         if (x > Gdx.graphics.getWidth()) {
             x = 0;
         }
-        
+
         if (x < -3) {
             x = Gdx.graphics.getWidth();
         }
-        
+
         x += vx * dt;
 
         if (y > Gdx.graphics.getHeight()) {
@@ -141,6 +144,9 @@ public class Player extends SpaceObject {
             y += vy * dt;
         }
 
+        System.out.println("Count: " + count + " radians: " + radians);
+
+//System.out.println("Player player x " +x +" player y " +y);
         // screen wrap
     }
 
@@ -150,10 +156,12 @@ public class Player extends SpaceObject {
         sprite.setTexture(imgPlayer);
         //Set the rotation of the Sprite.
         sprite.setRotation(count);
+        sprite.getRotation();
         //Set the x and y positon of the Sprite.
         sprite.setPosition(x, y);
         //Set the x position of the Sprite.
-        sprite.setX(x);
+        sprite.setX(vx);
+        sprite.setY(vy);
         //Set the Sprite to the Centre.
         sprite.setCenter(x, y);
         //Draw the Sprite

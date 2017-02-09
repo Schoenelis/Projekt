@@ -33,5 +33,6 @@ public class GameObj {
         if (x < -width) {
             x = Gdx.graphics.getWidth();
         }
+        
     }
 }

@@ -1,13 +1,10 @@
 package com.game.main;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.IntMap;
 import com.game.managers.GameInputProcessor;
 import com.game.managers.GameKeys;
 import com.game.managers.GameStateManager;
