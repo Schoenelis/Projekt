@@ -27,7 +27,7 @@ public class Player extends SpaceObject {
     private float acceleration;
     private float deceleration;
     private float acceleratingTimer;
-    private float count = 1.5f;
+    private float degrees;
 
     public static float b;
     public static float h;
@@ -91,11 +91,10 @@ public class Player extends SpaceObject {
         if (left) {
             //Set the rotationSpeed to count.          
             radians += rotationSpeed * dt;
-            count += rotationSpeed;
-        } else if (right) {
-            radians -= rotationSpeed * dt; 
 
-            count -= sprite.getX();;
+        } else if (right) {
+            radians -= rotationSpeed * dt;
+
         }
 
         // accelerating
@@ -117,10 +116,10 @@ public class Player extends SpaceObject {
             vy -= (vy / vec) * deceleration * dt;
         }
 
-        if (vec > maxSpeed) {
-            vx = (vx / vec) * maxSpeed;
-            vy = (vy / vec) * maxSpeed;
-        }
+//        if (vec > maxSpeed) {
+//            vx = (vx / vec) * maxSpeed;
+//            vy = (vy / vec) * maxSpeed;
+//        }
 
         // set position
         if (x > Gdx.graphics.getWidth()) {
@@ -144,7 +143,8 @@ public class Player extends SpaceObject {
             y += vy * dt;
         }
 
-        System.out.println("Count: " + count + " radians: " + radians);
+        degrees = (float) Math.toDegrees(radians);
+     //   System.out.println("Count: " + degrees + " radians: " + radians);
 
 //System.out.println("Player player x " +x +" player y " +y);
         // screen wrap
@@ -155,7 +155,7 @@ public class Player extends SpaceObject {
         // Set the Player img to the Sprite.
         sprite.setTexture(imgPlayer);
         //Set the rotation of the Sprite.
-        sprite.setRotation(count);
+        sprite.setRotation(degrees);
         sprite.getRotation();
         //Set the x and y positon of the Sprite.
         sprite.setPosition(x, y);

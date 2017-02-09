@@ -39,7 +39,7 @@ public class Blackhole extends SpaceObject {
        // x = 300;
        // y = 300;
         width = height = 200;
-        attraction = 99999999999999999999999999999999999999f;
+        attraction = 3000f;
     }
 
     private void attraction() {
@@ -57,7 +57,7 @@ public class Blackhole extends SpaceObject {
        
       
         //System.out.println("Blackhole player x " + player.x +" player y " + player.y);
-   //     System.out.println("player vx " + player.vx +"player vy " + player.vy);
+        System.out.println("player vx " + player.vx +"player vy " + player.vy);
     }
 
     public void update() {
