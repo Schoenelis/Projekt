@@ -29,7 +29,7 @@ public class Bullet extends SpaceObject {
         }
         sb = new SpriteBatch();
 
-        this.x = x;
+        this.x = x; 
         this.y = y;
         this.radians = radians;
 
