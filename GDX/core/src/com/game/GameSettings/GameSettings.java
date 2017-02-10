@@ -38,7 +38,7 @@ public class GameSettings {
     public static final String Game_Settings_File = "Settings.dat";
     private static final int Main_Frame_height = 768;
     private static final int Main_Frame_width = 1024;
-    public static boolean Main_Frame_fullscreen = true;
+    public static boolean Main_Frame_fullscreen = false;
     private static final String Main_Frame_IconPath = null; // pfad zum fenster icon.
     private static final String Main_Frame_title = "The Space Legend";
     private static final String Game_Id = "10012b001e";

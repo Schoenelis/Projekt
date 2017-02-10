@@ -15,9 +15,6 @@ public class Player extends SpaceObject {
     private final int MAX_BULLETS = 4;
     private ArrayList<Bullet> bullets;
 
-    private float[] flamex;
-    private float[] flamey;
-
     private boolean left;
     private boolean right;
     private boolean up;
@@ -29,16 +26,27 @@ public class Player extends SpaceObject {
     private float acceleratingTimer;
     private float degrees;
 
-    public static float b;
-    public static float h;
+    public static float px;
+    public static float py;
+//    public static float y;
+//    public static float x;
+//    public static float vx;
+//    public static float vy;
+//    int width, height;
+
     private Texture imgPlayer;
-    private SpriteBatch sb;
+    private final SpriteBatch sb;
     Sprite sprite;
 
     private Blackhole blackhole;
 
+    float radians;
+    float rotationSpeed;
+
     public Player(ArrayList<Bullet> bullets) {
 
+        px = x;
+        py = y;
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
@@ -51,13 +59,13 @@ public class Player extends SpaceObject {
         this.bullets = bullets;
         sb = new SpriteBatch();
 
-        // The Player starts on the midel of the screen.
-        x = Gdx.graphics.getWidth() / 2;
-        y = 50;
+        // The Player starts on the center of the screen.
+        px = Gdx.graphics.getWidth() / 2;
+        py = 50;
 
         width = 100;
         height = 100;
-        maxSpeed = 300;
+        maxSpeed = 200;
         maxEnergy = 100.0f;
         acceleration = 200;
         deceleration = 10;
@@ -66,7 +74,7 @@ public class Player extends SpaceObject {
         rotationSpeed = 1.5f;
     }
 
-    public void setLeft(boolean b) {
+        public void setLeft(boolean b) {
         left = b;
     }
 
@@ -82,7 +90,7 @@ public class Player extends SpaceObject {
         if (bullets.size() == MAX_BULLETS) {
             return;
         }
-        bullets.add(new Bullet(x, y, radians));
+        bullets.add(new Bullet(px, py, radians));
     }
 
     public void update(float dt) {
@@ -115,38 +123,35 @@ public class Player extends SpaceObject {
             vx -= (vx / vec) * deceleration * dt;
             vy -= (vy / vec) * deceleration * dt;
         }
-
-//        if (vec > maxSpeed) {
-//            vx = (vx / vec) * maxSpeed;
-//            vy = (vy / vec) * maxSpeed;
-//        }
+        if (vec > maxSpeed) {
+            vx = (vx / vec) * maxSpeed;
+            vy = (vy / vec) * maxSpeed;
+        }
 
         // set position
-        if (x > Gdx.graphics.getWidth()) {
-            x = 0;
+        if (px > Gdx.graphics.getWidth()) {
+            px = 0;
         }
 
-        if (x < -3) {
-            x = Gdx.graphics.getWidth();
+        if (px < -3) {
+            px = Gdx.graphics.getWidth();
         }
 
-        x += vx * dt;
-
-        if (y > Gdx.graphics.getHeight()) {
+        px += vx * dt;
+ 
+        if (py > Gdx.graphics.getHeight()) {
             //GOTO Next Level
-            y = 0;
+            py = 0;
         }
 
-        if (y <= 0 && up == true) {
-            y = 5;
-        } else if (y > -3) {
-            y += vy * dt;
+        if (py <= 0 && up == true) {
+            py = 5;
+        } else if (py > -3) {
+            py += vy * dt;
         }
 
+        System.out.println("x " + vx + "y " + vy);
         degrees = (float) Math.toDegrees(radians);
-     //   System.out.println("Count: " + degrees + " radians: " + radians);
-
-//System.out.println("Player player x " +x +" player y " +y);
         // screen wrap
     }
 
@@ -156,14 +161,10 @@ public class Player extends SpaceObject {
         sprite.setTexture(imgPlayer);
         //Set the rotation of the Sprite.
         sprite.setRotation(degrees);
-        sprite.getRotation();
         //Set the x and y positon of the Sprite.
-        sprite.setPosition(x, y);
-        //Set the x position of the Sprite.
-        sprite.setX(vx);
-        sprite.setY(vy);
+        sprite.setPosition(px, py);
         //Set the Sprite to the Centre.
-        sprite.setCenter(x, y);
+        sprite.setCenter(px, py);
         //Draw the Sprite
         sprite.draw(sb);
         sb.end();

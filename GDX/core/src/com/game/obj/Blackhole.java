@@ -16,12 +16,16 @@ public class Blackhole extends SpaceObject {
     private ArrayList<Bullet> bullets;
 
     private Random random;
-    private Player player;
+    private final Player player;
     private Texture imgBlackhole;
-    private  SpriteBatch sb;
+    private final SpriteBatch sb;
     private Sprite sprite;
+    float bx;
+    float by;
 
     public Blackhole() {
+        bx = x;
+        by = y;
 
         //loading the img
         try {
@@ -34,17 +38,17 @@ public class Blackhole extends SpaceObject {
         }
 
         player = new Player(bullets);
-//        imgBlackhole = new Texture("Game_Grafiken/blackhole.png");
         sb = new SpriteBatch();
-       // x = 300;
-       // y = 300;
+        bx = 300;
+        by = 300;
         width = height = 200;
-        attraction = 3000f;
+        attraction = 9000000000000f;
     }
 
     private void attraction() {
-        double dx = x - player.x;
-        double dy = y - player.y;
+
+        double dx = bx - player.px;
+        double dy = by - player.py;
         double r = Math.hypot(dx, dy);
         double r3 = r * r * r;
         double a = attraction * dt / r3;
@@ -52,12 +56,10 @@ public class Blackhole extends SpaceObject {
         double dvx = a * dx;
         double dvy = a * dy;
 
-       player.vx += dvx;
-       player.vy += dvy;
-       
-      
-        //System.out.println("Blackhole player x " + player.x +" player y " + player.y);
-        System.out.println("player vx " + player.vx +"player vy " + player.vy);
+        player.vx += dvx;
+        player.vy += dvy;
+
+        System.out.println("dvx: " + dvx + " dvy: " + dvy + "\nx: " + player.x + " y: " + player.x);
     }
 
     public void update() {
@@ -65,17 +67,16 @@ public class Blackhole extends SpaceObject {
     }
 
     public void draw() {
-       
-       
+
         sb.begin();
-         
+
         sprite.setTexture(imgBlackhole);
         //Set the rotation of the Sprite.
-        
+
         sprite.rotate(0.02f);
         //Set the x and y positon of the Sprite.
-        sprite.setPosition(300, 300);
-       
+        sprite.setPosition(bx, bx);
+
         sprite.draw(sb);
         //sb.draw(imgBlackhole, x, y, width, height);
         sb.end();

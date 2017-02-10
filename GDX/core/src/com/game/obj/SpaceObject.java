@@ -6,7 +6,7 @@ public class SpaceObject {
 
     protected float x;
     protected float y;
-
+     
     protected float vx;
     protected float vy;
 
@@ -20,6 +20,6 @@ public class SpaceObject {
     protected float[] shapex;
     protected float[] shapey;
 
-    protected float dt = Gdx.graphics.getDeltaTime();
+    protected static float dt = Gdx.graphics.getDeltaTime();
 
 }

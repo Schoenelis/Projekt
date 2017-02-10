@@ -45,7 +45,7 @@ public class SaveGameHandler extends Game {
             savecount = 0;
         }
         setSave();
-        System.out.println(SAVE_DATA);
+        //System.out.println(SAVE_DATA);
         Gdx.files.local(Primary_Save_DATA_PATH).writeString(SAVE_DATA, false);
 
     }
@@ -59,7 +59,7 @@ public class SaveGameHandler extends Game {
                 //Standart einstellungen laden.
                 loadDefaultSave();
                 writeXml();
-                System.out.println(SAVE_DATA);
+               // System.out.println(SAVE_DATA);
             } else {
                 try {
                     root = new XmlReader().parse(Gdx.files.internal(Secondary_Save_DATA_PATH));

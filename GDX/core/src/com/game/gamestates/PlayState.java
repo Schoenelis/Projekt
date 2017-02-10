@@ -9,6 +9,7 @@ import com.game.obj.Blackhole;
 import com.game.obj.Bullet;
 import com.game.obj.Player;
 
+
 public class PlayState extends GameState {
 
     private ShapeRenderer sr;
@@ -21,6 +22,7 @@ public class PlayState extends GameState {
         super(gsm);
     }
 
+    @Override
     public void init() {
 
         sr = new ShapeRenderer();
@@ -29,10 +31,11 @@ public class PlayState extends GameState {
 
         blackhole = new Blackhole();
 
-        player = new Player(bullets);
+       player=  new Player(bullets);
 
     }
 
+    @Override
     public void update(float dt) {
 
         // get user input
@@ -41,7 +44,7 @@ public class PlayState extends GameState {
         // update player
         player.update(dt);
         blackhole.update();
-        // update player bullets
+//         update player bullets
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).update(dt);
             if (bullets.get(i).shouldRemove()) {
@@ -52,6 +55,7 @@ public class PlayState extends GameState {
 
     }
 
+    @Override
     public void draw() {
 
         // draw player
@@ -64,6 +68,7 @@ public class PlayState extends GameState {
 
     }
 
+    @Override
     public void handleInput() {
         player.setLeft(GameKeys.isDown(GameKeys.LEFT));
         player.setRight(GameKeys.isDown(GameKeys.RIGHT));
@@ -73,6 +78,7 @@ public class PlayState extends GameState {
         }
     }
 
+    @Override
     public void dispose() {
     }
 

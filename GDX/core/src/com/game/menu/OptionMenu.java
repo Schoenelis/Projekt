@@ -388,7 +388,7 @@ public class OptionMenu implements Screen {
      * Die zu zeichneden buttons werden mittels der buttonId aus gewaehlt und
      * dann gezeichnet.
      *
-     * @param buttonId
+     * @param buttonId id
      */
     public void setVolume(int buttonId) {
         switch (buttonId) {
