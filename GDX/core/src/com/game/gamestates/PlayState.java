@@ -67,60 +67,70 @@ public class PlayState extends GameState {
         Rectangle boundingRectangle3 = Bullet.sprite.getBoundingRectangle();
         Rectangle boundingRectangle4 = Blackhole.sprite.getBoundingRectangle();
 
-        
-         if (Player.playerLife && !Gegner.gegnerLife) {
-                System.out.println("Gewonnen");
-            } else if(!Player.playerLife && !Gegner.gegnerLife){
-                System.out.println("Verloren");
-            }else if(!player.playerLife) {
-                System.out.println("Verloren");
-            }
-         
+        if (Player.playerLife && !Gegner.gegnerLife) {
+            System.out.println("Gewonnen");
+        } else if (!Player.playerLife && !Gegner.gegnerLife) {
+            System.out.println("Verloren");
+        } else if (!player.playerLife) {
+            System.out.println("Verloren");
+        }
+
         //Player Aktion
         if (player.pShoot && boundingRectangle1.overlaps(boundingRectangle0)) {
             System.out.println("Treffer  " + player.pShoot);
-            Gegner.maxEnergy-= 10 ;
+            Gegner.maxEnergy -= 10;
             player.pShoot = false;
         }
 
-        if (boundingRectangle2.overlaps(boundingRectangle0)) {
+        if (player.Collision &&boundingRectangle2.overlaps(boundingRectangle0)) {
             System.out.println("Zusammenstoß");
             gegner.maxEnergy = 0;
             player.maxEnergy = 0;
         }
 
-        if ( boundingRectangle2.overlaps(boundingRectangle4)) {
+        if (boundingRectangle2.overlaps(boundingRectangle4)) {
             System.out.println("Zusammenstoß Schwartzes loch");
-            Player.px= 600;
+            Player.px = 600;
             Player.py = 50;
+            Player.playerLife =false;
         }
 
-        
         //Gegner Aktion
-        if (gegner.gShoot && boundingRectangle2.contains(gegner.gx, player.py)) {           
-            gegner.shoot();     
+        if (gegner.gShoot && boundingRectangle2.contains(gegner.gx, player.py)) {
+            gegner.shoot();
         }
 
         if (gegner.gShoot && boundingRectangle2.overlaps(boundingRectangle3)) {
             System.out.println("Treffer  " + gegner.gShoot);
             gegner.gShoot = false;
-            player.maxEnergy -=0.5f;
+            player.maxEnergy -= 0.5f;
         }
 
     }
 
     @Override
     public void draw() {
+        if (Gegner.gegnerLife) {
+            // draw player
+            player.draw();
 
-        // draw player
-        player.draw();
+            blackhole.draw();
+            // draw bullets
+            for (int i = 0; i < bullets.size(); i++) {
+                bullets.get(i).draw();
+            }
+            gegner.draw();
+        } else {
+            // draw player
+            player.draw();
 
-        blackhole.draw();
-        // draw bullets
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).draw();
+            blackhole.draw();
+            // draw bullets
+            for (int i = 0; i < bullets.size(); i++) {
+                bullets.get(i).draw();
+            }
+           // gegner.draw();
         }
-        gegner.draw();
     }
 
     @Override
