@@ -2,11 +2,11 @@ package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
-import javax.swing.JOptionPane;
 
 public class Bullet extends SpaceObject {
 
@@ -16,7 +16,9 @@ public class Bullet extends SpaceObject {
     private boolean remove;
 
     private Texture imgBullet;
-    private SpriteBatch sb;
+    public SpriteBatch sb;
+    public static Sprite sprite;
+    public static float sx;
 
     public Bullet(float x, float y, float radians) {
 
@@ -24,11 +26,13 @@ public class Bullet extends SpaceObject {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
             imgBullet = new Texture(object.getChildByName("bullet").getAttribute("bullettexture0"));
+             sprite = new Sprite(imgBullet);
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
         }
         sb = new SpriteBatch();
 
+        sx = x;
         this.x = x; 
         this.y = y;
         this.radians = radians;
@@ -40,7 +44,7 @@ public class Bullet extends SpaceObject {
         width = height = 2;
 
         lifeTimer = 0;
-        lifeTime = 1;
+        lifeTime = 3;
 
     }
 
@@ -62,7 +66,11 @@ public class Bullet extends SpaceObject {
 
     public void draw() {
         sb.begin();
-        sb.draw(imgBullet, x, y);
+        sprite.setTexture(imgBullet);
+        sprite.setPosition(x, y);
+        sprite.draw(sb);
+        
+        //sb.draw(imgBullet, x, y);
         sb.end();
     }
 

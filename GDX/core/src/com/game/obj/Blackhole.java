@@ -15,13 +15,15 @@ public class Blackhole extends SpaceObject {
     private final float attraction;
     private ArrayList<Bullet> bullets;
 
-    private Random random;
+//    private Random random;
     private final Player player;
     private Texture imgBlackhole;
     private final SpriteBatch sb;
-    private Sprite sprite;
-    float bx;
-    float by;
+    public static  Sprite sprite;
+    static float bx;
+    static float by;
+    public static int height;
+    public static int width;
 
     public Blackhole() {
         bx = x;
@@ -34,21 +36,21 @@ public class Blackhole extends SpaceObject {
             imgBlackhole = new Texture(object.getChildByName("blackhole").getAttribute("blackholetexture0"));
             sprite = new Sprite(imgBlackhole);
         } catch (IOException ex) {
-            System.out.println("Bild wurde nicht geladen.");
+            System.err.println("Bild wurde nicht geladen." +ex);
         }
 
         player = new Player(bullets);
         sb = new SpriteBatch();
         bx = 300;
         by = 300;
-        width = height = 200;
-        attraction = 9000000000000f;
+        width = height = 250;
+        attraction = 9000f;
     }
 
     private void attraction() {
 
-        double dx = bx - player.px;
-        double dy = by - player.py;
+        double dx = bx - Player.px;
+        double dy = by - Player.py;
         double r = Math.hypot(dx, dy);
         double r3 = r * r * r;
         double a = attraction * dt / r3;
@@ -56,10 +58,17 @@ public class Blackhole extends SpaceObject {
         double dvx = a * dx;
         double dvy = a * dy;
 
-        player.vx += dvx;
-        player.vy += dvy;
+        Player.pvx += dvx;
+        Player.pvy += dvy;
 
-        System.out.println("dvx: " + dvx + " dvy: " + dvy + "\nx: " + player.x + " y: " + player.x);
+//        
+//         if (bx < Player.px + Player.width && by < Player.py + Player.height && bx + width > Player.px && by + height > Player.py) {
+//            System.out.println("tot");
+//            Player.px= 512;
+//            Player.py = 50;
+//        }
+       // System.out.println("dvx: " + dvx + " dvy: " + dvy + "\nx: " + Player.px + " y: " + Player.px);
+       
     }
 
     public void update() {

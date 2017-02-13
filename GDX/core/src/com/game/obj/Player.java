@@ -1,18 +1,20 @@
 package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
 
 public class Player extends SpaceObject {
 
-    private final int MAX_BULLETS = 4;
+    private final int MAX_BULLETS = 10;
     private ArrayList<Bullet> bullets;
 
     private boolean left;
@@ -20,7 +22,7 @@ public class Player extends SpaceObject {
     private boolean up;
 
     private float maxSpeed;
-    private float maxEnergy;
+    public static float maxEnergy;
     private float acceleration;
     private float deceleration;
     private float acceleratingTimer;
@@ -28,25 +30,26 @@ public class Player extends SpaceObject {
 
     public static float px;
     public static float py;
-//    public static float y;
-//    public static float x;
-//    public static float vx;
-//    public static float vy;
-//    int width, height;
+    public static float pvx;
+    public static float pvy;
 
     private Texture imgPlayer;
     private final SpriteBatch sb;
-    Sprite sprite;
-
-    private Blackhole blackhole;
+    public static Sprite sprite;
 
     float radians;
     float rotationSpeed;
+    public static int height;
+    public static int width;
+    public static boolean pShoot;
+    public static boolean playerLife;
+    public  static boolean  Collision;
 
     public Player(ArrayList<Bullet> bullets) {
 
         px = x;
         py = y;
+
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
@@ -69,12 +72,16 @@ public class Player extends SpaceObject {
         maxEnergy = 100.0f;
         acceleration = 200;
         deceleration = 10;
-
+        
+        playerLife =true;
+        pShoot =false;
+        Collision =false;
+        
         radians = 3.1415f / 2;
-        rotationSpeed = 1.5f;
+        rotationSpeed = 0.9f;
     }
 
-        public void setLeft(boolean b) {
+    public void setLeft(boolean b) {
         left = b;
     }
 
@@ -87,28 +94,32 @@ public class Player extends SpaceObject {
     }
 
     public void shoot() {
+
         if (bullets.size() == MAX_BULLETS) {
+
             return;
         }
+        pShoot = true;
         bullets.add(new Bullet(px, py, radians));
     }
 
     public void update(float dt) {
-
+   if (Gdx.input.isKeyJustPressed(Keys.T) || maxEnergy == 0) {     
+          playerLife=false;
+        }
+        
         // turning
         if (left) {
-            //Set the rotationSpeed to count.          
+            //Set the rotationSpeed to count.  
             radians += rotationSpeed * dt;
-
         } else if (right) {
             radians -= rotationSpeed * dt;
-
         }
 
         // accelerating
         if (up) {
-            vx += MathUtils.cos(radians) * acceleration * dt;
-            vy += MathUtils.sin(radians) * acceleration * dt;
+            pvx += MathUtils.cos(radians) * acceleration * dt;
+            pvy += MathUtils.sin(radians) * acceleration * dt;
             acceleratingTimer += dt;
             if (acceleratingTimer > 0.1f) {
                 acceleratingTimer = 0;
@@ -118,14 +129,16 @@ public class Player extends SpaceObject {
         }
 
         // deceleration
-        float vec = (float) Math.sqrt(vx * vx + vy * vy);
+        float vec = (float) Math.sqrt(pvx * pvx + pvy * pvy);
+
         if (vec > 0) {
-            vx -= (vx / vec) * deceleration * dt;
-            vy -= (vy / vec) * deceleration * dt;
+            pvx -= (pvx / vec) * deceleration * dt;
+            pvy -= (pvy / vec) * deceleration * dt;
         }
+
         if (vec > maxSpeed) {
-            vx = (vx / vec) * maxSpeed;
-            vy = (vy / vec) * maxSpeed;
+            pvx = (pvx / vec) * maxSpeed;
+            pvy = (pvy / vec) * maxSpeed;
         }
 
         // set position
@@ -133,13 +146,19 @@ public class Player extends SpaceObject {
             px = 0;
         }
 
+        x += pvx * dt;
+
         if (px < -3) {
             px = Gdx.graphics.getWidth();
         }
 
-        px += vx * dt;
- 
-        if (py > Gdx.graphics.getHeight()) {
+        px += pvx * dt;
+
+        if (Gegner.gegnerLife) {
+            if (py > Gdx.graphics.getHeight()) {
+                py = Gdx.graphics.getHeight();
+            }
+        } else if (py > Gdx.graphics.getHeight()) {
             //GOTO Next Level
             py = 0;
         }
@@ -147,10 +166,11 @@ public class Player extends SpaceObject {
         if (py <= 0 && up == true) {
             py = 5;
         } else if (py > -3) {
-            py += vy * dt;
+            py += pvy * dt;
         }
 
-        System.out.println("x " + vx + "y " + vy);
+        
+
         degrees = (float) Math.toDegrees(radians);
         // screen wrap
     }
