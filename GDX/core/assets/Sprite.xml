@@ -60,7 +60,7 @@ Sprite xml
                 playertexture4="Game_Grafiken/GameObjects/Player/playergrafik4.png"   >
         </player>
         <blackhole blackholetexture0="Game_Grafiken/GameObjects/blackhole.png" blackholetexture1="Game_Grafiken/GameObjects/blackholeschwarz.png"></blackhole>
-        <bullet bullettexture0="Game_Grafiken/GameObjects/Player/laser.png" bullettexture1="" bullettexture2=""></bullet>
+        <bullet bullettexture0="Game_Grafiken/GameObjects/Player/laser.png" bullettexture1="Game_Grafiken/GameObjects/Gegner/bad_laser.png" bullettexture2=""></bullet>
         
         <gegner gegnertexture0="Game_Grafiken/GameObjects/Gegner/gegnergrafik0.png" gegnertexture1="Game_Grafiken/GameObjects/Gegner/" 
                 gegnertexture2="Game_Grafiken/GameObjects/Gegner/">

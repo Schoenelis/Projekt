@@ -14,8 +14,8 @@ import java.io.IOException;
 
 public class Player extends SpaceObject {
 
-    private final int MAX_BULLETS = 10;
-    private ArrayList<Bullet> bullets;
+    private final int MAX_BULLETS = 4;
+    private ArrayList<BulletPlayer> bullets;
 
     private boolean left;
     private boolean right;
@@ -43,9 +43,10 @@ public class Player extends SpaceObject {
     public static int width;
     public static boolean pShoot;
     public static boolean playerLife;
-    public  static boolean  Collision;
+    public static boolean Collision;
+    public static Rectangle boundingRectangle_Player;
 
-    public Player(ArrayList<Bullet> bullets) {
+    public Player(ArrayList<BulletPlayer> bullets) {
 
         px = x;
         py = y;
@@ -69,14 +70,14 @@ public class Player extends SpaceObject {
         width = 100;
         height = 100;
         maxSpeed = 200;
-        maxEnergy = 100.0f;
+        maxEnergy = 100;
         acceleration = 200;
         deceleration = 10;
-        
-        playerLife =true;
-        pShoot =false;
-        Collision =false;
-        
+
+        playerLife = true;
+        pShoot = false;
+        Collision = false;
+
         radians = 3.1415f / 2;
         rotationSpeed = 0.9f;
     }
@@ -100,14 +101,17 @@ public class Player extends SpaceObject {
             return;
         }
         pShoot = true;
-        bullets.add(new Bullet(px, py, radians));
+        bullets.add(new BulletPlayer(px, py, radians));
     }
 
     public void update(float dt) {
-   if (Gdx.input.isKeyJustPressed(Keys.T) || maxEnergy == 0) {     
-          playerLife=false;
+
+        boundingRectangle_Player = sprite.getBoundingRectangle();
+
+        if (Gdx.input.isKeyJustPressed(Keys.Z) || maxEnergy <= 0) {
+            playerLife = false;
         }
-        
+
         // turning
         if (left) {
             //Set the rotationSpeed to count.  
@@ -168,8 +172,6 @@ public class Player extends SpaceObject {
         } else if (py > -3) {
             py += pvy * dt;
         }
-
-        
 
         degrees = (float) Math.toDegrees(radians);
         // screen wrap

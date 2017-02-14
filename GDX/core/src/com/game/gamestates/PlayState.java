@@ -3,15 +3,13 @@ package com.game.gamestates;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.game.managers.GameKeys;
 import com.game.managers.GameStateManager;
 import com.game.obj.Blackhole;
-import com.game.obj.Bullet;
+import com.game.obj.BulletGegner;
+import com.game.obj.BulletPlayer;
 import com.game.obj.Gegner;
 import com.game.obj.Player;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PlayState extends GameState {
 
@@ -20,7 +18,8 @@ public class PlayState extends GameState {
     private Blackhole blackhole;
     private Player player;
     private Gegner gegner;
-    private ArrayList<Bullet> bullets;
+    private ArrayList<BulletPlayer> bulletsPlayer;
+    private ArrayList<BulletGegner> bulletsGegner;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -31,12 +30,14 @@ public class PlayState extends GameState {
 
         sr = new ShapeRenderer();
 
-        bullets = new ArrayList<Bullet>();
+        bulletsGegner = new ArrayList<BulletGegner>();
+        bulletsPlayer = new ArrayList<BulletPlayer>();
 
         blackhole = new Blackhole();
-        player = new Player(bullets);
 
-        gegner = new Gegner(bullets);
+        player = new Player(bulletsPlayer);
+
+        gegner = new Gegner(bulletsGegner);
 
     }
 
@@ -52,58 +53,69 @@ public class PlayState extends GameState {
         gegner.update(dt);
         // update blackhole
         blackhole.update();
-//         update player bullets
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).update(dt);
-            if (bullets.get(i).shouldRemove()) {
-                bullets.remove(i);
+
+        // Update Bullets Gegner
+        for (int j = 0; j < bulletsGegner.size(); j++) {
+            bulletsGegner.get(j).update(dt);
+            if (bulletsGegner.get(j).shouldRemove()) {
+                bulletsGegner.remove(j);
+                j--;
+            }
+        }
+//         update player bulletsPlayer
+        for (int i = 0; i < bulletsPlayer.size(); i++) {
+            bulletsPlayer.get(i).update(dt);
+            if (bulletsPlayer.get(i).shouldRemove()) {
+                bulletsPlayer.remove(i);
                 i--;
             }
         }
 
-        Rectangle boundingRectangle0 = Gegner.sprite.getBoundingRectangle();
-        Rectangle boundingRectangle1 = Bullet.sprite.getBoundingRectangle();
-        Rectangle boundingRectangle2 = Player.sprite.getBoundingRectangle();
-        Rectangle boundingRectangle3 = Bullet.sprite.getBoundingRectangle();
-        Rectangle boundingRectangle4 = Blackhole.sprite.getBoundingRectangle();
+//        Rectangle boundingRectangle0 = Gegner.sprite.getBoundingRectangle();
+//        Rectangle boundingRectangle1 = BulletGegner.sprite.getBoundingRectangle();
+//        Rectangle boundingRectangle2 = Player.sprite.getBoundingRectangle();
+//        Rectangle boundingRectangle3 = BulletPlayer.sprite.getBoundingRectangle();
+//        Rectangle boundingRectangle4 = Blackhole.sprite.getBoundingRectangle();
 
         if (Player.playerLife && !Gegner.gegnerLife) {
             System.out.println("Gewonnen");
         } else if (!Player.playerLife && !Gegner.gegnerLife) {
             System.out.println("Verloren");
-        } else if (!player.playerLife) {
+        } else if (!Player.playerLife) {
             System.out.println("Verloren");
         }
 
         //Player Aktion
-        if (player.pShoot && boundingRectangle1.overlaps(boundingRectangle0)) {
-            System.out.println("Treffer  " + player.pShoot);
-            Gegner.maxEnergy -= 10;
-            player.pShoot = false;
+        if (Player.pShoot && Gegner.boundingRectangle_Gegner.contains(Gegner.sprite.getX(), BulletPlayer.sprite.getY())) {
+            System.out.println("Treffer  Gegner " + Player.pShoot);
+            Gegner.maxEnergy = Gegner.maxEnergy -17;
+            System.out.println("gegner Energx" +Gegner.maxEnergy);
+            Player.pShoot = false;
         }
 
-        if (player.Collision &&boundingRectangle2.overlaps(boundingRectangle0)) {
-            System.out.println("Zusammenstoß");
-            gegner.maxEnergy = 0;
-            player.maxEnergy = 0;
+        //Zusammen stoß mit gegner erkennen.
+        if (Gegner.boundingRectangle_Gegner.contains(Player.px, Player.py)) {
+            System.out.println("Zusammenstoß Gegner");
+            Player.playerLife = false;
+            Gegner.gegnerLife = false;
         }
+        
+      
 
-        if (boundingRectangle2.overlaps(boundingRectangle4)) {
+        //Beruehrung mit schwartzenloch erkennen.
+        if (Blackhole.boundingRectangle_Blackhole.contains(Player.px, Player.py)) {
             System.out.println("Zusammenstoß Schwartzes loch");
             Player.px = 600;
             Player.py = 50;
-            Player.playerLife =false;
+            //Player.playerLife =false;
         }
 
         //Gegner Aktion
-        if (gegner.gShoot && boundingRectangle2.contains(gegner.gx, player.py)) {
-            gegner.shoot();
-        }
-
-        if (gegner.gShoot && boundingRectangle2.overlaps(boundingRectangle3)) {
-            System.out.println("Treffer  " + gegner.gShoot);
-            gegner.gShoot = false;
-            player.maxEnergy -= 0.5f;
+        if (Gegner.gShoot && BulletGegner.boundingRectangle_GegnerBullet.overlaps(Player.boundingRectangle_Player)) {
+            System.out.println("Treffer  Player " + Gegner.gShoot);         
+            Player.maxEnergy =  Player.maxEnergy -10;
+            System.out.println("Player Energy " +Player.maxEnergy);
+            Gegner.gShoot = false;
         }
 
     }
@@ -113,23 +125,27 @@ public class PlayState extends GameState {
         if (Gegner.gegnerLife) {
             // draw player
             player.draw();
-
-            blackhole.draw();
-            // draw bullets
-            for (int i = 0; i < bullets.size(); i++) {
-                bullets.get(i).draw();
-            }
             gegner.draw();
+
+            // draw bulletsPlayer
+            for (int i = 0; i < bulletsPlayer.size(); i++) {
+                bulletsPlayer.get(i).draw();
+            }
+            // draw bulletsPlayer
+            for (int j = 0; j < bulletsGegner.size(); j++) {
+                bulletsGegner.get(j).draw();
+            }
+            blackhole.draw();
         } else {
             // draw player
             player.draw();
 
             blackhole.draw();
-            // draw bullets
-            for (int i = 0; i < bullets.size(); i++) {
-                bullets.get(i).draw();
+            // draw bulletsPlayer
+            for (int i = 0; i < bulletsPlayer.size(); i++) {
+                bulletsPlayer.get(i).draw();
             }
-           // gegner.draw();
+            // gegner.draw();
         }
     }
 

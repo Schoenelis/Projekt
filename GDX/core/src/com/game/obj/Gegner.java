@@ -1,19 +1,14 @@
 package com.game.obj;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.XmlReader;
-import static com.game.obj.Player.pShoot;
-import static com.game.obj.Player.px;
-import static com.game.obj.Player.py;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,8 +16,8 @@ import java.util.logging.Logger;
  */
 public class Gegner extends GameObj {
 
-    private final int MAX_BULLETS = 4;
-    private ArrayList<Bullet> bullets;
+    private final int MAX_BULLETS = 2;
+    private ArrayList<BulletGegner> bullets;
 
     private boolean left;
     private boolean right;
@@ -49,8 +44,9 @@ public class Gegner extends GameObj {
     public boolean leftTurn = false;
     public boolean rightTurn = false;
     public static boolean gShoot = false;
+    public static Rectangle boundingRectangle_Gegner;
 
-    public Gegner(ArrayList<Bullet> bullets) {
+    public Gegner(ArrayList<BulletGegner> bullets) {
 
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
@@ -68,8 +64,8 @@ public class Gegner extends GameObj {
         gx = Player.px;
         gy = Gdx.graphics.getHeight() - 50;
 
-        width = 100;
-        height = 100;
+        width = 50;
+        height = 50;
         maxSpeed = 200;
         maxEnergy = 100.0f;
 
@@ -77,21 +73,21 @@ public class Gegner extends GameObj {
 
     }
 
-    public void shoot(){
-        
+    public void shoot() {
+
         if (bullets.size() == MAX_BULLETS) {
             return;
         }
         gShoot = true;
-        bullets.add(new Bullet(gx, gy, radians * -1));
-        
+        bullets.add(new BulletGegner(gx, gy, radians * -1));
+
     }
 
     public void update(float dt) {
-
-        if (Gdx.input.isKeyJustPressed(Keys.T) || maxEnergy == 0) {
+        boundingRectangle_Gegner = Gegner.sprite.getBoundingRectangle();
+        if (Gdx.input.isKeyJustPressed(Keys.T) || maxEnergy <= 0) {
             gegnerLife = false;
-           
+
         }
 
         // player verfolgung
@@ -101,7 +97,7 @@ public class Gegner extends GameObj {
             gx--;
         }
 
-        if (Player.px == gx) {
+        if(Player.px == gx || gx - 5 <= Player.px || gx +5 >= Player.px){
             shoot();
         }
 
