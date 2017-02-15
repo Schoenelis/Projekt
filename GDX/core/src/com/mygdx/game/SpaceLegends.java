@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.game.Audio.Sounds;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import static com.game.GameSettings.GameSettings.LoadGameSettings;
 import com.game.GameSettings.SaveGameHandler;
@@ -11,7 +12,7 @@ import com.game.menu.OptionMenu;
 /**
  * Hauptklasse des spiels.
  *
- * @author dreissa
+ * @author  ???
  * @version 0.01
  */
 public class SpaceLegends extends Game {
@@ -36,6 +37,9 @@ public class SpaceLegends extends Game {
         //this.setScreen(new PauseMenu(this));
 
     }
+    
+    
+  
 
     @Override
     public void dispose() {

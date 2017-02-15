@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Blackhole extends SpaceObject {
 
-    private final float attraction;
+    public static float attraction;
     private ArrayList<BulletPlayer> bullets;
 
 //    private Random random;
@@ -25,6 +25,18 @@ public class Blackhole extends SpaceObject {
     public static int height;
     public static int width;
 public static Rectangle boundingRectangle_Blackhole;
+
+    public static void setBx(float bx) {
+        Blackhole.bx = bx;
+    }
+
+    public static void setBy(float by) {
+        Blackhole.by = by;
+    }
+
+    public static void setAttraction(float attraction) {
+        Blackhole.attraction = attraction;
+    }
     
     public Blackhole() {
         bx = x;
@@ -45,7 +57,8 @@ public static Rectangle boundingRectangle_Blackhole;
         bx = 300;
         by = 300;
         width = height = 200;
-        attraction = 50000f;
+        
+//        attraction = 90000f;
     }
 
     private void attraction() {

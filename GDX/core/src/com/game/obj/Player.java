@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Player extends SpaceObject {
 
-    private final int MAX_BULLETS = 4;
+    private final int MAX_BULLETS = 2;
     private ArrayList<BulletPlayer> bullets;
 
     private boolean left;
@@ -45,11 +45,28 @@ public class Player extends SpaceObject {
     public static boolean playerLife;
     public static boolean Collision;
     public static Rectangle boundingRectangle_Player;
+    public static float schaden;
+
+    public static void setMaxEnergy(float maxEnergy) {
+        Player.maxEnergy = maxEnergy;
+    }
+
+    public static void setPy(float py) {
+        Player.py = py;
+    }
+
+    public static void setSchaden(float schaden) {
+        Player.schaden = schaden;
+    }
+
+    public static float getSchaden() {
+        return schaden;
+    }
 
     public Player(ArrayList<BulletPlayer> bullets) {
 
         px = x;
-        py = y;
+//        py = y;
 
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
@@ -65,12 +82,12 @@ public class Player extends SpaceObject {
 
         // The Player starts on the center of the screen.
         px = Gdx.graphics.getWidth() / 2;
-        py = 50;
+//        py = 50;
 
         width = 100;
         height = 100;
         maxSpeed = 200;
-        maxEnergy = 100;
+//        maxEnergy = 100;
         acceleration = 200;
         deceleration = 10;
 
@@ -110,6 +127,10 @@ public class Player extends SpaceObject {
 
         if (Gdx.input.isKeyJustPressed(Keys.Z) || maxEnergy <= 0) {
             playerLife = false;
+        }
+
+        if (Gdx.input.isKeyJustPressed(Keys.E) && Gdx.input.isKeyJustPressed(Keys.K) && Gdx.input.isKeyJustPressed(Keys.Y)) {
+            maxEnergy = 100 * 100 / 2;
         }
 
         // turning

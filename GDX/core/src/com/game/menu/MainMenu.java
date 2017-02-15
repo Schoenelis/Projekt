@@ -62,6 +62,10 @@ public class MainMenu implements Screen {
     Texture Option_disabled;
     Texture Load_Default_Settings;
 
+    
+  
+    
+    
 //    boolean LoadGameSettings = LoadGameSettings(); ("Game_Grafiken/background.png");
     public MainMenu(SpaceLegends game) {
         this.game = game;

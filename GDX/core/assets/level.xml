@@ -1,0 +1,50 @@
+<!--
+Erzeugung der Level fuer das spiel 
+finish gibt an ob man das Level geschaft hat. true oder false
+
+Blacḱhole aktiv gibt an ob ein schwarzeloch vorhanden ist oder nicht. true oder false.
+anziehung gibt die anzihung vom schwartzenloch an sie solte zwischen 9k und 20k ligen.
+posX posX gebeb die position an wo es auf taucht.
+anz ist die anzahl 0 - 2 stueck.
+Gegner aktiv gibt an ob es einen gegner gibt oder nicht. true oder false.
+energy gibt die gegner energy an immer 100 oder 150 oder 200 250.
+schaden gibt an wie hoch der schaden ist den der gegner erzeugt 0.1f bis 5f .
+PosY gibt die y position vom gegner an 30 - 60.
+
+-->
+
+<gamelevel>
+
+
+<level1 finish="false">
+    
+<blackhole aktiv="false" attraction="5900000" posX="300" posY="400" anz="1"></blackhole>
+<gegner aktiv="true" energy="100" schaden="6.2" posY="50" ></gegner>
+<player energy="100" schaden="7.5" posY="50"  ></player>
+</level1>
+
+<level2 finish="false">
+<blackhole aktiv="true" attraction="5900999" posX="400" posY="250" anz="1"></blackhole>
+<gegner aktiv="true" energy="100" schaden="6.3" posY="45" ></gegner>
+<player energy="120" schaden="7.5" posY="50" ></player>
+</level2>
+
+<level3 finish="false">
+<blackhole aktiv="false" attraction="5901900" posX="200" posY="200" anz="1"></blackhole>
+<gegner aktiv="true" energy="150" schaden="6.5" posY="50" ></gegner>
+<player energy="125" schaden="7.6" posY="50" ></player>
+</level3>
+
+<level4 finish="false">
+<blackhole aktiv="false" attraction="5909009" posX="560" posY="300" anz="1"></blackhole>
+<gegner aktiv="true" energy="200" schaden="9.5" posY="40" ></gegner>
+<player energy="220" schaden="8" posY="50" ></player>
+</level4>
+
+<level5 finish="false">
+<blackhole aktiv="false" attraction="6000000" posX="500" posY="600" anz="1"></blackhole>
+<gegner aktiv="true" energy="250" schaden="10" posY="35" ></gegner>
+<player energy="320" schaden="9.4" posY="50" ></player>
+</level5>
+
+</gamelevel>

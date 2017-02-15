@@ -66,6 +66,7 @@ Sprite xml
                 gegnertexture2="Game_Grafiken/GameObjects/Gegner/">
         </gegner>
         
+        <gamescreen gameovertexture="Game_Grafiken/GameObjects/blackhole.png" gewonnentexture="Game_Grafiken/GameObjects/badlogic.jpg"></gamescreen>
     </gameobjects>
     
 </sprite>

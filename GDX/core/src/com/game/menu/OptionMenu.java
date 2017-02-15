@@ -136,7 +136,7 @@ public class OptionMenu implements Screen {
 
             Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
             //  Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
-            ;
+            
 
             // Loading the Menu Elements from the xml file.
             Element menu = root.getChildByName("optionmenu");

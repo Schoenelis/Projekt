@@ -20,6 +20,7 @@ public class BulletGegner extends SpaceObject {
     public SpriteBatch sb;
     public static Sprite sprite;
     public static float sx;
+    public static float sy;
     public static float bgvx;
     public static float bgvy;
 
@@ -36,6 +37,7 @@ public class BulletGegner extends SpaceObject {
         sb = new SpriteBatch();
 
         sx = x;
+        sy = y;
         this.x = x;
         this.y = y;
         this.radians = radians;
@@ -48,7 +50,7 @@ public class BulletGegner extends SpaceObject {
 
         lifeTimer = 0;
         lifeTime = 3;
-      boundingRectangle_GegnerBullet = sprite.getBoundingRectangle();
+        boundingRectangle_GegnerBullet = sprite.getBoundingRectangle();
     }
 
     public boolean shouldRemove() {
@@ -56,7 +58,7 @@ public class BulletGegner extends SpaceObject {
     }
 
     public void update(float dt) {
-  
+
         x += bgvx * dt;
         y += bgvy * dt;
 

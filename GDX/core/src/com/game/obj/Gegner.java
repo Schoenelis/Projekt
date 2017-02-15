@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Gegner extends GameObj {
 
-    private final int MAX_BULLETS = 2;
+    private final int MAX_BULLETS = 1;
     private ArrayList<BulletGegner> bullets;
 
     private boolean left;
@@ -45,6 +45,24 @@ public class Gegner extends GameObj {
     public boolean rightTurn = false;
     public static boolean gShoot = false;
     public static Rectangle boundingRectangle_Gegner;
+    public static float schaden;
+
+    
+    public static float getSchaden() {
+        return schaden;
+    }
+
+    public static void setSchaden(float schaden) {
+        Gegner.schaden = schaden;
+    }
+
+    public static void setMaxEnergy(float maxEnergy) {
+        Gegner.maxEnergy = maxEnergy;
+    }
+
+    public static void setGy(float gy) {
+        Gegner.gy = Gdx.graphics.getHeight() - gy;
+    }
 
     public Gegner(ArrayList<BulletGegner> bullets) {
 
@@ -62,11 +80,11 @@ public class Gegner extends GameObj {
 
         // The Player starts on the center of the screen.
         gx = Player.px;
-        gy = Gdx.graphics.getHeight() - 50;
+//        gy = Gdx.graphics.getHeight() - 50;
 
         width = 50;
         height = 50;
-        maxSpeed = 200;
+        maxSpeed = 290;
         maxEnergy = 100.0f;
 
         radians = 3.1415f / 2;
@@ -85,37 +103,46 @@ public class Gegner extends GameObj {
 
     public void update(float dt) {
         boundingRectangle_Gegner = Gegner.sprite.getBoundingRectangle();
-        if (Gdx.input.isKeyJustPressed(Keys.T) || maxEnergy <= 0) {
+        if (maxEnergy <= 0) {
             gegnerLife = false;
 
         }
 
-        // player verfolgung
-        if (Player.px - 1 > gx) {
-            gx++;
-        } else if (Player.px + 1 < gx) {
-            gx--;
+      
+
+     
+        if (Gdx.input.isKeyJustPressed(Keys.S) && Gdx.input.isKeyJustPressed(Keys.NUM_4) && Gdx.input.isKeyJustPressed(Keys.D)) {         
+                gegnerLife = false;
+            }
+
+            // player verfolgung
+            if (Player.px - 1 > gx) {
+                gx++;
+            } else if (Player.px + 1 < gx) {
+                gx--;
+            }
+
+            if (Player.px == gx || gx - 5 <= Player.px || gx + 5 >= Player.px) {
+                shoot();
+            }
+
+            // set position
+            if (gx
+                    > Gdx.graphics.getWidth()) {
+                gx = 0;
+            }
+
+            if (gx
+                    < -3) {
+                gx = Gdx.graphics.getWidth();
+            }
+
+            //System.out.println("x " + pvx + "y " + pvy);
+            //degrees = (float) Math.toDegrees(radians);
+            // screen wrap
         }
 
-        if(Player.px == gx || gx - 5 <= Player.px || gx +5 >= Player.px){
-            shoot();
-        }
-
-        // set position
-        if (gx
-                > Gdx.graphics.getWidth()) {
-            gx = 0;
-        }
-
-        if (gx
-                < -3) {
-            gx = Gdx.graphics.getWidth();
-        }
-
-        //System.out.println("x " + pvx + "y " + pvy);
-        //degrees = (float) Math.toDegrees(radians);
-        // screen wrap
-    }
+    
 
     public void draw() {
         sb.begin();
