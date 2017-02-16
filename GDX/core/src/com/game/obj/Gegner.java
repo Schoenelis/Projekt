@@ -111,7 +111,7 @@ public class Gegner extends GameObj {
       
 
      
-        if (Gdx.input.isKeyJustPressed(Keys.S) && Gdx.input.isKeyJustPressed(Keys.NUM_4) && Gdx.input.isKeyJustPressed(Keys.D)) {         
+        if (Gdx.input.isKeyJustPressed(Keys.S) && Gdx.input.isKeyJustPressed(Keys.NUM_1) && Gdx.input.isKeyJustPressed(Keys.L)) {         
                 gegnerLife = false;
             }
 

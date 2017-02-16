@@ -39,8 +39,8 @@ public static Rectangle boundingRectangle_Blackhole;
     }
     
     public Blackhole() {
-        bx = x;
-        by = y;
+//        bx = x;
+//        by = y;
 
         //loading the img
         try {
@@ -54,8 +54,8 @@ public static Rectangle boundingRectangle_Blackhole;
 
         player = new Player(bullets);
         sb = new SpriteBatch();
-        bx = 300;
-        by = 300;
+//        bx = 300;
+//        by = 300;
         width = height = 200;
         
 //        attraction = 90000f;
@@ -71,8 +71,10 @@ public static Rectangle boundingRectangle_Blackhole;
 
         double dvx = a * dx;
         double dvy = a * dy;
-//        BulletGegner.bgvx +=dvx;
-//        BulletGegner.bgvy +=dvy;
+       BulletGegner.bgvx +=dvx;
+        BulletGegner.bgvy +=dvy;
+        BulletPlayer.bpvx +=dvx;
+        BulletPlayer.bpvy +=dvy;
         Player.pvx += dvx;
         Player.pvy += dvy;
 

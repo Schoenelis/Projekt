@@ -30,9 +30,9 @@ public class GameSettings {
 
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
-    private static final String build = "Internal Build Version";
-    private static final String buildnummer = "00.12";
-    private static final String version = "b.";
+    private static final String build = "Build Version";
+    private static final String buildnummer = "00.90";
+    private static final String version = "";
 
     // Spiel einstelungen Warnung nicht aendern.
     public static final String Game_Settings_File = "Settings.dat";
@@ -41,7 +41,7 @@ public class GameSettings {
     public static boolean Main_Frame_fullscreen = true;
     private static final String Main_Frame_IconPath = null; // pfad zum fenster icon.
     private static final String Main_Frame_title = "The Space Legend";
-    private static final String Game_Id = "10012b001e";
+    private static final String Game_Id = "100100001e";
 
     public static String getGame_Id() {
         return Game_Id;

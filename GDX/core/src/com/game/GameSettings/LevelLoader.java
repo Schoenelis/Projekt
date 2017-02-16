@@ -12,7 +12,8 @@ import java.io.IOException;
 
 /**
  *
- * @author ???
+ * @author Dreissa
+ * @version 1.0
  */
 public class LevelLoader {
 
@@ -95,10 +96,10 @@ public class LevelLoader {
 
     private static void createLevel() {
 
-        // set Blackhole Values
-        com.game.obj.Blackhole.setAttraction(Blackhole_Attraction);
+        // set Blackhole Values       
         com.game.obj.Blackhole.setBx(Blackhole_posX);
-        com.game.obj.Blackhole.setBy(Blackhole_posY);      
+        com.game.obj.Blackhole.setBy(Blackhole_posY);
+        com.game.obj.Blackhole.setAttraction(Blackhole_Attraction);      
         // Set Gegner Values 
         com.game.obj.Gegner.setGy(Gegner_posY);
         com.game.obj.Gegner.setMaxEnergy(Gegner_energy);

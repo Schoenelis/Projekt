@@ -47,12 +47,12 @@ public class PlayState extends GameState {
 
     @Override
     public void init() {
-        LevelLoader levelloader;
-
-        levelloader = new LevelLoader(level);
 
         sb = new SpriteBatch();
         sr = new ShapeRenderer();
+
+        LevelLoader levelloader;
+        levelloader = new LevelLoader(level);
 
         bulletsGegner = new ArrayList<BulletGegner>();
         bulletsPlayer = new ArrayList<BulletPlayer>();
@@ -145,7 +145,8 @@ public class PlayState extends GameState {
         }
 
         //Player Aktion
-        if (Player.pShoot && Gegner.boundingRectangle_Gegner.contains(Gegner.sprite.getX(), BulletPlayer.sprite.getY())) {
+//        if (Player.pShoot && Gegner.boundingRectangle_Gegner.contains(Gegner.sprite.getX(), BulletPlayer.sprite.getY()) && Player.playerLife) {
+        if (Player.pShoot && Gegner.boundingRectangle_Gegner.contains(BulletPlayer.sx, Gegner.gy) && Player.playerLife) {
             System.out.println("Treffer  Gegner " + Player.pShoot);
             Gegner.maxEnergy = Gegner.maxEnergy - Player.getSchaden();
             System.out.println("gegner Energx" + Gegner.maxEnergy);
@@ -164,7 +165,7 @@ public class PlayState extends GameState {
             System.out.println("Zusammenstoß Schwarzesloch");
 //            Player.px = 600;
 //             Player.py = 50;
-              drawGameOver();
+            drawGameOver();
             Player.playerLife = false;
         }
 
