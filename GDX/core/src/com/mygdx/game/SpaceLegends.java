@@ -12,7 +12,7 @@ import com.game.menu.OptionMenu;
 /**
  * Hauptklasse des spiels.
  *
- * @author  ???
+ * @author  Dreissa
  * @version 0.01
  */
 public class SpaceLegends extends Game {
