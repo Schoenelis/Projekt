@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Sprite xml 
+************************************************************************************
+*                                                                                  *
+* Sprite xml  Ver. 1.0                                                             *
+* In this file you can edit the sprites of the Game.                               * 
+*                                                                                  *
+* Note. YOU CAN NOT MAKE NEW TEXTURES.                                             *
+*                                                                                  *
+* When you make new Textures for example you make a new menu Button you must edit  *
+* the code in the menu class.                                                      *
+************************************************************************************
 -->
 
 
@@ -62,8 +71,9 @@ Sprite xml
         <blackhole blackholetexture0="Game_Grafiken/GameObjects/blackhole.png" blackholetexture1="Game_Grafiken/GameObjects/blackholeschwarz.png"></blackhole>
         <bullet bullettexture0="Game_Grafiken/GameObjects/Player/laser.png" bullettexture1="Game_Grafiken/GameObjects/Gegner/bad_laser.png" bullettexture2=""></bullet>
         
-        <gegner gegnertexture0="Game_Grafiken/GameObjects/Gegner/gegnergrafik0.png" gegnertexture1="Game_Grafiken/GameObjects/Gegner/" 
-                gegnertexture2="Game_Grafiken/GameObjects/Gegner/">
+        <gegner gegnertexture1="Game_Grafiken/GameObjects/Gegner/gegnergrafik0.png" gegnertexture2="Game_Grafiken/GameObjects/Gegner/" 
+                gegnertexture3="Game_Grafiken/GameObjects/Gegner/" gegnertexture4="Game_Grafiken/GameObjects/Gegner/" 
+                gegnertexture5="Game_Grafiken/GameObjects/Gegner/">
         </gegner>
         
         <gamescreen gameovertexture="Game_Grafiken/GameObjects/blackhole.png" gewonnentexture="Game_Grafiken/GameObjects/badlogic.jpg"></gamescreen>

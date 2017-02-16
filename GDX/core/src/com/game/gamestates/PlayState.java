@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,6 +23,7 @@ import com.game.obj.Gegner;
 import com.game.obj.Player;
 import com.mygdx.game.SpaceLegends;
 import java.io.IOException;
+import com.game.Audio.Sounds;
 
 public class PlayState extends GameState {
 
@@ -39,7 +41,7 @@ public class PlayState extends GameState {
     Texture Game_Over;
     Texture Gewonnen;
     public static int level = 1;
-    public static boolean bk = false;
+    public static boolean played = false;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
@@ -85,10 +87,11 @@ public class PlayState extends GameState {
             gsm.draw();
             Player.playerLife = true;
             Gegner.gegnerLife = true;
+            played = false;
         }
 
         if (!Player.playerLife && Gdx.input.isKeyJustPressed(Keys.BACKSPACE)) {
-            System.out.println("Test");
+            //System.out.println("Test");
             Gdx.app.exit();
         }
 
@@ -100,12 +103,13 @@ public class PlayState extends GameState {
             gsm.draw();
             Player.playerLife = true;
             Gegner.gegnerLife = true;
+            played = false;
         } else if (level == 5) {
-            System.out.println("Alles geschaft.");
+           // System.out.println("Alles geschaft.");
         }
 
         if (Player.playerLife && !Gegner.gegnerLife && Gdx.input.isKeyJustPressed(Keys.BACKSPACE)) {
-            System.out.println("Test");
+           // System.out.println("Test");
             Gdx.app.exit();
         }
 
@@ -139,9 +143,25 @@ public class PlayState extends GameState {
         if (Player.playerLife && !Gegner.gegnerLife) {
             System.out.println("Gewonnen");
         } else if (!Player.playerLife && !Gegner.gegnerLife) {
-            System.out.println("Verloren");
+            System.out.println("Verloren Player und Gegner");
         } else if (!Player.playerLife) {
-            System.out.println("Verloren");
+            System.out.println("Verloren Player");
+        }
+
+        if (!Gegner.gegnerLife && !played && Player.playerLife) {
+            Sounds.PlayInvaderKilled();
+            played = true;
+        }
+
+        if (!Player.playerLife && !played && Gegner.gegnerLife) {
+            Sounds.PlayExplosion();
+            played = true;
+        }
+
+        if (!Player.playerLife && !played && !Gegner.gegnerLife) {
+            Sounds.PlayExplosion();
+            Sounds.PlayExplosion();
+            played = true;
         }
 
         //Player Aktion
@@ -156,6 +176,7 @@ public class PlayState extends GameState {
         //Zusammen stoß mit gegner erkennen.
         if (Gegner.boundingRectangle_Gegner.contains(Player.px, Player.py) && Gegner.gegnerLife) {
             System.out.println("Zusammenstoß Gegner");
+
             Player.playerLife = false;
             Gegner.gegnerLife = false;
         }
@@ -200,6 +221,7 @@ public class PlayState extends GameState {
         } else if (!Player.playerLife) {
             drawGameOver();
         } else if (!Gegner.gegnerLife) {
+
             drawGewonnen();
         }
     }
@@ -210,6 +232,7 @@ public class PlayState extends GameState {
         player.setRight(GameKeys.isDown(GameKeys.RIGHT));
         player.setUp(GameKeys.isDown(GameKeys.UP));
         if (GameKeys.isPressed(GameKeys.SPACE)) {
+            Sounds.PlayPlayerShoot();
             player.shoot();
         }
     }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 /**
  *
  * @author dreissa
- * @version 0.03
+ * @version 0.05
  *
  * Einstelungen fuer den fenster und Volbildmodus Audio usw. .
  *

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.game.GameSettings;
 
 import com.badlogic.gdx.Gdx;
@@ -14,11 +9,17 @@ import java.io.IOException;
  *
  * @author Dreissa
  * @version 1.0
+ * 
+ * Loading the level from a XML file and Set it to the 
+ * Player the Gegner and the Blackhole.
+ * for an example in the xml file we have the posY values this values 
+ * Set the Player or the Gegener y position.
  */
 public class LevelLoader {
 
     private static final String DATA_PATH = "level.xml";
     private static String LEVEL_DATA;
+    private static String Game_level;
     private static XmlReader.Element root;
     private static XmlReader.Element e_level;
     private static XmlReader.Element Blackhole;
@@ -42,6 +43,7 @@ public class LevelLoader {
     public static float Player_energy;
     public static float Player_schaden;
     public static float Player_posY;
+    
 
     public LevelLoader(int level) {
         readXml(level);
@@ -53,12 +55,13 @@ public class LevelLoader {
 
         if (!Level.exists()) {
             //Gdx.app.exit();
-            System.out.println("test");
+            System.err.print("The level file were not found.");
         } else {
             try {
                 root = new XmlReader().parse(Gdx.files.internal(DATA_PATH));
                 e_level = root.getChildByName("level" + level);
                 finish = Boolean.parseBoolean(e_level.getAttribute("finish"));
+                Game_level = e_level.getAttribute("level");
 
                 //Blackhole
                 Blackhole = e_level.getChildByName("blackhole");
@@ -104,6 +107,7 @@ public class LevelLoader {
         com.game.obj.Gegner.setGy(Gegner_posY);
         com.game.obj.Gegner.setMaxEnergy(Gegner_energy);
         com.game.obj.Gegner.setSchaden(Gegner_schaden);
+        com.game.obj.Gegner.setLevel(Game_level);
         //Set Player vales
         com.game.obj.Player.setPy(Gegner_posY);
         com.game.obj.Player.setMaxEnergy(Player_energy);

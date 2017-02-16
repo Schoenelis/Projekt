@@ -11,8 +11,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Der Gegner in Spiel Wird erzeugt.
+ * 
+ * Erzeugt einen Gegner dessen Energy und Position durch die 
+ * level.xml vorgegeben ist. der gegner kann je nach level eine anders aussehen
+ * haben. Das aussehen wird automatisch aus gewaehlt nach anzahl der level.
+ * 
+ * Für einen neuen Gegner muss man einen neue Texture in des Sprite.xml anlegen und das neue level.
+ * 
+ * Der neue Gegner wird dan automatisch geladen.
+ * Wenn der neue Gegner nicht geladen wird dan wird er halt nicht geladen.
+ * 
  * @author dreissa
+ * @version 1.1
  */
 public class Gegner extends GameObj {
 
@@ -46,8 +57,12 @@ public class Gegner extends GameObj {
     public static boolean gShoot = false;
     public static Rectangle boundingRectangle_Gegner;
     public static float schaden;
+    public static String level;
 
-    
+    public static void setLevel(String level) {
+        Gegner.level = level;
+    }
+
     public static float getSchaden() {
         return schaden;
     }
@@ -69,7 +84,8 @@ public class Gegner extends GameObj {
         try {
             XmlReader.Element root = new XmlReader().parse(Gdx.files.internal("Sprite.xml"));
             XmlReader.Element object = root.getChildByName("gameobjects");
-            imgGegner = new Texture(object.getChildByName("gegner").getAttribute("gegnertexture0"));
+            String temp = "gegnertexture"+level;
+            imgGegner = new Texture(object.getChildByName("gegner").getAttribute(temp));
             sprite = new Sprite(imgGegner);
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
@@ -108,41 +124,36 @@ public class Gegner extends GameObj {
 
         }
 
-      
-
-     
-        if (Gdx.input.isKeyJustPressed(Keys.S) && Gdx.input.isKeyJustPressed(Keys.NUM_1) && Gdx.input.isKeyJustPressed(Keys.L)) {         
-                gegnerLife = false;
-            }
-
-            // player verfolgung
-            if (Player.px - 1 > gx) {
-                gx++;
-            } else if (Player.px + 1 < gx) {
-                gx--;
-            }
-
-            if (Player.px == gx || gx - 5 <= Player.px || gx + 5 >= Player.px) {
-                shoot();
-            }
-
-            // set position
-            if (gx
-                    > Gdx.graphics.getWidth()) {
-                gx = 0;
-            }
-
-            if (gx
-                    < -3) {
-                gx = Gdx.graphics.getWidth();
-            }
-
-            //System.out.println("x " + pvx + "y " + pvy);
-            //degrees = (float) Math.toDegrees(radians);
-            // screen wrap
+        if (Gdx.input.isKeyJustPressed(Keys.S) && Gdx.input.isKeyJustPressed(Keys.NUM_1) && Gdx.input.isKeyJustPressed(Keys.L)) {
+            gegnerLife = false;
         }
 
-    
+        // player verfolgung
+        if (Player.px - 1 > gx) {
+            gx++;
+        } else if (Player.px + 1 < gx) {
+            gx--;
+        }
+
+        if (Player.px == gx || gx - 5 <= Player.px || gx + 5 >= Player.px) {
+            shoot();
+        }
+
+        // set position
+        if (gx
+                > Gdx.graphics.getWidth()) {
+            gx = 0;
+        }
+
+        if (gx
+                < -3) {
+            gx = Gdx.graphics.getWidth();
+        }
+
+        //System.out.println("x " + pvx + "y " + pvy);
+        //degrees = (float) Math.toDegrees(radians);
+        // screen wrap
+    }
 
     public void draw() {
         sb.begin();
