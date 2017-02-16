@@ -3,8 +3,6 @@ package com.game.managers;
 import com.badlogic.gdx.Game;
 import com.game.gamestates.GameState;
 import com.game.gamestates.PlayState;
-import com.game.menu.MainMenu;
-import com.game.obj.GameObj;
 import com.mygdx.game.SpaceLegends;
 
 public class GameStateManager extends Game {

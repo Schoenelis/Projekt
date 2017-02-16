@@ -1,10 +1,7 @@
 package com.game.gamestates;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,13 +12,11 @@ import com.badlogic.gdx.utils.XmlReader;
 import com.game.GameSettings.LevelLoader;
 import com.game.managers.GameKeys;
 import com.game.managers.GameStateManager;
-import com.game.menu.MainMenu;
 import com.game.obj.Blackhole;
 import com.game.obj.BulletGegner;
 import com.game.obj.BulletPlayer;
 import com.game.obj.Gegner;
 import com.game.obj.Player;
-import com.mygdx.game.SpaceLegends;
 import java.io.IOException;
 import com.game.Audio.Sounds;
 

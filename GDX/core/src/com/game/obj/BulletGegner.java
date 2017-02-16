@@ -9,6 +9,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
 
+
+/**
+ * Erzeugt die schuesse des Gegners
+ * @author info
+ */
 public class BulletGegner extends SpaceObject {
 
     public static float lifeTime;

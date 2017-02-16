@@ -13,6 +13,12 @@ import com.game.main.MyGdxGame;
 import com.mygdx.game.SpaceLegends;
 import java.io.IOException;
 
+/**
+ * Erzeugt das Hauptmenue fuer das spiel.
+ * 
+ * 
+ * @author Dreissa
+ */
 public class MainMenu implements Screen {
 
     // Groesse der schaltflaechen.

@@ -12,6 +12,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
 
+/**
+ * Erzeugt den Spieler.
+ * @author dreissa
+ */
 public class Player extends SpaceObject {
 
     private final int MAX_BULLETS = 2;

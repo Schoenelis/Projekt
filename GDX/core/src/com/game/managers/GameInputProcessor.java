@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input.Keys;
 
 public class GameInputProcessor extends InputAdapter {
 	
+        @Override
 	public boolean keyDown(int k) {
 		if(k == Keys.UP) {
 			GameKeys.setKey(GameKeys.UP, true);
