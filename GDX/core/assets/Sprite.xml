@@ -71,12 +71,12 @@
         <blackhole blackholetexture0="Game_Grafiken/GameObjects/blackhole.png" blackholetexture1="Game_Grafiken/GameObjects/blackholeschwarz.png"></blackhole>
         <bullet bullettexture0="Game_Grafiken/GameObjects/Player/laser.png" bullettexture1="Game_Grafiken/GameObjects/Gegner/bad_laser.png" bullettexture2=""></bullet>
         
-        <gegner gegnertexture1="Game_Grafiken/GameObjects/Gegner/gegnergrafik0.png" gegnertexture2="Game_Grafiken/GameObjects/Gegner/" 
-                gegnertexture3="Game_Grafiken/GameObjects/Gegner/" gegnertexture4="Game_Grafiken/GameObjects/Gegner/" 
-                gegnertexture5="Game_Grafiken/GameObjects/Gegner/">
+        <gegner gegnertexture1="Game_Grafiken/GameObjects/Gegner/gegnergrafik1.png" gegnertexture2="Game_Grafiken/GameObjects/Gegner/gegnergrafik2.png" 
+                gegnertexture3="Game_Grafiken/GameObjects/Gegner/gegnergrafik3.png" gegnertexture4="Game_Grafiken/GameObjects/Gegner/gegnergrafik4.png" 
+                gegnertexture5="Game_Grafiken/GameObjects/Gegner/gegnergrafik5.png" >
         </gegner>
         
-        <gamescreen gameovertexture="Game_Grafiken/GameObjects/blackhole.png" gewonnentexture="Game_Grafiken/GameObjects/badlogic.jpg"></gamescreen>
+        <gamescreen gameovertexture="Game_Grafiken/GameObjects/gameover.png" gewonnentexture="Game_Grafiken/GameObjects/gewonnen.png" ></gamescreen>
     </gameobjects>
     
 </sprite>

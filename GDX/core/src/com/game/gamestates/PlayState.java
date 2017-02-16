@@ -19,6 +19,8 @@ import com.game.obj.Gegner;
 import com.game.obj.Player;
 import java.io.IOException;
 import com.game.Audio.Sounds;
+import static com.game.obj.Player.px;
+import static com.game.obj.Player.py;
 
 public class PlayState extends GameState {
 
@@ -32,9 +34,13 @@ public class PlayState extends GameState {
 
     private SpriteBatch sb;
     public static Sprite sprite;
-    public static Sprite sprite2;
+    public static Sprite sprite1;
+
+
     Texture Game_Over;
     Texture Gewonnen;
+
+
     public static int level = 1;
     public static boolean played = false;
 
@@ -66,7 +72,9 @@ public class PlayState extends GameState {
             Game_Over = new Texture(object.getChildByName("gamescreen").getAttribute("gameovertexture"));
             Gewonnen = new Texture(object.getChildByName("gamescreen").getAttribute("gewonnentexture"));
             sprite = new Sprite(Game_Over);
-            sprite2 = new Sprite(Gewonnen);
+            sprite1 = new Sprite(Gewonnen);
+
+
         } catch (IOException ex) {
             System.out.println("Bild wurde nicht geladen.");
         }
@@ -99,12 +107,12 @@ public class PlayState extends GameState {
             Player.playerLife = true;
             Gegner.gegnerLife = true;
             played = false;
-        } else if (level == 5) {
-           // System.out.println("Alles geschaft.");
+        } else if (level == 6) {
+            // System.out.println("Alles geschaft.");
         }
 
         if (Player.playerLife && !Gegner.gegnerLife && Gdx.input.isKeyJustPressed(Keys.BACKSPACE)) {
-           // System.out.println("Test");
+            // System.out.println("Test");
             Gdx.app.exit();
         }
 
@@ -179,10 +187,8 @@ public class PlayState extends GameState {
         //Beruehrung mit schwarzenloch erkennen.
         if (Blackhole.boundingRectangle_Blackhole.contains(Player.px, Player.py)) {
             System.out.println("Zusammenstoß Schwarzesloch");
-//            Player.px = 600;
-//             Player.py = 50;
-            drawGameOver();
             Player.playerLife = false;
+            drawGameOver();
         }
 
         //Gegner Aktion
@@ -235,15 +241,15 @@ public class PlayState extends GameState {
     public void drawGewonnen() {
         sb.begin();
         // Set the Player img to the Sprite.
-        sprite2.setTexture(Gewonnen);
-        //Set the rotation of the Sprite.
-//        sprite.setRotation(degrees);
+        sprite1.setTexture(Gewonnen);
+
         //Set the x and y positon of the Sprite.
 //        sprite.setPosition(px, py);
+
         //Set the Sprite to the Centre.
-//        sprite.setCenter(px, py);
+        sprite1.setCenter(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         //Draw the Sprite
-        sprite2.draw(sb);
+        sprite1.draw(sb);
         sb.end();
     }
 
@@ -251,14 +257,16 @@ public class PlayState extends GameState {
         sb.begin();
         // Set the Player img to the Sprite.
         sprite.setTexture(Game_Over);
-        //Set the rotation of the Sprite.
-//        sprite.setRotation(degrees);
+
         //Set the x and y positon of the Sprite.
 //        sprite.setPosition(px, py);
+
         //Set the Sprite to the Centre.
-//        sprite.setCenter(px, py);
+        sprite.setCenter(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight()/2 );
+
         //Draw the Sprite
         sprite.draw(sb);
+
         sb.end();
     }
 
