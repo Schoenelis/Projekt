@@ -35,6 +35,7 @@ public class GameSettings {
     private static final String version = "";
 
     // Spiel einstelungen Warnung nicht aendern.
+    
     public static final String Game_Settings_File = "Settings.dat";
     private static final int Main_Frame_height = 768;
     private static final int Main_Frame_width = 1280;//1024;
@@ -204,7 +205,8 @@ public class GameSettings {
                 + "#FX_Volume: " + Game_SFX_Volume + ",\n"
                 + "#End";
 
-        Gdx.files.external(Game_Settings_File).writeString(data, false);
+        String path = Gdx.files.getExternalStoragePath();
+        Gdx.files.absolute(path+Game_Settings_File).writeString(data, false);
 
     }
 
@@ -235,7 +237,8 @@ public class GameSettings {
 
         // System.out.println("\nStart:\n");
         // Loading the curent the Setings File.
-        FileHandle file = Gdx.files.external(Game_Settings_File);
+        String path = Gdx.files.getExternalStoragePath();
+        FileHandle file = Gdx.files.absolute(path+Game_Settings_File);
 
         if (!file.exists()) {
             DATA_LOAD_Fail = true;
@@ -279,20 +282,20 @@ public class GameSettings {
 //                // Check the SETTINGS_DATA for Valid value between 0 and 1f.
                 for (int i = 1; i < SETTINGS_DATA.length; i++) {
                     temp[i - 1] = Float.parseFloat(SETTINGS_DATA[i]);
-                  //  System.out.println(temp[i - 1]);
+                    //  System.out.println(temp[i - 1]);
                 }
 
                 for (int x = 0; x < temp.length; x++) {
                     if (temp[x] < 0f || temp[x] > 1f) {
                         temp[x] = 0.6f;
                     }
-                } 
-                        Menu_Volume = temp[0];
-                        Button_Volume = temp[1];
-                        Game_Volume = temp[2];
-                        Game_SFX_Volume = temp[3];
-                        saveGameSettings();
-                
+                }
+                Menu_Volume = temp[0];
+                Button_Volume = temp[1];
+                Game_Volume = temp[2];
+                Game_SFX_Volume = temp[3];
+                saveGameSettings();
+
 //            //Print the Value to the Terminal for Testing.
 //            for (int i = 0; i < SETTINGS_DATA.length; i++) {
 //                System.out.println(SETTINGS_DATA[i]);
@@ -310,7 +313,5 @@ public class GameSettings {
         Game_Volume = 1f;
         Game_SFX_Volume = 0.6f;
     }
-    
-  
 
 }

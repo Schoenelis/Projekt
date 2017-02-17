@@ -116,7 +116,7 @@ public class Sounds {
 
 //        music.stop();
         if (file.exists()) {
-            System.out.println("test");
+            System.out.println("Externes audio.");
             music = Gdx.audio.newMusic(file);
         } else {
             music = Gdx.audio.newMusic(Gdx.files.internal("Game_Sound/Sound.mp3"));
