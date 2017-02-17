@@ -204,7 +204,7 @@ public class GameSettings {
                 + "#FX_Volume: " + Game_SFX_Volume + ",\n"
                 + "#End";
 
-        Gdx.files.local(Game_Settings_File).writeString(data, false);
+        Gdx.files.external(Game_Settings_File).writeString(data, false);
 
     }
 
@@ -235,7 +235,7 @@ public class GameSettings {
 
         // System.out.println("\nStart:\n");
         // Loading the curent the Setings File.
-        FileHandle file = Gdx.files.internal(Game_Settings_File);
+        FileHandle file = Gdx.files.external(Game_Settings_File);
 
         if (!file.exists()) {
             DATA_LOAD_Fail = true;
