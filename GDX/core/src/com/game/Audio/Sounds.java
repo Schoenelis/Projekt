@@ -24,14 +24,14 @@ public class Sounds {
     private static float Game_SFX_Volume = GameSettings.getGame_SFX_Volume();
 
     //Creatin of the IDs for the Audiofiles. 
-    private static final long Menu_Music = 0L;
-    private static final long Button_Sound = 1L;
-    private static final long Game_Music = 2L;
-    private static final long Game_SFX_Sound = 3L;
+    public static final long Menu_Music = 0L;
+    public static final long Button_Sound = 1L;
+    public static final long Game_Music = 2L;
+    public static final long Game_SFX_Sound = 3L;
 
-    private static final long PlayerShoot = 4L;
-    private static final long Invader_Killed = 5L;
-    private static final long Explosion = 6L;
+    public static final long PlayerShoot = 4L;
+    public static final long Invader_Killed = 5L;
+    public static final long Explosion = 6L;
 
     /**
      * Set the Game Volume.
@@ -84,8 +84,8 @@ public class Sounds {
     /**
      * Stop the sound playing
      */
-    public static void stopSound() {
-        sound.stop();
+    public static void stopSound(long id) {
+        sound.stop(id);
         System.out.println("Sound Stop");
     }
 
@@ -114,31 +114,22 @@ public class Sounds {
 
         FileHandle file = Gdx.files.external("gamemusic.mp3");
 
-//        music.stop();/
         if (file.exists()) {
             System.out.println("external audio.");
-            music = Gdx.audio.newMusic(Gdx.files.external("gamemusic.mp3"));
+//            music = Gdx.audio.newMusic(Gdx.files.external("gamemusic.mp3"));
+            music = Gdx.audio.newMusic(file);
+            music.play();
+            music.setVolume(Game_Volume);
         } else {
             System.out.println("internal audio.");
             music = Gdx.audio.newMusic(Gdx.files.internal("Game_Sound/gamemusic.mp3"));
-//        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/Sound.mp3"));
-
-//        sound.setLooping(0, true);
-            //Game_Music = sound.play(0f);
-//            sound.setVolume(Game_Music, Game_Volume);
             music.play();
-//            sound.play(Game_Volume);
             music.setVolume(Game_Volume);
-            
-//            music.setLooping(true);
 
-//            sound.setLooping(2, true);
-//
-//            sound.setLooping(Game_Music, true);
         }
     }
-    
-    public static void gameEnd(){
+
+    public static void gameEnd() {
         music.dispose();
     }
 

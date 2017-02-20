@@ -178,20 +178,28 @@ public class OptionMenu implements Screen {
 
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_DOWN)) && select < 5) {
             if (select < 2) {
-                Sounds.stopSound();
+                Sounds.stopSound(Sounds.Menu_Music);
+                Sounds.stopSound(Sounds.Game_Music);
+                Sounds.stopSound(Sounds.Game_SFX_Sound);
             }
             Sounds.playButtonSound();
-            Sounds.stopSound();
+            Sounds.stopSound(Sounds.Menu_Music);
+            Sounds.stopSound(Sounds.Game_Music);
+            Sounds.stopSound(Sounds.Game_SFX_Sound);;
 
             select++;
         }
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_UP)) && select > 0) {
             if (select > 0) {
-                Sounds.stopSound();
+                Sounds.stopSound(Sounds.Menu_Music);
+                Sounds.stopSound(Sounds.Game_Music);
+                Sounds.stopSound(Sounds.Game_SFX_Sound);
 
             }
             Sounds.playButtonSound();
-            Sounds.stopSound();
+            Sounds.stopSound(Sounds.Menu_Music);
+            Sounds.stopSound(Sounds.Game_Music);
+            Sounds.stopSound(Sounds.Game_SFX_Sound);
 
             select--;
         }
@@ -375,7 +383,7 @@ public class OptionMenu implements Screen {
                     saveGameSettings();
                     System.out.println("Einstelllungen gespeichert.");
                     // LoadGameSettings(); // Print the setings to the Terminal
-                    Sounds.stopSound();
+
                     Sounds.playMenuSound();
                     game.setScreen(new MainMenu(game));
 

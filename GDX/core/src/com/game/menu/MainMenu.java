@@ -15,8 +15,8 @@ import java.io.IOException;
 
 /**
  * Erzeugt das Hauptmenue fuer das spiel.
- * 
- * 
+ *
+ *
  * @author Dreissa
  */
 public class MainMenu implements Screen {
@@ -68,10 +68,6 @@ public class MainMenu implements Screen {
     Texture Option_disabled;
     Texture Load_Default_Settings;
 
-    
-  
-    
-    
 //    boolean LoadGameSettings = LoadGameSettings(); ("Game_Grafiken/background.png");
     public MainMenu(SpaceLegends game) {
         this.game = game;
@@ -112,10 +108,11 @@ public class MainMenu implements Screen {
         }
 
     }
-int t = 0;
+    int t = 0;
+
     @Override
     public void render(float delta) {
-        
+
         if (Gdx.input.isKeyJustPressed((Keys.SPACE))) {
             t++;
             System.out.println(t);
@@ -161,7 +158,7 @@ int t = 0;
             case -99:
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-                game.batch.draw(Load_Default_Settings, buton_x, Title_Banner_y -500 , 600, 600);
+                game.batch.draw(Load_Default_Settings, buton_x, Title_Banner_y - 500, 600, 600);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     LoadDefaultSettings();
                     saveGameSettings();
@@ -174,8 +171,8 @@ int t = 0;
                 game.batch.draw(Option_disabled, buton_x, buton_y + Option_button_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_button_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
-                    Sounds.stopSound();
-                    Sounds.playGameSound();
+                    Sounds.stopSound(Sounds.Menu_Music);
+//                    Sounds.playGameSound();
                     game.setScreen(new MyGdxGame(game));
                 }
                 break;
