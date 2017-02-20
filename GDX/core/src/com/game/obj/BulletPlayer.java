@@ -54,7 +54,7 @@ public class BulletPlayer extends SpaceObject {
         width = height = 2;
 
         lifeTimer = 0;
-        lifeTime = 3;
+        lifeTime = 2.5f;
 boundingRectangle_PlayerBullet = sprite.getBoundingRectangle();
     }
 
