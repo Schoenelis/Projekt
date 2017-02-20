@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class Player extends SpaceObject {
 
-    private final int MAX_BULLETS = 2;
+    private final int MAX_BULLETS = 3;
     private ArrayList<BulletPlayer> bullets;
 
     private boolean left;
