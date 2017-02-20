@@ -41,17 +41,12 @@ public class Sounds {
     public static void setGame_Volume(float Volume) {
         Game_Volume = Volume;
         System.out.println("\nSound New Game_Volume: " + Volume);
-//        sound.stop(Game_Music);
-//        sound.dispose();
-//        sound.setVolume(Game_Music, Game_Volume);
-//        playGameSound();
-//        music.stop();
+        music.play();
+        music.setVolume(Volume);
+        music.stop();
 
 //        music.dispose();
-//music.play();
-//music.pause();
-//        music.setVolume(Game_Music);
-        playGameSound();
+//        playGameSound();
 
     }
 
