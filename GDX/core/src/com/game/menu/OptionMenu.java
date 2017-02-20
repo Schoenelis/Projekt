@@ -192,13 +192,13 @@ public class OptionMenu implements Screen {
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_UP)) && select > 0) {
             if (select > 0) {
                 Sounds.stopSound(Sounds.Menu_Music);
-                Sounds.stopSound(Sounds.Game_Music);
+                Sounds.gameEnd();
                 Sounds.stopSound(Sounds.Game_SFX_Sound);
 
             }
             Sounds.playButtonSound();
             Sounds.stopSound(Sounds.Menu_Music);
-            Sounds.stopSound(Sounds.Game_Music);
+            Sounds.gameEnd();
             Sounds.stopSound(Sounds.Game_SFX_Sound);
 
             select--;

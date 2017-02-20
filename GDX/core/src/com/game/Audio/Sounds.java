@@ -54,7 +54,7 @@ public class Sounds {
         sound.dispose();
         sound.setVolume(Game_SFX_Sound, Game_SFX_Volume);
         playSFXSounds();
-        sound.dispose();
+//        sound.dispose();
     }
 
     /**
@@ -72,7 +72,7 @@ public class Sounds {
         sound.dispose();
         sound.setVolume(Menu_Music, Menu_Volume);
         playMenuSound();
-          sound.dispose();
+//          sound.dispose();
     }
 
     /**
