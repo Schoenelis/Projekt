@@ -31,7 +31,7 @@ public class GameSettings {
     // Einstellungen fuer das Hauptfenster.
     // Versions Verwaltung des Spiels. 
     private static final String build = "Build Version";
-    private static final String buildnummer = "1.00";
+    private static final String buildnummer = "1.01";
     private static final String version = "";
 
     // Spiel einstelungen Warnung nicht aendern.
