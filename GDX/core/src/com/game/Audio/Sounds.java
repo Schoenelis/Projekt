@@ -114,7 +114,7 @@ public class Sounds {
 
         FileHandle file = Gdx.files.external("gamemusic.mp3");
 
-//        music.stop();
+//        music.stop();/
         if (file.exists()) {
             System.out.println("Externes audio.");
             music = Gdx.audio.newMusic(Gdx.files.external("gamemusic.mp3"));
