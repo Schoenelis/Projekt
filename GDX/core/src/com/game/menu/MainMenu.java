@@ -172,7 +172,7 @@ public class MainMenu implements Screen {
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_button_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     Sounds.stopSound(Sounds.Menu_Music);
-//                    Sounds.playGameSound();
+                    Sounds.playGameSound();
                     game.setScreen(new MyGdxGame(game));
                 }
                 break;
