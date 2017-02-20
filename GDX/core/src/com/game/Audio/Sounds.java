@@ -124,12 +124,12 @@ public class Sounds {
 
 //        sound.setLooping(0, true);
             //Game_Music = sound.play(0f);
-            music.setVolume(Game_Volume);
 //            sound.setVolume(Game_Music, Game_Volume);
             music.play();
 //            sound.play(Game_Volume);
-
-            music.setLooping(true);
+            music.setVolume(Game_Volume);
+            
+//            music.setLooping(true);
 
 //            sound.setLooping(2, true);
 //
@@ -176,7 +176,7 @@ public class Sounds {
     //plays the Explosion sound 
     public static void PlayExplosion() {
 
-        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/explosion.mp3"));        
+        sound = Gdx.audio.newSound(Gdx.files.internal("Game_Sound/explosion.mp3"));
         sound.setVolume(Explosion, Game_SFX_Volume);
 
         sound.play(Game_SFX_Volume);
