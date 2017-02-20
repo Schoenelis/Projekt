@@ -174,6 +174,7 @@ int t = 0;
                 game.batch.draw(Option_disabled, buton_x, buton_y + Option_button_y, buton_size_width, buton_size_heigth);
                 game.batch.draw(Exit_disabled, buton_x, buton_y + Exit_button_y, buton_size_width, buton_size_heigth);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
+                    Sounds.stopSound();
                     Sounds.playGameSound();
                     game.setScreen(new MyGdxGame(game));
                 }
