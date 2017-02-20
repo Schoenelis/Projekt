@@ -136,6 +136,10 @@ public class Sounds {
 //            sound.setLooping(Game_Music, true);
         }
     }
+    
+    public static void gameEnd(){
+        music.dispose();
+    }
 
     /**
      * Plays the Button Sound when you Enter a Buton in the Game.

@@ -161,7 +161,7 @@ int t = 0;
             case -99:
                 game.batch.draw(Background, Background_size_x, Background_size_y);
                 game.batch.draw(Title_Banner, Banner_x, Banner_y, Title_Banner_size_width, Title_banner_size_heigth);
-                game.batch.draw(Load_Default_Settings, buton_x, buton_y + Option_button_y, 100, 100);
+                game.batch.draw(Load_Default_Settings, buton_x, Title_Banner_y -500 , 600, 600);
                 if (Gdx.input.isKeyJustPressed((Keys.ENTER))) {
                     LoadDefaultSettings();
                     saveGameSettings();

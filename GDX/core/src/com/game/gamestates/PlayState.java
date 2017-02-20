@@ -19,8 +19,6 @@ import com.game.obj.Gegner;
 import com.game.obj.Player;
 import java.io.IOException;
 import com.game.Audio.Sounds;
-import static com.game.obj.Player.px;
-import static com.game.obj.Player.py;
 
 public class PlayState extends GameState {
 
@@ -95,6 +93,7 @@ public class PlayState extends GameState {
 
         if (!Player.playerLife && Gdx.input.isKeyJustPressed(Keys.BACKSPACE)) {
             //System.out.println("Test");
+            Sounds.gameEnd();
             Gdx.app.exit();
         }
 
@@ -113,6 +112,7 @@ public class PlayState extends GameState {
 
         if (Player.playerLife && !Gegner.gegnerLife && Gdx.input.isKeyJustPressed(Keys.BACKSPACE)) {
             // System.out.println("Test");
+               Sounds.gameEnd();
             Gdx.app.exit();
         }
 

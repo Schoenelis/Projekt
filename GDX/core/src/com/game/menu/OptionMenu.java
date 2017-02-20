@@ -136,7 +136,6 @@ public class OptionMenu implements Screen {
 
             Title_Banner_size_width = Integer.parseInt(title.getAttribute("width"));
             //  Title_Banner_y = Integer.parseInt(title.getAttribute("y"));
-            
 
             // Loading the Menu Elements from the xml file.
             Element menu = root.getChildByName("optionmenu");
@@ -182,13 +181,18 @@ public class OptionMenu implements Screen {
                 Sounds.stopSound();
             }
             Sounds.playButtonSound();
+            Sounds.stopSound();
+
             select++;
         }
         if (Gdx.input.isKeyJustPressed((Input.Keys.DPAD_UP)) && select > 0) {
             if (select > 0) {
                 Sounds.stopSound();
+
             }
             Sounds.playButtonSound();
+            Sounds.stopSound();
+
             select--;
         }
 
@@ -371,6 +375,7 @@ public class OptionMenu implements Screen {
                     saveGameSettings();
                     System.out.println("Einstelllungen gespeichert.");
                     // LoadGameSettings(); // Print the setings to the Terminal
+                    Sounds.stopSound();
                     Sounds.playMenuSound();
                     game.setScreen(new MainMenu(game));
 
@@ -482,7 +487,7 @@ public class OptionMenu implements Screen {
         } else if (Gdx.graphics.getHeight() <= 900) {
             Banner_y = screen_heigth + Banner_heigth;
             button_y = screen_heigth - button_heigth;
-            
+
             Title_Banner_y = Gdx.graphics.getHeight() - 250; // 200;
             Menu_Volume_button_y = Title_Banner_y / 2 - 80;//250;
             Game_Volume_button_y = Menu_Volume_button_y - 100; //150;

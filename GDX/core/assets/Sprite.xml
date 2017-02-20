@@ -15,7 +15,7 @@
 
 <sprite>
     <lowresoulution texture="Game_Grafiken/Menu/low_resoulution2.png"></lowresoulution>
-    <loaddefaultsettings texture="badlogic.jpg"></loaddefaultsettings>
+    <loaddefaultsettings texture="Game_Grafiken/defaultsettings.png"></loaddefaultsettings>
     <title mainmenutitle="Game_Grafiken/Menu/title_main_menu.png" optionmenutitle="Game_Grafiken/Menu/title_optionen.png" heigth = "400" width= "1200" y ="450" ></title>
     <background texture="Game_Grafiken/background.png"></background>
     
