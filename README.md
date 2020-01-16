@@ -1,2 +1,0 @@
-# Projekt
-The Space Legends
