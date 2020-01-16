@@ -1,9 +1,0 @@
-#Game Settings file do not change this file, it can have side effects for the gameplay and the stability of the game.
-You can change the settings in the Option menu from the Game.
-
-#Audio Settings 
-#Menu Volume: 0.2,
-#Buton_Volume: 0.6,
-#Game_Volume: 0.0,
-#FX_Volume: 0.0,
-#End
